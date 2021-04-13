@@ -22,20 +22,20 @@
     </properties>
 
     <build>
-        <directory>${project.basedir}/target</directory>
-        <outputDirectory>${project.build.directory}/classes</outputDirectory>
+        <directory>${project.basedir}/Pandas/target</directory>
+        <outputDirectory>${project.build.directory}/Pandas/classes</outputDirectory>
         <finalName>${project.artifactId}-${project.version}</finalName>
-        <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
-        <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/src/tests/java</testSourceDirectory>
+        <testOutputDirectory>${project.build.directory}/Pandas/test-classes</testOutputDirectory>
+        <sourceDirectory>${project.basedir}/Pandas/src/main/java</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/Pandas/src/tests/java</testSourceDirectory>
         <resources>
             <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
+                <directory>${project.basedir}/Pandas/src/main/resources</directory>
             </resource>
         </resources>
         <testResources>
             <testResource>
-                <directory>${project.basedir}/src/test/resources</directory>
+                <directory>${project.basedir}/Pandas/src/test/resources</directory>
             </testResource>
         </testResources>
     </build>
