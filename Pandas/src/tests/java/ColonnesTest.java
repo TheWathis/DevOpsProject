@@ -2,7 +2,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ColonnesTests {
+public class ColonnesTest {
     /***
      * Tests sur la foonction addElem
      * */

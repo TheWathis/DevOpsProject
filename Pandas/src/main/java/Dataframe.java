@@ -6,6 +6,5 @@ public class Dataframe {
 
     public int marche() {
         return 1;
-
     }
 }

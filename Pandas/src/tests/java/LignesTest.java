@@ -4,7 +4,7 @@ import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
-public class LignesTests {
+public class LignesTest {
     /**
      * Function getElem tests
      * */
