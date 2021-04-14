@@ -1,10 +1,17 @@
 import java.util.List;
 
 public class Lignes {
+	/**
+	 * Indice de la ligne dans notre tableau
+	 * */
 	int index;
+	/**
+	 * Colonnes dans le lignes
+	 * */
 	List<Colonnes> colonnes;
 	
 	public Lignes(int i,List<Colonnes> c) {
+		index = i;
 		colonnes = c;
 	}
 	
