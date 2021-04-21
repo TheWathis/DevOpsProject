@@ -2,9 +2,9 @@ import java.util.List;
 
 public class Lignes {
 	int index;
-	List<Colonnes> colonnes;
+	List<Element> colonnes;
 	
-	public Lignes(int i,List<Colonnes> c) {
+	public Lignes(int i, List<Element> c) {
 		colonnes = c;
 	}
 	
