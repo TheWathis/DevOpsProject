@@ -9,6 +9,15 @@ public class Dataframe {
     private final ArrayList<Line> table;
 
     /**
+     * Change the label line
+     *
+     * @param line New line of label
+     */
+    public void changeLabelLine(Line line){
+        label = line;
+    }
+
+    /**
      * Add a line in the dataframe
      *
      * @param line Line to be added

@@ -196,7 +196,13 @@ public class DataframeTest {
 		boolean resultAssert = true;
 		ArrayList<Line> listOfLine = dt.getLines();
 		ArrayList<Line> listOfSubLine = dtSub.getLines();
-		if(listOfLine.get(0).getElements().get(0).getElem() != listOfSubLine.get(0).getElements().get(0).getElem() ){
+		if(listOfLine.get(0).getElements().get(0).getElem()
+				!= listOfSubLine.get(0).getElements().get(0).getElem()
+				|| listOfLine.get(1).getElements().get(0).getElem()
+				!= listOfSubLine.get(1).getElements().get(0).getElem()
+				|| listOfLine.get(2).getElements().get(0).getElem()
+				!= listOfSubLine.get(2).getElements().get(0).getElem()
+				|| listOfSubLine.size() != 3 ){
 			resultAssert = false;
 		}
 		assertTrue(resultAssert);
@@ -271,6 +277,204 @@ public class DataframeTest {
 		indexOfColumn.add(2);
 
 		Dataframe dtSub = dt.getSubDataFrameFromColumnsNumber(indexOfColumn);
+
+		boolean resultAssert = true;
+		ArrayList<Line> listOfLine = dt.getLines();
+		ArrayList<Line> listOfSubLine = dtSub.getLines();
+		if(listOfLine.get(0).getElements().get(2).getElem()
+				!= listOfSubLine.get(0).getElements().get(0).getElem()
+				|| listOfLine.get(1).getElements().get(2).getElem()
+				!= listOfSubLine.get(1).getElements().get(0).getElem()
+				|| listOfLine.get(2).getElements().get(2).getElem()
+				!= listOfSubLine.get(2).getElements().get(0).getElem()
+
+				|| listOfLine.get(0).getElements().get(2).getElem()
+				!= listOfSubLine.get(0).getElements().get(1).getElem()
+				|| listOfLine.get(1).getElements().get(2).getElem()
+				!= listOfSubLine.get(1).getElements().get(1).getElem()
+				|| listOfLine.get(2).getElements().get(2).getElem()
+				!= listOfSubLine.get(2).getElements().get(1).getElem()
+				|| listOfSubLine.size() != 3){
+			resultAssert = false;
+		}
+		assertTrue(resultAssert);
+	}
+
+	/**
+	 * Test on get sub of data frame with sequence of column label
+	 * */
+
+	@Test
+	public void testGetSubDataFrameFromColumnsLabel() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element(1995));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element(1870));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element(2010));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Number"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<String> indexOfColumn = new ArrayList<>();
+		indexOfColumn.add("Number");
+		indexOfColumn.add("Name");
+		indexOfColumn.add("Date");
+		Dataframe dtSub = dt.getSubDataFrameFromColumnsLabel(indexOfColumn);
+		dtSub.changeLabelLine(lLabel);
+
+		assertEquals(dt.toString(), dtSub.toString());
+	}
+
+	@Test
+	public void testGetSubDataFrameFromFirstColumnsLabel() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element(1995));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element(1870));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element(2010));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Number"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<String> indexOfColumn = new ArrayList<>();
+		indexOfColumn.add("Number");
+		Dataframe dtSub = dt.getSubDataFrameFromColumnsLabel(indexOfColumn);
+		dtSub.changeLabelLine(lLabel);
+
+		boolean resultAssert = true;
+		ArrayList<Line> listOfLine = dt.getLines();
+		ArrayList<Line> listOfSubLine = dtSub.getLines();
+		if(listOfLine.get(0).getElements().get(0).getElem()
+				!= listOfSubLine.get(0).getElements().get(0).getElem()
+				|| listOfLine.get(1).getElements().get(0).getElem()
+				!= listOfSubLine.get(1).getElements().get(0).getElem()
+				|| listOfLine.get(2).getElements().get(0).getElem()
+				!= listOfSubLine.get(2).getElements().get(0).getElem()
+				|| listOfSubLine.size() != 3){
+			resultAssert = false;
+		}
+		assertTrue(resultAssert);
+	}
+
+	@Test
+	public void testGetSubDataFrameFromLastColumnsLabel() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element(1995));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element(1870));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element(2010));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Number"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<String> indexOfColumn = new ArrayList<>();
+		indexOfColumn.add("Date");
+		Dataframe dtSub = dt.getSubDataFrameFromColumnsLabel(indexOfColumn);
+		dtSub.changeLabelLine(lLabel);
+
+		boolean resultAssert = true;
+		ArrayList<Line> listOfLine = dt.getLines();
+		ArrayList<Line> listOfSubLine = dtSub.getLines();
+		if(listOfLine.get(0).getElements().get(2).getElem()
+				!= listOfSubLine.get(0).getElements().get(0).getElem()
+				|| listOfLine.get(1).getElements().get(2).getElem()
+				!= listOfSubLine.get(1).getElements().get(0).getElem()
+				|| listOfLine.get(2).getElements().get(2).getElem()
+				!= listOfSubLine.get(2).getElements().get(0).getElem()
+				|| listOfSubLine.size() != 3){
+			resultAssert = false;
+		}
+		assertTrue(resultAssert);
+	}
+
+	@Test
+	public void testGetSubDataFrameFromSameColumnsLabel() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element(1995));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element(1870));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element(2010));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Number"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<String> indexOfColumn = new ArrayList<>();
+		indexOfColumn.add("Date");
+		indexOfColumn.add("Date");
+		Dataframe dtSub = dt.getSubDataFrameFromColumnsLabel(indexOfColumn);
+		dtSub.changeLabelLine(lLabel);
 
 		boolean resultAssert = true;
 		ArrayList<Line> listOfLine = dt.getLines();
