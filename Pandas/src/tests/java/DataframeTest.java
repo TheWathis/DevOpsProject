@@ -1,14 +1,20 @@
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
+import java.util.ArrayList;
 
 public class DataframeTest {
 
 	@Test
-	public void test() {
-
+	public void testGetIndexLastElement() {
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("A"));
+		listOfElement.add(new Element("B"));
+		listOfElement.add(new Element("C"));
+		listOfElement.add(new Element("D"));
+		Line l = new Line(0, listOfElement);
+		int index = l.getIndex("D");
+		assertEquals(3, index);
 	}
-
 //	public static void main(String args[]) {
 //		Dataframe df = new Dataframe();
 //		if(args.length > 0) {

@@ -34,6 +34,7 @@ public class Line {
 
 	/**
 	 * Get the sub line with given a sequence of index of column we want to keep.
+	 * The column are added in the order of the sequence of index.
 	 *
 	 * @param numbersOfColumns The sequence of column we want to keep
 	 * @return The sub line
@@ -48,6 +49,8 @@ public class Line {
 				currentI++;
 				if (currentI >= numbersOfColumns.size()) {
 					break;
+				} else if (numbersOfColumns.get(currentI) <= numbersOfColumns.get(currentI - 1)){
+					i = 0;
 				}
 				currentColumns = numbersOfColumns.get(currentI);
 			}
