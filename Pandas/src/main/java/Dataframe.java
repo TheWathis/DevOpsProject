@@ -8,14 +8,17 @@ public class Dataframe {
     private Line label;
     private final ArrayList<Line> table;
 
-    /**
-     * Constructeur
-     */
     public Dataframe() {
         label = new Line();
         table = new ArrayList<>();
     }
 
+    /**
+     * Get the sub dataframe for the given index list of lines.
+     *
+     * @param numbersOfLines List of line we want to keep
+     * @return The sub data frame
+     */
     public Dataframe getSubDataFrameFromLines(List<Integer> numbersOfLines) {
         Dataframe toReturn = new Dataframe();
         toReturn.label = this.label;
@@ -25,15 +28,27 @@ public class Dataframe {
         return toReturn;
     }
 
+    /**
+     * Get the sub dataframe for the given index list of column we want to keep.
+     *
+     * @param numbersOfColumns The list of index of column we want to keep
+     * @return The sub data frame
+     */
     public Dataframe getSubDataFrameFromColumnsNumber(List<Integer> numbersOfColumns) {
         Dataframe toReturn = new Dataframe();
-        toReturn.label = this.label.getSubLineFromNumber(numbersOfColumns);
+        toReturn.label = this.label.getSubColumnFromNumber(numbersOfColumns);
         for (int i = 0; i < this.table.size(); i++) {
-            toReturn.table.add(this.table.get(i).getSubLineFromNumber(numbersOfColumns));
+            toReturn.table.add(this.table.get(i).getSubColumnFromNumber(numbersOfColumns));
         }
         return toReturn;
     }
 
+    /**
+     * Get the sub dataframe for the given label list of column we want to keep.
+     *
+     * @param labelsOfColumns The list of label of column we want to keep
+     * @return The sub data frame
+     */
     public Dataframe getSubDataFrameFromColumnsLabel(List<String> labelsOfColumns) {
         ArrayList<Integer> tmp = new ArrayList<>();
         for (String s: labelsOfColumns) {
@@ -42,6 +57,13 @@ public class Dataframe {
         return getSubDataFrameFromColumnsNumber(tmp);
     }
 
+    /**
+     * Print the numberOfLines first lines of the data frame.
+     * If numberOfLines is greater than the size of the frame,
+     * we'll print the entire frame
+     *
+     * @param numberOfLines The number of lines we want to print
+     */
     public void printFirstLines(int numberOfLines) {
         this.label.printLine();
         int goal = Math.min(this.table.size(), numberOfLines);
@@ -50,6 +72,13 @@ public class Dataframe {
         }
     }
 
+    /**
+     * Print the numberOfLines last lines of the data frame.
+     * If numberOfLines is greater than the size of the frame,
+     * we'll print the entire frame
+     *
+     * @param numberOfLines The number of lines we want to print
+     */
     public void printLastLines(int numberOfLines) {
         this.label.printLine();
         int i = Math.max((this.table.size() - numberOfLines), 0);
@@ -58,16 +87,28 @@ public class Dataframe {
         }
     }
 
+    /**
+     * Print the content of the data frame
+     *
+     */
     public void printDataframe() {
         System.out.println(this);
     }
 
+    /**
+     * Convert the dataframe in string element
+     *
+     */
     @Override
     public String toString() {
         return "Dataframe : \n" +
                 table;
     }
 
+    /**
+     * Main function
+     *
+     */
     public static void main(String args[]) {
         Dataframe df = new Dataframe();
         if(args.length > 0) {

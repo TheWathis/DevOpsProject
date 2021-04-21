@@ -2,26 +2,33 @@
 public class Element<E>{
 	private E data;
 	
-	public Element(E l) {
-		this.data = l;
+	public Element(E data) {
+		this.data = data;
 	}
 
+	/**
+	 * Return the current value of the element
+	 *
+	 * @return The data of the element
+	 */
 	public E getElem() {
 		return data;
 	}
-	public void setElem(E e) {
-		data = e;
+
+	/**
+	 * Change the current value of the element
+	 *
+	 * @param newData  the newData of the element
+	 */
+	public void setElem(E newData) {
+		this.data = newData;
 	}
 
-//	@Override
-//	public Object clone() {
-//		try {
-//			return (Element) super.clone();
-//		} catch (CloneNotSupportedException e) {
-//			return new Element(data);
-//		}
-//	}
-
+	/**
+	 * Return the string value of the element
+	 *
+	 * @return The string version of the element
+	 */
 	@Override
 	public String toString() {
 		return data.toString();

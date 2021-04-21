@@ -6,8 +6,7 @@ public class DataframeTest {
 
 	@Test
 	public void test() {
-		Dataframe d = new Dataframe();
-		assertEquals(1,d.marche());
+
 	}
 
 //	public static void main(String args[]) {
