@@ -1,9 +1,14 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Line {
 	private int index;
 	private ArrayList<Element> elements = new ArrayList<>();
+
+	public ArrayList<Element> getElements(){
+		return elements;
+	}
 
 	public Line() {
 		new Line(0);
