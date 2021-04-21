@@ -8,6 +8,24 @@ public class Dataframe {
     private Line label;
     private final ArrayList<Line> table;
 
+    /**
+     * Add a line in the dataframe
+     *
+     * @param line Line to be added
+     */
+    public void addLine(Line line){
+        this.table.add(line);
+    }
+
+    /**
+     * Get the list of line in the dataframe
+     *
+     * @return List of line
+     */
+    public ArrayList<Line> getLines(){
+        return this.table;
+    }
+
     public Dataframe() {
         label = new Line();
         table = new ArrayList<>();
