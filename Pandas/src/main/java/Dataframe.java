@@ -238,6 +238,49 @@ public class Dataframe {
         }
 
     }
+
+    /**
+     * Return the mean of the element for a column given by her index.
+     * If the column does not exist or the column does not contain number return null
+     *
+     * @param indexColumn Index of the column
+     * @return Element to be returned or null
+     */
+    public Element meanValueByIndex(int indexColumn){
+        if(this.table.size() < 1
+                || this.table.get(0).getElements().size() <= indexColumn
+                || indexColumn < 0
+                || this.table.get(0).getElementByIndex(indexColumn).getElem() instanceof String) {
+            return null;
+        }
+        Double mean = 0.0;
+        Integer numberOfElement = this.table.size();
+        for(int i = 0; i < this.table.size(); i++){
+            mean += Double.parseDouble(this.table.get(i).getElementByIndex(indexColumn).getElem().toString());
+        }
+        Element returnValue = new Element(mean/numberOfElement);
+        return returnValue;
+    }
+
+    /**
+     * Return the mean of the element for a column given by her label.
+     * If the column does not exist or the column does not contain number return null
+     *
+     * @param columnLabel Label of the column
+     * @return Element to be returned or null
+     */
+    public Element meanValueByLabel(String columnLabel){
+        if(this.label == null){
+            return null;
+        }
+        int indexLabel = this.label.getIndex(columnLabel);
+        if(indexLabel != -1){
+            return meanValueByIndex(indexLabel);
+        } else {
+            return null;
+        }
+    }
+
     /**
      * Main function
      *
@@ -290,90 +333,61 @@ public class Dataframe {
                 }
                 df.printDataframe();
                 System.out.println("----------------");
-                Element eSexe = df.maxValueByColumnIndex(0);
+                Element eSexe = df.meanValueByIndex(0);
                 if(eSexe == null){
                     System.out.println("Null pointer returned");
                 } else {
                     System.out.println("Value of element for sexe " + eSexe.getElem().toString());
                 }
                 System.out.println("----------------");
-                Element eName = df.maxValueByColumnIndex(1);
-                System.out.println("Value of element for name " + eName.getElem().toString());
+                Element eName = df.meanValueByIndex(1);
+                if(eName == null){
+                    System.out.println("Null pointer returned");
+                } else {
+                    System.out.println("Value of element for Name " + eName.getElem().toString());
+                }
                 System.out.println("----------------");
-                Element eDate = df.maxValueByColumnIndex(2);
-                System.out.println("Value of element for date " + eDate.getElem().toString());
+                Element eDate = df.meanValueByIndex(2);
+                if(eDate == null){
+                    System.out.println("Null pointer returned");
+                } else {
+                    System.out.println("Value of element for date " + eDate.getElem().toString());
+                }
                 System.out.println("----------------");
-                Element eNull = df.maxValueByColumnIndex(5);
+                Element eNull = df.meanValueByIndex(5);
                 if(eNull == null){
                     System.out.println("Null pointer returned");
                 } else {
                     System.out.println("Value of element for sexe " + eNull.getElem().toString());
                 }
 
-
-                System.out.println("// Test Min value by index ----------------------------------------------------");
-                Element eSexeMin = df.minValueByColumnIndex(0);
-                if(eSexeMin == null){
-                    System.out.println("Null pointer returned");
-                } else {
-                    System.out.println("Value of element for sexe " + eSexeMin.getElem().toString());
-                }
-                System.out.println("----------------");
-                Element eNameMin = df.minValueByColumnIndex(1);
-                System.out.println("Value of element for name " + eNameMin.getElem().toString());
-                System.out.println("----------------");
-                Element eDateMin = df.minValueByColumnIndex(2);
-                System.out.println("Value of element for date " + eDateMin.getElem().toString());
-                System.out.println("----------------");
-                Element eNullMin = df.minValueByColumnIndex(5);
-                if(eNullMin == null){
-                    System.out.println("Null pointer returned");
-                } else {
-                    System.out.println("Value of element for sexe " + eNullMin.getElem().toString());
-                }
-
-
                 System.out.println("// Test Max value by label ----------------------------------------------------");
-                Element eSexeMaxLabel = df.maxValueByLabel("Sexe");
+                Element eSexeMaxLabel = df.meanValueByLabel("Sexe");
                 if(eSexeMaxLabel == null){
                     System.out.println("Null pointer returned");
                 } else {
                     System.out.println("Value of element for sexe " + eSexeMaxLabel.getElem().toString());
                 }
                 System.out.println("----------------");
-                Element eNameMaxLabel = df.maxValueByLabel("Prénom");
-                System.out.println("Value of element for name " + eNameMaxLabel.getElem().toString());
+                Element eNameMaxLabel = df.meanValueByLabel("Prénom");
+                if(eNameMaxLabel == null){
+                    System.out.println("Null pointer returned");
+                } else {
+                    System.out.println("Value of element for sexe " + eNameMaxLabel.getElem().toString());
+                }
                 System.out.println("----------------");
-                Element eDateMaxLabel = df.maxValueByLabel("Année de naissance");
-                System.out.println("Value of element for date " + eDateMaxLabel.getElem().toString());
+                Element eDateMaxLabel = df.meanValueByLabel("Année de naissance");
+                if(eDateMaxLabel == null){
+                    System.out.println("Null pointer returned");
+                } else {
+                    System.out.println("Value of element for sexe " + eDateMaxLabel.getElem().toString());
+                }
                 System.out.println("----------------");
-                Element eNullMaxLabel = df.maxValueByLabel("bwa");
+                Element eNullMaxLabel = df.meanValueByLabel("bwa");
                 if(eNullMaxLabel == null){
                     System.out.println("Null pointer returned");
                 } else {
                     System.out.println("Value of element for sexe " + eNullMaxLabel.getElem().toString());
-                }
-
-
-                System.out.println("// Test Min value by label ----------------------------------------------------");
-                Element eSexeMinLabel = df.minValueByLabel("Sexe");
-                if(eSexeMinLabel == null){
-                    System.out.println("Null pointer returned");
-                } else {
-                    System.out.println("Value of element for sexe " + eSexeMinLabel.getElem().toString());
-                }
-                System.out.println("----------------");
-                Element eNameMinLabel = df.minValueByLabel("Prénom");
-                System.out.println("Value of element for name " + eNameMinLabel.getElem().toString());
-                System.out.println("----------------");
-                Element eDateMinLabel = df.minValueByLabel("Année de naissance");
-                System.out.println("Value of element for date " + eDateMinLabel.getElem().toString());
-                System.out.println("----------------");
-                Element eNullMinLabel = df.minValueByLabel("Test");
-                if(eNullMinLabel == null){
-                    System.out.println("Null pointer returned");
-                } else {
-                    System.out.println("Value of element for sexe " + eNullMinLabel.getElem().toString());
                 }
                 br.close();
             } catch (IOException e) {
