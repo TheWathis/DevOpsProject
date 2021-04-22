@@ -13,19 +13,19 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromLines() {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("10"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("5"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -44,13 +44,13 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromFirstLine() {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("1"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("10"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("5"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -74,13 +74,13 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromLastLine() {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("1"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("10"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("5"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -104,13 +104,13 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromSameLine() {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("1"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("10"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("5"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -139,19 +139,19 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromColumnsNumber() {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("10"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("5"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -170,19 +170,19 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromFirstColumnsNumber() {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("10"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("5"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -212,19 +212,19 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromLastColumnsNumber() {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("10"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("5"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -254,19 +254,19 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromSameColumnsNumber() {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("10"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("5"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -308,19 +308,19 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromColumnsLabel() {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("10"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("5"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -347,19 +347,19 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromFirstColumnsLabel() {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("10"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("5"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -396,19 +396,19 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromLastColumnsLabel() {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("10"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("5"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -445,19 +445,19 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromSameColumnsLabel() {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element(1));
+		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element(10));
+		listOfElement2.add(new Element("10"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element(5));
+		listOfElement3.add(new Element("5"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -507,17 +507,17 @@ public class DataframeTest {
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("M"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
 		listOfElement2.add(new Element("L"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
 		listOfElement3.add(new Element("X"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -535,7 +535,7 @@ public class DataframeTest {
 		Element eName = dt.maxValueByColumnIndex(1);
 		assertEquals("Audrey", eName.getElem());
 		Element eDate = dt.maxValueByColumnIndex(2);
-		assertEquals(2010, eDate.getElem());
+		assertEquals("2010", eDate.getElem());
 
 	}
 
@@ -545,17 +545,17 @@ public class DataframeTest {
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("M"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
 		listOfElement2.add(new Element("L"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
 		listOfElement3.add(new Element("X"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -586,17 +586,17 @@ public class DataframeTest {
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("M"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
 		listOfElement2.add(new Element("L"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
 		listOfElement3.add(new Element("X"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -614,7 +614,7 @@ public class DataframeTest {
 		Element eName = dt.maxValueByLabel("Name");
 		assertEquals("Audrey", eName.getElem());
 		Element eDate = dt.maxValueByLabel("Date");
-		assertEquals(2010, eDate.getElem());
+		assertEquals("2010", eDate.getElem());
 
 	}
 
@@ -624,17 +624,17 @@ public class DataframeTest {
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("M"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
 		listOfElement2.add(new Element("L"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
 		listOfElement3.add(new Element("X"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -665,17 +665,17 @@ public class DataframeTest {
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("M"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
 		listOfElement2.add(new Element("L"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
 		listOfElement3.add(new Element("X"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -693,7 +693,7 @@ public class DataframeTest {
 		Element eName = dt.minValueByColumnIndex(1);
 		assertEquals("Marion", eName.getElem());
 		Element eDate = dt.minValueByColumnIndex(2);
-		assertEquals(1870, eDate.getElem());
+		assertEquals("1870", eDate.getElem());
 
 	}
 
@@ -703,17 +703,17 @@ public class DataframeTest {
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("M"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
 		listOfElement2.add(new Element("L"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
 		listOfElement3.add(new Element("X"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -744,17 +744,17 @@ public class DataframeTest {
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("M"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
 		listOfElement2.add(new Element("L"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
 		listOfElement3.add(new Element("X"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -772,7 +772,7 @@ public class DataframeTest {
 		Element eName = dt.minValueByLabel("Name");
 		assertEquals("Marion", eName.getElem());
 		Element eDate = dt.minValueByLabel("Date");
-		assertEquals(1870, eDate.getElem());
+		assertEquals("1870", eDate.getElem());
 
 	}
 
@@ -782,17 +782,17 @@ public class DataframeTest {
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("M"));
 		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element(1995));
+		listOfElement.add(new Element("1995"));
 		Line l = new Line(0, listOfElement);
 		ArrayList<Element> listOfElement2 = new ArrayList<>();
 		listOfElement2.add(new Element("L"));
 		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element(1870));
+		listOfElement2.add(new Element("1870"));
 		Line l2 = new Line(1, listOfElement2);
 		ArrayList<Element> listOfElement3 = new ArrayList<>();
 		listOfElement3.add(new Element("X"));
 		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element(2010));
+		listOfElement3.add(new Element("2010"));
 		Line l3 = new Line(2, listOfElement3);
 		dt.addLine(l);
 		dt.addLine(l2);
@@ -811,6 +811,254 @@ public class DataframeTest {
 		assertEquals(null, eNullInf);
 		Element eNullSupDomain = dt.minValueByLabel("Laa");
 		assertEquals(null, eNullSupDomain);
+
+	}
+
+	/***
+	 * Tests for mean function
+	 * */
+	@Test
+	public void testMeanValueByIndex() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+
+		Element mean = dt.meanValueByIndex(0);
+		assertEquals(2.0, mean.getElem());
+
+	}
+
+	@Test
+	public void testMeanValueByInvalidIndex() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+
+		Element eNullSup = dt.meanValueByIndex(5);
+		assertEquals(null, eNullSup);
+		Element eInvalidColumn = dt.meanValueByIndex(1);
+		assertEquals(null, eInvalidColumn);
+		Element eNullInf = dt.meanValueByIndex(-1);
+		assertEquals(null, eNullInf);
+	}
+
+	/***
+	 * Tests for mean function with label
+	 * */
+	@Test
+	public void testMeanValueByLabel() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+
+		Element mean = dt.meanValueByLabel("Sexe");
+		assertEquals(2.0, mean.getElem());
+
+	}
+
+	@Test
+	public void testMeanValueByInvalidLabel() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+
+		Element eNullSup = dt.meanValueByLabel("");
+		assertEquals(null, eNullSup);
+		Element eInvalidColumn = dt.meanValueByLabel("Name");
+		assertEquals(null, eInvalidColumn);
+		Element eInvalidColumn2 = dt.meanValueByLabel("null");
+		assertEquals(null, eInvalidColumn2);
+	}
+
+	/***
+	 * Tests for select line where
+	 * */
+	@Test
+	public void testSelectLineWhere() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<Integer> column = new ArrayList<>();
+		column.add(1);
+		ArrayList<String> columnValue = new ArrayList<>();
+		columnValue.add("Bruno");
+		Dataframe selectDataframe = dt.selectLineWhere(column, columnValue);
+		selectDataframe.printDataframe();
+		boolean correctValue = true;
+		if(selectDataframe.getLines().size() != 1
+			|| selectDataframe.getLines().get(0).getElementByIndex(1).getElem() != "Bruno"){
+			correctValue = false;
+		}
+		selectDataframe.printDataframe();
+		assertTrue(correctValue);
+
+	}
+
+	/***
+	 * Tests for select line where with label
+	 * */
+	@Test
+	public void testSelectLineWhereWithLabel() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<String> column = new ArrayList<>();
+		column.add("Name");
+		ArrayList<String> columnValue = new ArrayList<>();
+		columnValue.add("Bruno");
+		Dataframe selectDataframe = dt.selectLineWhereByLabel(column, columnValue);
+		selectDataframe.printDataframe();
+		boolean correctValue = true;
+		if(selectDataframe.getLines().size() != 1
+				|| selectDataframe.getLines().get(0).getElementByIndex(1).getElem() != "Bruno"){
+			correctValue = false;
+		}
+		selectDataframe.printDataframe();
+		assertTrue(correctValue);
 
 	}
 }

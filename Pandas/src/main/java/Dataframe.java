@@ -1,8 +1,7 @@
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
 
 public class Dataframe {
 
@@ -59,18 +58,7 @@ public class Dataframe {
             if (ligne != null) {
                 String[] data = ligne.split(",");
                 for (String val : data) {
-                    /**
-                     * Check if data is a numeric value
-                     * */
-                    if (val == null) {
-                        this.label.add(new Element(""));;
-                    }
-                    try {
-                        double d = Double.parseDouble(val);
-                        this.label.add(new Element(d));
-                    } catch (NumberFormatException nfe) {
-                        this.label.add(new Element(val));
-                    }
+                    this.label.add(new Element(val));
 
                 }
             }
@@ -79,18 +67,7 @@ public class Dataframe {
                 ArrayList<Element> tmp = new ArrayList<>();
                 String[] data = ligne.split(",");
                 for (String val : data) {
-                    /**
-                     * Check if data is a numeric value
-                     * */
-                    if (val == null) {
-                        tmp.add(new Element(""));;
-                    }
-                    try {
-                        double d = Double.parseDouble(val);
-                        tmp.add(new Element(d));
-                    } catch (NumberFormatException nfe) {
-                        tmp.add(new Element(val));
-                    }
+                    tmp.add(new Element(val));
                 }
                 this.table.add(new Line(this.table.size(), tmp));
             }
@@ -135,6 +112,22 @@ public class Dataframe {
             }
         }
         return toReturn;
+    }
+
+    /**
+     * Get the sub dataframe for the given index list of column and their values.
+     * For each i, column numbersOfLines[i] has to have the value of valueOfLines[i]
+     *
+     * @param labelOfColumns List of line we want to keep
+     * @param valueOfLines Values excepted for each column
+     * @return The sub data frame
+     */
+    public Dataframe selectLineWhereByLabel(List<String> labelOfColumns, List<String> valueOfLines) {
+        ArrayList<Integer> numbersOfColumns = new ArrayList<>();
+        for(String label: labelOfColumns){
+            numbersOfColumns.add(this.label.getIndex(label));
+        }
+        return selectLineWhere(numbersOfColumns, valueOfLines);
     }
 
     /**
@@ -239,19 +232,26 @@ public class Dataframe {
         if(this.table.size() < 1 || this.table.get(0).getElements().size() <= indexColumn || indexColumn < 0) {
             return null;
         }
-        Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
-        for(int i = 1; i < this.table.size(); i++){
-            if(returnValue.getElem() instanceof String){
-                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) < 0){
-                    returnValue = this.table.get(i).getElementByIndex(indexColumn);
-                }
-            } else {
+        //On regarde si les valeurs sont d'un type particulier
+        try {
+            double d = Double.parseDouble(this.table.get(0).getElementByIndex(indexColumn).getElem().toString());
+            Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
+            for(int i = 1; i < this.table.size(); i++){
                 if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) > 0){
                     returnValue = this.table.get(i).getElementByIndex(indexColumn);
                 }
             }
+            return returnValue;
+        } catch (NumberFormatException nfe) {
+            Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
+            for(int i = 1; i < this.table.size(); i++){
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) < 0){
+                    returnValue = this.table.get(i).getElementByIndex(indexColumn);
+                }
+            }
+            return returnValue;
         }
-        return returnValue;
+
     }
 
     /**
@@ -285,20 +285,24 @@ public class Dataframe {
         if(this.table.size() < 1 || this.table.get(0).getElements().size() <= indexColumn || indexColumn < 0) {
             return null;
         }
-        Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
-        for(int i = 1; i < this.table.size(); i++){
-            if(returnValue.getElem() instanceof String){
-                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) > 0){
-                    returnValue = this.table.get(i).getElementByIndex(indexColumn);
-                }
-            } else {
+        try {
+            double d = Double.parseDouble(this.table.get(0).getElementByIndex(indexColumn).getElem().toString());
+            Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
+            for(int i = 1; i < this.table.size(); i++){
                 if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) < 0){
                     returnValue = this.table.get(i).getElementByIndex(indexColumn);
                 }
             }
-
+            return returnValue;
+        } catch (NumberFormatException nfe) {
+            Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
+            for(int i = 1; i < this.table.size(); i++){
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) > 0){
+                    returnValue = this.table.get(i).getElementByIndex(indexColumn);
+                }
+            }
+            return returnValue;
         }
-        return returnValue;
     }
 
     /**
@@ -331,17 +335,21 @@ public class Dataframe {
     public Element meanValueByIndex(int indexColumn){
         if(this.table.size() < 1
                 || this.table.get(0).getElements().size() <= indexColumn
-                || indexColumn < 0
-                || this.table.get(0).getElementByIndex(indexColumn).getElem() instanceof String) {
+                || indexColumn < 0) {
             return null;
         }
-        Double mean = 0.0;
-        Integer numberOfElement = this.table.size();
-        for(int i = 0; i < this.table.size(); i++){
-            mean += Double.parseDouble(this.table.get(i).getElementByIndex(indexColumn).getElem().toString());
+        try {
+            Double mean = 0.0;
+            Integer numberOfElement = this.table.size();
+            for(int i = 0; i < this.table.size(); i++){
+                mean += Double.parseDouble(this.table.get(i).getElementByIndex(indexColumn).getElem().toString());
+            }
+            Element returnValue = new Element(mean/numberOfElement);
+            return returnValue;
+        } catch (NumberFormatException nfe) {
+            return null;
         }
-        Element returnValue = new Element(mean/numberOfElement);
-        return returnValue;
+
     }
 
     /**
