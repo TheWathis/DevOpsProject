@@ -132,6 +132,83 @@ public class Dataframe {
                 table;
     }
 
+    /***
+     * Statistics functions
+     *
+     * For numbers value :
+     *  - Max
+     *  - Min
+     *  - Sum
+     *
+     * For String value :
+     *  - Max
+     *  - Min
+     *
+     * */
+    public Element maxValueByColumnIndex(int numColumn){
+        if(this.table.size() < 1 || this.table.get(0).getElements().size() <= numColumn) {
+            return null;
+        }
+        Element returnValue = this.table.get(0).getElementByIndex(numColumn);
+        for(int i = 1; i < this.table.size(); i++){
+            if(returnValue.getElem() instanceof String){
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(numColumn).getElem()) < 0){
+                    returnValue = this.table.get(i).getElementByIndex(numColumn);
+                }
+            } else {
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(numColumn).getElem()) > 0){
+                    returnValue = this.table.get(i).getElementByIndex(numColumn);
+                }
+            }
+        }
+        return returnValue;
+    }
+
+    public Element maxValueByLabel(String label){
+        if(this.label == null){
+            return null;
+        }
+        int indexLabel = this.label.getIndex(label);
+        if(indexLabel != -1){
+            return maxValueByColumnIndex(indexLabel);
+        } else {
+            return null;
+        }
+
+    }
+
+    public Element minValueByColumnIndex(int numColumn){
+        if(this.table.size() < 1 || this.table.get(0).getElements().size() <= numColumn) {
+            return null;
+        }
+        Element returnValue = this.table.get(0).getElementByIndex(numColumn);
+        for(int i = 1; i < this.table.size(); i++){
+            if(returnValue.getElem() instanceof String){
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(numColumn).getElem()) > 0){
+                    returnValue = this.table.get(i).getElementByIndex(numColumn);
+                }
+            } else {
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(numColumn).getElem()) < 0){
+                    returnValue = this.table.get(i).getElementByIndex(numColumn);
+                }
+            }
+
+        }
+        return returnValue;
+    }
+
+    public Element minValueByLabel(String label){
+        if(this.label == null){
+            return null;
+        }
+        int indexLabel = this.label.getIndex(label);
+        if(indexLabel != -1){
+            return minValueByColumnIndex(indexLabel);
+        } else {
+            return null;
+        }
+
+    }
     /**
      * Main function
      *
@@ -147,7 +224,19 @@ public class Dataframe {
                 if (ligne != null) {
                     String[] data = ligne.split(",");
                     for (String val : data) {
-                        df.label.add(new Element(val));
+                        /**
+                         * Check if data is a numeric value
+                         * */
+                        if (val == null) {
+                            df.label.add(new Element(""));;
+                        }
+                        try {
+                            double d = Double.parseDouble(val);
+                            df.label.add(new Element(d));
+                        } catch (NumberFormatException nfe) {
+                            df.label.add(new Element(val));
+                        }
+
                     }
                 }
 
@@ -155,51 +244,108 @@ public class Dataframe {
                     ArrayList<Element> tmp = new ArrayList<>();
                     String[] data = ligne.split(",");
                     for (String val : data) {
-                        tmp.add(new Element(val));
+                        /**
+                         * Check if data is a numeric value
+                         * */
+                        if (val == null) {
+                            tmp.add(new Element(""));;
+                        }
+                        try {
+                            double d = Double.parseDouble(val);
+                            tmp.add(new Element(d));
+                        } catch (NumberFormatException nfe) {
+                            tmp.add(new Element(val));
+                        }
                     }
                     df.table.add(new Line(df.table.size(), tmp));
                 }
                 df.printDataframe();
                 System.out.println("----------------");
-                df.printFirstLines(2);
+                Element eSexe = df.maxValueByColumnIndex(0);
+                if(eSexe == null){
+                    System.out.println("Null pointer returned");
+                } else {
+                    System.out.println("Value of element for sexe " + eSexe.getElem().toString());
+                }
                 System.out.println("----------------");
-                df.printFirstLines(15);
+                Element eName = df.maxValueByColumnIndex(1);
+                System.out.println("Value of element for name " + eName.getElem().toString());
                 System.out.println("----------------");
-                df.printLastLines(2);
+                Element eDate = df.maxValueByColumnIndex(2);
+                System.out.println("Value of element for date " + eDate.getElem().toString());
                 System.out.println("----------------");
-                df.printLastLines(15);
-                System.out.println("################");
-                Dataframe dfL = df.getSubDataFrameFromLines(new ArrayList<Integer>(Arrays.asList(0, 2)));
-                System.out.println("################");
-                dfL.printFirstLines(2);
-                System.out.println("----------------");
-                dfL.printFirstLines(15);
-                System.out.println("----------------");
-                dfL.printLastLines(2);
-                System.out.println("----------------");
-                dfL.printLastLines(15);
-                System.out.println("################");
-                Dataframe dfC = df.getSubDataFrameFromColumnsNumber(new ArrayList<Integer>(Arrays.asList(0, 2)));
-                dfC.printDataframe();
-                System.out.println("################");
-                dfC.printFirstLines(2);
-                System.out.println("----------------");
-                dfC.printFirstLines(15);
-                System.out.println("----------------");
-                dfC.printLastLines(2);
-                System.out.println("----------------");
-                dfC.printLastLines(15);
-                System.out.println("################");
-                Dataframe dfCl = df.getSubDataFrameFromColumnsLabel(new ArrayList<String>(Arrays.asList("Sexe", "Année de naissance")));
-                System.out.println("################");
-                dfCl.printFirstLines(2);
-                System.out.println("----------------");
-                dfCl.printFirstLines(15);
-                System.out.println("----------------");
-                dfCl.printLastLines(2);
-                System.out.println("----------------");
-                dfCl.printLastLines(15);
+                Element eNull = df.maxValueByColumnIndex(5);
+                if(eNull == null){
+                    System.out.println("Null pointer returned");
+                } else {
+                    System.out.println("Value of element for sexe " + eNull.getElem().toString());
+                }
 
+
+                System.out.println("// Test Min value by index ----------------------------------------------------");
+                Element eSexeMin = df.minValueByColumnIndex(0);
+                if(eSexeMin == null){
+                    System.out.println("Null pointer returned");
+                } else {
+                    System.out.println("Value of element for sexe " + eSexeMin.getElem().toString());
+                }
+                System.out.println("----------------");
+                Element eNameMin = df.minValueByColumnIndex(1);
+                System.out.println("Value of element for name " + eNameMin.getElem().toString());
+                System.out.println("----------------");
+                Element eDateMin = df.minValueByColumnIndex(2);
+                System.out.println("Value of element for date " + eDateMin.getElem().toString());
+                System.out.println("----------------");
+                Element eNullMin = df.minValueByColumnIndex(5);
+                if(eNullMin == null){
+                    System.out.println("Null pointer returned");
+                } else {
+                    System.out.println("Value of element for sexe " + eNullMin.getElem().toString());
+                }
+
+
+                System.out.println("// Test Max value by label ----------------------------------------------------");
+                Element eSexeMaxLabel = df.maxValueByLabel("Sexe");
+                if(eSexeMaxLabel == null){
+                    System.out.println("Null pointer returned");
+                } else {
+                    System.out.println("Value of element for sexe " + eSexeMaxLabel.getElem().toString());
+                }
+                System.out.println("----------------");
+                Element eNameMaxLabel = df.maxValueByLabel("Prénom");
+                System.out.println("Value of element for name " + eNameMaxLabel.getElem().toString());
+                System.out.println("----------------");
+                Element eDateMaxLabel = df.maxValueByLabel("Année de naissance");
+                System.out.println("Value of element for date " + eDateMaxLabel.getElem().toString());
+                System.out.println("----------------");
+                Element eNullMaxLabel = df.maxValueByLabel("bwa");
+                if(eNullMaxLabel == null){
+                    System.out.println("Null pointer returned");
+                } else {
+                    System.out.println("Value of element for sexe " + eNullMaxLabel.getElem().toString());
+                }
+
+
+                System.out.println("// Test Min value by label ----------------------------------------------------");
+                Element eSexeMinLabel = df.minValueByLabel("Sexe");
+                if(eSexeMinLabel == null){
+                    System.out.println("Null pointer returned");
+                } else {
+                    System.out.println("Value of element for sexe " + eSexeMinLabel.getElem().toString());
+                }
+                System.out.println("----------------");
+                Element eNameMinLabel = df.minValueByLabel("Prénom");
+                System.out.println("Value of element for name " + eNameMinLabel.getElem().toString());
+                System.out.println("----------------");
+                Element eDateMinLabel = df.minValueByLabel("Année de naissance");
+                System.out.println("Value of element for date " + eDateMinLabel.getElem().toString());
+                System.out.println("----------------");
+                Element eNullMinLabel = df.minValueByLabel("Test");
+                if(eNullMinLabel == null){
+                    System.out.println("Null pointer returned");
+                } else {
+                    System.out.println("Value of element for sexe " + eNullMinLabel.getElem().toString());
+                }
                 br.close();
             } catch (IOException e) {
                 e.printStackTrace();

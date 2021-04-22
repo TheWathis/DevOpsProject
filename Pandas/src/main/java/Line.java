@@ -10,6 +10,15 @@ public class Line {
 		return elements;
 	}
 
+	public Element getElementByIndex(int index){
+		if( 0 <= index && index < elements.size()){
+			return elements.get(index);
+		} else {
+			return null;
+		}
+
+	}
+
 	public Line() {
 		new Line(0);
 	}

@@ -1,5 +1,5 @@
 
-public class Element<E>{
+public class Element<E> implements Comparable<E>{
 	private E data;
 	
 	public Element(E data) {
@@ -32,5 +32,12 @@ public class Element<E>{
 	@Override
 	public String toString() {
 		return data.toString();
+	}
+
+	@Override
+	public int compareTo(E e) {
+		String tmp1 = e.toString();
+		String tmp2 = this.data.toString();
+		return tmp1.compareTo(tmp2);
 	}
 }
