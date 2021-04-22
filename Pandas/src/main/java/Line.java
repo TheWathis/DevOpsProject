@@ -68,6 +68,45 @@ public class Line {
 	}
 
 	/**
+	 * Get the sub line with given a sequence of index of column we want to keep.
+	 * The column are added in the order of the sequence of index.
+	 * Return null if the line don't contains the right value
+	 *
+	 * @param numbersOfColumns The sequence of column we want to keep
+	 * @param valuesOfColumns The values of each column
+	 * @return The sub line
+	 */
+	public Line selectLineWhere(List<Integer> numbersOfColumns, List<String> valuesOfColumns) {
+		ArrayList<Element> tmp = new ArrayList<>();
+		int currentI = 0;
+		int currentColumns = numbersOfColumns.get(currentI);
+		for (int i = 0; i < this.elements.size(); i++) {
+
+			if (i == currentColumns ) {
+				if(this.elements.get(i).compareTo(valuesOfColumns.get(currentI)) != 0 ){
+					return null;
+				}
+				tmp.add(this.elements.get(i));
+
+				currentI++;
+				if (currentI >= numbersOfColumns.size()) {
+					i++;
+					for(; i < this.elements.size(); i++){
+						tmp.add(this.elements.get(i));
+					}
+					break;
+				} else if (numbersOfColumns.get(currentI) <= numbersOfColumns.get(currentI - 1)){
+					i = 0;
+				}
+				currentColumns = numbersOfColumns.get(currentI);
+			} else {
+				tmp.add(this.elements.get(i));
+			}
+		}
+		return new Line(this.index, tmp);
+	}
+
+	/**
 	 * Get the sub line with given a sequence of label of column we want to keep.
 	 *
 	 * @param labelsOfColumns The sequence of label we want to keep
