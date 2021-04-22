@@ -67,6 +67,18 @@ public class Line {
 		return new Line(this.index, tmp);
 	}
 
+	public class ExceptionUnknowColumn extends Exception {
+		public String message;
+		public ExceptionUnknowColumn(String message){
+			super();
+			this.message = message;
+		}
+
+		public ExceptionUnknowColumn(){
+			super();
+			this.message = "";
+		}
+	}
 	/**
 	 * Get the sub line with given a sequence of index of column we want to keep.
 	 * The column are added in the order of the sequence of index.
@@ -76,9 +88,12 @@ public class Line {
 	 * @param valuesOfColumns The values of each column
 	 * @return The sub line
 	 */
-	public Line selectLineWhere(List<Integer> numbersOfColumns, List<String> valuesOfColumns) {
+	public Line selectLineWhere(List<Integer> numbersOfColumns, List<String> valuesOfColumns) throws ExceptionUnknowColumn {
 		ArrayList<Element> tmp = new ArrayList<>();
 		int currentI = 0;
+		if( numbersOfColumns.get(currentI) < 0 || numbersOfColumns.get(currentI) >= this.elements.size()){
+			throw new ExceptionUnknowColumn("One of the given index of column is not in the array");
+		}
 		int currentColumns = numbersOfColumns.get(currentI);
 		for (int i = 0; i < this.elements.size(); i++) {
 
@@ -97,6 +112,9 @@ public class Line {
 					break;
 				} else if (numbersOfColumns.get(currentI) <= numbersOfColumns.get(currentI - 1)){
 					i = 0;
+				}
+				if( numbersOfColumns.get(currentI) < 0 || numbersOfColumns.get(currentI) >= this.elements.size()){
+					throw new ExceptionUnknowColumn("One of the given index of column is not in the array");
 				}
 				currentColumns = numbersOfColumns.get(currentI);
 			} else {

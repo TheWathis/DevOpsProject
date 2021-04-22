@@ -96,12 +96,13 @@ public class Dataframe {
     /**
      * Get the sub dataframe for the given index list of column and their values.
      * For each i, column numbersOfLines[i] has to have the value of valueOfLines[i]
+     * An exception ExceptionUnknowColumn is thrown if the index of column is wrong.
      *
      * @param numbersOfColumns List of line we want to keep
      * @param valueOfLines Values excepted for each column
      * @return The sub data frame
      */
-    public Dataframe selectLineWhere(List<Integer> numbersOfColumns, List<String> valueOfLines) {
+    public Dataframe selectLineWhere(List<Integer> numbersOfColumns, List<String> valueOfLines) throws Line.ExceptionUnknowColumn {
         Dataframe toReturn = new Dataframe();
         toReturn.label = this.label.getSubColumnFromNumber(numbersOfColumns);
         Line l;
@@ -114,15 +115,59 @@ public class Dataframe {
         return toReturn;
     }
 
+    public class ExceptionWrongColumnType extends Exception {
+        public String message;
+        public ExceptionWrongColumnType(String message){
+            super();
+            this.message = message;
+        }
+        public ExceptionWrongColumnType(){
+            super();
+            this.message = "";
+        }
+    }
     /**
-     * Get the sub dataframe for the given index list of column and their values.
+     * Return the sum of value in the given column.
+     * If the column is of type string the function will raise an exception.
+     *
+     * @param indexColumn Index of the column to sum
+     * @return The sum of the column
+     */
+    public Double sumOfColumn(Integer indexColumn) throws ExceptionWrongColumnType{
+        if(indexColumn < 0 || indexColumn >= this.table.size()){
+            throw new ExceptionWrongColumnType("Your index is not in the array");
+        }
+        try {
+            Double result = Double.parseDouble(this.table.get(0).getElementByIndex(indexColumn).getElem().toString());
+            for(int i = 1; i < this.table.size(); i++){
+                result += Double.parseDouble(this.table.get(i).getElementByIndex(indexColumn).getElem().toString());
+            }
+            return result;
+        } catch (NumberFormatException nfe) {
+            throw new ExceptionWrongColumnType("The given index show a column that cannot be parse as a Double");
+        }
+    }
+
+    /**
+     * Return the sum of value in the given column.
+     * If the column is of type string the function will raise an exception.
+     *
+     * @param label Label of the column to sum
+     * @return The sum of the column
+     */
+    public Double sumOfColumnByLabel(String label) throws ExceptionWrongColumnType{
+        return sumOfColumn(this.label.getIndex(label));
+    }
+
+    /**
+     * Get the sub dataframe for the given index list of label of column and their values.
      * For each i, column numbersOfLines[i] has to have the value of valueOfLines[i]
      *
      * @param labelOfColumns List of line we want to keep
      * @param valueOfLines Values excepted for each column
      * @return The sub data frame
      */
-    public Dataframe selectLineWhereByLabel(List<String> labelOfColumns, List<String> valueOfLines) {
+    public Dataframe selectLineWhereByLabel(List<String> labelOfColumns, List<String> valueOfLines) throws Line.ExceptionUnknowColumn {
         ArrayList<Integer> numbersOfColumns = new ArrayList<>();
         for(String label: labelOfColumns){
             numbersOfColumns.add(this.label.getIndex(label));
@@ -162,7 +207,31 @@ public class Dataframe {
     /**
      * Print the numberOfLines first lines of the data frame.
      * If numberOfLines is greater than the size of the frame,
-     * we'll print the entire frame
+     * we'll print try {
+            br = new BufferedReader(new FileReader(csvFileName));
+
+            String ligne = br.readLine();
+            if (ligne != null) {
+                String[] data = ligne.split(",");
+                for (String val : data) {
+                    this.label.add(new Element(val));
+
+                }
+            }
+
+            while ((ligne = br.readLine()) != null) {
+                ArrayList<Element> tmp = new ArrayList<>();
+                String[] data = ligne.split(",");
+                for (String val : data) {
+                    tmp.add(new Element(val));
+                }
+                this.table.add(new Line(this.table.size(), tmp));
+            }
+            this.printDataframe();
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }the entire frame
      *
      * @param numberOfLines The number of lines we want to print
      */
@@ -374,7 +443,7 @@ public class Dataframe {
     /**
      * Main function
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Line.ExceptionUnknowColumn {
         if(args.length > 0) {
             Dataframe df = new Dataframe(args[0]);
 

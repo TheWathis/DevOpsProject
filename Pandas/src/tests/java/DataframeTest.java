@@ -970,7 +970,7 @@ public class DataframeTest {
 	 * Tests for select line where
 	 * */
 	@Test
-	public void testSelectLineWhere() {
+	public void testSelectLineWhere() throws Line.ExceptionUnknowColumn {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1003,22 +1003,98 @@ public class DataframeTest {
 		ArrayList<String> columnValue = new ArrayList<>();
 		columnValue.add("Bruno");
 		Dataframe selectDataframe = dt.selectLineWhere(column, columnValue);
-		selectDataframe.printDataframe();
 		boolean correctValue = true;
 		if(selectDataframe.getLines().size() != 1
 			|| selectDataframe.getLines().get(0).getElementByIndex(1).getElem() != "Bruno"){
 			correctValue = false;
 		}
-		selectDataframe.printDataframe();
 		assertTrue(correctValue);
+	}
 
+	@Test
+	public void testSelectLineWhereValueNotIn() throws Line.ExceptionUnknowColumn {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<Integer> column = new ArrayList<>();
+		column.add(0);
+		ArrayList<String> columnValue = new ArrayList<>();
+		columnValue.add("Bruno");
+		Dataframe selectDataframe = dt.selectLineWhere(column, columnValue);
+		boolean correctValue = true;
+		if(selectDataframe.getLines().size() != 0){
+			correctValue = false;
+		}
+		assertTrue(correctValue);
+	}
+
+	@Test(expected = Line.ExceptionUnknowColumn.class)
+	public void testSelectLineWhereValueColumnNotIn() throws Line.ExceptionUnknowColumn {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<Integer> column = new ArrayList<>();
+		column.add(-1);
+		ArrayList<String> columnValue = new ArrayList<>();
+		columnValue.add("Bruno");
+		Dataframe selectDataframe = dt.selectLineWhere(column, columnValue);
+		selectDataframe.printDataframe();
+		assertEquals(0, selectDataframe.getLines().size());
 	}
 
 	/***
 	 * Tests for select line where with label
 	 * */
 	@Test
-	public void testSelectLineWhereWithLabel() {
+	public void testSelectLineWhereWithLabel() throws Line.ExceptionUnknowColumn {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1051,14 +1127,251 @@ public class DataframeTest {
 		ArrayList<String> columnValue = new ArrayList<>();
 		columnValue.add("Bruno");
 		Dataframe selectDataframe = dt.selectLineWhereByLabel(column, columnValue);
-		selectDataframe.printDataframe();
 		boolean correctValue = true;
 		if(selectDataframe.getLines().size() != 1
 				|| selectDataframe.getLines().get(0).getElementByIndex(1).getElem() != "Bruno"){
 			correctValue = false;
 		}
-		selectDataframe.printDataframe();
 		assertTrue(correctValue);
+	}
 
+	@Test(expected = Line.ExceptionUnknowColumn.class)
+	public void testSelectLineWhereWithLabelNotIn() throws Line.ExceptionUnknowColumn {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<String> column = new ArrayList<>();
+		column.add("Unknow");
+		ArrayList<String> columnValue = new ArrayList<>();
+		columnValue.add("Bruno");
+		Dataframe selectDataframe = dt.selectLineWhereByLabel(column, columnValue);
+	}
+
+	/***
+	 * Tests for sum function
+	 * */
+	@Test
+	public void testSumOfColumn() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Double result = dt.sumOfColumn(0);
+		assertEquals(6.0, result, 0.001);
+	}
+
+	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
+	public void testSumOfColumnInvalidColumn() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Double result = dt.sumOfColumn(1);
+		assertEquals(6.0, result, 0.001);
+	}
+
+	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
+	public void testSumOfColumnWrongIndex() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Double result = dt.sumOfColumn(-1);
+		assertEquals(6.0, result, 0.001);
+	}
+
+	/***
+	 * Tests for sum function by label
+	 * */
+	@Test
+	public void testSumOfColumnByLabel() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Double result = dt.sumOfColumnByLabel("Sexe");
+		assertEquals(6.0, result, 0.001);
+	}
+
+	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
+	public void testSumOfColumnByLabelInvalidColumn() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Double result = dt.sumOfColumnByLabel("Name");
+		assertEquals(6.0, result, 0.001);
+	}
+
+	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
+	public void testSumOfColumnByLabelWrongIndex() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Double result = dt.sumOfColumnByLabel("unknow");
+		assertEquals(6.0, result, 0.001);
 	}
 }
