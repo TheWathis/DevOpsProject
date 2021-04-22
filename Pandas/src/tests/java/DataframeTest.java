@@ -498,74 +498,319 @@ public class DataframeTest {
 		assertTrue(resultAssert);
 	}
 
-//	public static void main(String args[]) {
-//		Dataframe df = new Dataframe();
-//		if(args.length > 0) {
-//			BufferedReader br = null;
-//			try {
-//				br = new BufferedReader(new FileReader(args[0]));
-//
-//				String ligne = br.readLine();
-//				if (ligne != null) {
-//					String[] data = ligne.split(",");
-//					for (String val : data) {
-//						df.label.add(new Element(val));
-//					}
-//				}
-//
-//				while ((ligne = br.readLine()) != null) {
-//					ArrayList<Element> tmp = new ArrayList<>();
-//					String[] data = ligne.split(",");
-//					for (String val : data) {
-//						tmp.add(new Element(val));
-//					}
-//					df.table.add(new Line(df.table.size(), tmp));
-//				}
-//				df.printDataframe();
-//				System.out.println("----------------");
-//				df.printFirstLines(2);
-//				System.out.println("----------------");
-//				df.printFirstLines(15);
-//				System.out.println("----------------");
-//				df.printLastLines(2);
-//				System.out.println("----------------");
-//				df.printLastLines(15);
-//				System.out.println("################");
-//				Dataframe dfL = df.getSubDataFrameFromLines(new ArrayList<Integer>(Arrays.asList(0, 2)));
-//				System.out.println("################");
-//				dfL.printFirstLines(2);
-//				System.out.println("----------------");
-//				dfL.printFirstLines(15);
-//				System.out.println("----------------");
-//				dfL.printLastLines(2);
-//				System.out.println("----------------");
-//				dfL.printLastLines(15);
-//				System.out.println("################");
-//				Dataframe dfC = df.getSubDataFrameFromColumnsNumber(new ArrayList<Integer>(Arrays.asList(0, 2)));
-//				dfC.printDataframe();
-//				System.out.println("################");
-//				dfC.printFirstLines(2);
-//				System.out.println("----------------");
-//				dfC.printFirstLines(15);
-//				System.out.println("----------------");
-//				dfC.printLastLines(2);
-//				System.out.println("----------------");
-//				dfC.printLastLines(15);
-//				System.out.println("################");
-//				Dataframe dfCl = df.getSubDataFrameFromColumnsLabel(new ArrayList<String>(Arrays.asList("Sexe", "Année de naissance")));
-//				System.out.println("################");
-//				dfCl.printFirstLines(2);
-//				System.out.println("----------------");
-//				dfCl.printFirstLines(15);
-//				System.out.println("----------------");
-//				dfCl.printLastLines(2);
-//				System.out.println("----------------");
-//				dfCl.printLastLines(15);
-//
-//				br.close();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	}
+	/**
+	 * Tests for maximum value function
+	 * */
+	@Test
+	public void testMaxElementByColumnIndex() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("M"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element(1995));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("L"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element(1870));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("X"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element(2010));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Element eSexe = dt.maxValueByColumnIndex(0);
+		assertEquals("L", eSexe.getElem());
+		Element eName = dt.maxValueByColumnIndex(1);
+		assertEquals("Audrey", eName.getElem());
+		Element eDate = dt.maxValueByColumnIndex(2);
+		assertEquals(2010, eDate.getElem());
+
+	}
+
+	@Test
+	public void testMaxElementByColumnIndexNonExistingColumn() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("M"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element(1995));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("L"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element(1870));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("X"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element(2010));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Element eNullSup = dt.maxValueByColumnIndex(-1);
+		assertEquals(null, eNullSup);
+		Element eNullInf = dt.maxValueByColumnIndex(10);
+		assertEquals(null, eNullInf);
+		Element eNullSupDomain = dt.maxValueByColumnIndex(3);
+		assertEquals(null, eNullSupDomain);
+
+	}
+
+	/**
+	 * Tests for maximum value function by label
+	 * */
+	@Test
+	public void testMaxElementByColumnLabel() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("M"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element(1995));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("L"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element(1870));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("X"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element(2010));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Element eSexe = dt.maxValueByLabel("Sexe");
+		assertEquals("L", eSexe.getElem());
+		Element eName = dt.maxValueByLabel("Name");
+		assertEquals("Audrey", eName.getElem());
+		Element eDate = dt.maxValueByLabel("Date");
+		assertEquals(2010, eDate.getElem());
+
+	}
+
+	@Test
+	public void testMaxElementByColumnLabelNonExistingColumn() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("M"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element(1995));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("L"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element(1870));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("X"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element(2010));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Element eNullSup = dt.maxValueByLabel("");
+		assertEquals(null, eNullSup);
+		Element eNullInf = dt.maxValueByLabel("tst");
+		assertEquals(null, eNullInf);
+		Element eNullSupDomain = dt.maxValueByLabel("Laa");
+		assertEquals(null, eNullSupDomain);
+
+	}
+
+	/**
+	 * Tests for minimum value function
+	 * */
+	@Test
+	public void testMinElementByColumnIndex() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("M"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element(1995));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("L"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element(1870));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("X"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element(2010));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Element eSexe = dt.minValueByColumnIndex(0);
+		assertEquals("X", eSexe.getElem());
+		Element eName = dt.minValueByColumnIndex(1);
+		assertEquals("Marion", eName.getElem());
+		Element eDate = dt.minValueByColumnIndex(2);
+		assertEquals(1870, eDate.getElem());
+
+	}
+
+	@Test
+	public void testMinElementByColumnIndexNonExistingColumn() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("M"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element(1995));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("L"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element(1870));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("X"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element(2010));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Element eNullSup = dt.minValueByColumnIndex(-1);
+		assertEquals(null, eNullSup);
+		Element eNullInf = dt.minValueByColumnIndex(10);
+		assertEquals(null, eNullInf);
+		Element eNullSupDomain = dt.minValueByColumnIndex(3);
+		assertEquals(null, eNullSupDomain);
+
+	}
+
+	/**
+	 * Tests for maximum value function by label
+	 * */
+	@Test
+	public void testMinElementByColumnLabel() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("M"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element(1995));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("L"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element(1870));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("X"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element(2010));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Element eSexe = dt.minValueByLabel("Sexe");
+		assertEquals("X", eSexe.getElem());
+		Element eName = dt.minValueByLabel("Name");
+		assertEquals("Marion", eName.getElem());
+		Element eDate = dt.minValueByLabel("Date");
+		assertEquals(1870, eDate.getElem());
+
+	}
+
+	@Test
+	public void testMinElementByColumnLabelNonExistingColumn() {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("M"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element(1995));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("L"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element(1870));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("X"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element(2010));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		Element eNullSup = dt.minValueByLabel("");
+		assertEquals(null, eNullSup);
+		Element eNullInf = dt.minValueByLabel("tst");
+		assertEquals(null, eNullInf);
+		Element eNullSupDomain = dt.minValueByLabel("Laa");
+		assertEquals(null, eNullSupDomain);
+
+	}
 }

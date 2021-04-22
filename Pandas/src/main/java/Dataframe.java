@@ -154,7 +154,7 @@ public class Dataframe {
      * @return Element to be returned or null
      */
     public Element maxValueByColumnIndex(int indexColumn){
-        if(this.table.size() < 1 || this.table.get(0).getElements().size() <= indexColumn) {
+        if(this.table.size() < 1 || this.table.get(0).getElements().size() <= indexColumn || indexColumn < 0) {
             return null;
         }
         Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
@@ -200,7 +200,7 @@ public class Dataframe {
      * @return Element to be returned or null
      */
     public Element minValueByColumnIndex(int indexColumn){
-        if(this.table.size() < 1 || this.table.get(0).getElements().size() <= indexColumn) {
+        if(this.table.size() < 1 || this.table.get(0).getElements().size() <= indexColumn || indexColumn < 0) {
             return null;
         }
         Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
