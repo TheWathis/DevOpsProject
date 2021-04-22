@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -126,6 +128,7 @@ public class Dataframe {
             this.message = "";
         }
     }
+
     /**
      * Return the sum of value in the given column.
      * If the column is of type string the function will raise an exception.
@@ -207,31 +210,7 @@ public class Dataframe {
     /**
      * Print the numberOfLines first lines of the data frame.
      * If numberOfLines is greater than the size of the frame,
-     * we'll print try {
-            br = new BufferedReader(new FileReader(csvFileName));
-
-            String ligne = br.readLine();
-            if (ligne != null) {
-                String[] data = ligne.split(",");
-                for (String val : data) {
-                    this.label.add(new Element(val));
-
-                }
-            }
-
-            while ((ligne = br.readLine()) != null) {
-                ArrayList<Element> tmp = new ArrayList<>();
-                String[] data = ligne.split(",");
-                for (String val : data) {
-                    tmp.add(new Element(val));
-                }
-                this.table.add(new Line(this.table.size(), tmp));
-            }
-            this.printDataframe();
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }the entire frame
+     * we'll print the entire frame
      *
      * @param numberOfLines The number of lines we want to print
      */
@@ -276,19 +255,22 @@ public class Dataframe {
                 table;
     }
 
-    /***
-     * Statistics functions
+    /**
+     * Sort the data frame with the given column
      *
-     * For numbers value :
-     *  - Max
-     *  - Min
-     *  - Sum
-     *
-     * For String value :
-     *  - Max
-     *  - Min
-     *
-     * */
+     * @param indexColumn Index of the column to sum
+     */
+    public void orderBy(final Integer indexColumn) throws ExceptionWrongColumnType{
+        if(indexColumn < 0 || indexColumn >= this.table.size()){
+            throw new ExceptionWrongColumnType("Your index is not in the array");
+        }
+        Collections.sort(this.table, new Comparator<Line>() {
+            @Override
+            public int compare(Line o1, Line o2) {
+                return o1.getElementByIndex(indexColumn).compareTo(o2.getElementByIndex(indexColumn));
+            }
+        });
+    }
 
     /**
      * Return the maximum element for a column.
@@ -301,12 +283,11 @@ public class Dataframe {
         if(this.table.size() < 1 || this.table.get(0).getElements().size() <= indexColumn || indexColumn < 0) {
             return null;
         }
-        //On regarde si les valeurs sont d'un type particulier
         try {
             double d = Double.parseDouble(this.table.get(0).getElementByIndex(indexColumn).getElem().toString());
             Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
             for(int i = 1; i < this.table.size(); i++){
-                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) > 0){
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) < 0){
                     returnValue = this.table.get(i).getElementByIndex(indexColumn);
                 }
             }
@@ -314,7 +295,7 @@ public class Dataframe {
         } catch (NumberFormatException nfe) {
             Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
             for(int i = 1; i < this.table.size(); i++){
-                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) < 0){
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) > 0){
                     returnValue = this.table.get(i).getElementByIndex(indexColumn);
                 }
             }
@@ -358,7 +339,7 @@ public class Dataframe {
             double d = Double.parseDouble(this.table.get(0).getElementByIndex(indexColumn).getElem().toString());
             Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
             for(int i = 1; i < this.table.size(); i++){
-                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) < 0){
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) > 0){
                     returnValue = this.table.get(i).getElementByIndex(indexColumn);
                 }
             }
@@ -366,12 +347,14 @@ public class Dataframe {
         } catch (NumberFormatException nfe) {
             Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
             for(int i = 1; i < this.table.size(); i++){
-                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) > 0){
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) < 0){
                     returnValue = this.table.get(i).getElementByIndex(indexColumn);
                 }
             }
             return returnValue;
         }
+
+
     }
 
     /**

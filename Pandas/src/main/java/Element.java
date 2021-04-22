@@ -36,8 +36,16 @@ public class Element<E> implements Comparable<E>{
 
 	@Override
 	public int compareTo(E e) {
-		String tmp1 = e.toString();
-		String tmp2 = this.data.toString();
-		return tmp1.compareTo(tmp2);
+		try {
+			Double result = Double.parseDouble(this.data.toString());
+			String tmp1 = e.toString();
+			String tmp2 = this.data.toString();
+			return tmp2.compareTo(tmp1);
+		} catch (NumberFormatException nfe) {
+			String tmp1 = e.toString();
+			String tmp2 = this.data.toString();
+			return tmp2.compareTo(tmp1);
+		}
+
 	}
 }

@@ -1374,4 +1374,73 @@ public class DataframeTest {
 		Double result = dt.sumOfColumnByLabel("unknow");
 		assertEquals(6.0, result, 0.001);
 	}
+
+	/***
+	 * Tests for order by function
+	 * */
+	@Test
+	public void testOrderByStringColumn() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		dt.orderBy(1);
+		//assertEquals(6.0, result, 0.001);
+	}
+
+	@Test
+	public void testOrderByIntColumn() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		dt.orderBy(0);
+		//assertEquals(6.0, result, 0.001);
+	}
 }
