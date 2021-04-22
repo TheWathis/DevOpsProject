@@ -145,30 +145,45 @@ public class Dataframe {
      *  - Min
      *
      * */
-    public Element maxValueByColumnIndex(int numColumn){
-        if(this.table.size() < 1 || this.table.get(0).getElements().size() <= numColumn) {
+
+    /**
+     * Return the maximum element for a column.
+     * If the column does not exist return null
+     *
+     * @param indexColumn Index of the column
+     * @return Element to be returned or null
+     */
+    public Element maxValueByColumnIndex(int indexColumn){
+        if(this.table.size() < 1 || this.table.get(0).getElements().size() <= indexColumn) {
             return null;
         }
-        Element returnValue = this.table.get(0).getElementByIndex(numColumn);
+        Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
         for(int i = 1; i < this.table.size(); i++){
             if(returnValue.getElem() instanceof String){
-                if(returnValue.compareTo(this.table.get(i).getElementByIndex(numColumn).getElem()) < 0){
-                    returnValue = this.table.get(i).getElementByIndex(numColumn);
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) < 0){
+                    returnValue = this.table.get(i).getElementByIndex(indexColumn);
                 }
             } else {
-                if(returnValue.compareTo(this.table.get(i).getElementByIndex(numColumn).getElem()) > 0){
-                    returnValue = this.table.get(i).getElementByIndex(numColumn);
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) > 0){
+                    returnValue = this.table.get(i).getElementByIndex(indexColumn);
                 }
             }
         }
         return returnValue;
     }
 
-    public Element maxValueByLabel(String label){
+    /**
+     * Return the maximum element for a column.
+     * If the column does not exist return null
+     *
+     * @param columnLabel Label of the column
+     * @return Element to be returned or null
+     */
+    public Element maxValueByLabel(String columnLabel){
         if(this.label == null){
             return null;
         }
-        int indexLabel = this.label.getIndex(label);
+        int indexLabel = this.label.getIndex(columnLabel);
         if(indexLabel != -1){
             return maxValueByColumnIndex(indexLabel);
         } else {
@@ -177,19 +192,26 @@ public class Dataframe {
 
     }
 
-    public Element minValueByColumnIndex(int numColumn){
-        if(this.table.size() < 1 || this.table.get(0).getElements().size() <= numColumn) {
+    /**
+     * Return the minimum element for a column.
+     * If the column does not exist return null
+     *
+     * @param indexColumn Index of the column
+     * @return Element to be returned or null
+     */
+    public Element minValueByColumnIndex(int indexColumn){
+        if(this.table.size() < 1 || this.table.get(0).getElements().size() <= indexColumn) {
             return null;
         }
-        Element returnValue = this.table.get(0).getElementByIndex(numColumn);
+        Element returnValue = this.table.get(0).getElementByIndex(indexColumn);
         for(int i = 1; i < this.table.size(); i++){
             if(returnValue.getElem() instanceof String){
-                if(returnValue.compareTo(this.table.get(i).getElementByIndex(numColumn).getElem()) > 0){
-                    returnValue = this.table.get(i).getElementByIndex(numColumn);
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) > 0){
+                    returnValue = this.table.get(i).getElementByIndex(indexColumn);
                 }
             } else {
-                if(returnValue.compareTo(this.table.get(i).getElementByIndex(numColumn).getElem()) < 0){
-                    returnValue = this.table.get(i).getElementByIndex(numColumn);
+                if(returnValue.compareTo(this.table.get(i).getElementByIndex(indexColumn).getElem()) < 0){
+                    returnValue = this.table.get(i).getElementByIndex(indexColumn);
                 }
             }
 
@@ -197,11 +219,18 @@ public class Dataframe {
         return returnValue;
     }
 
-    public Element minValueByLabel(String label){
+    /**
+     * Return the minimum element for a column.
+     * If the column does not exist return null
+     *
+     * @param columnLabel Label of the column
+     * @return Element to be returned or null
+     */
+    public Element minValueByLabel(String columnLabel){
         if(this.label == null){
             return null;
         }
-        int indexLabel = this.label.getIndex(label);
+        int indexLabel = this.label.getIndex(columnLabel);
         if(indexLabel != -1){
             return minValueByColumnIndex(indexLabel);
         } else {
