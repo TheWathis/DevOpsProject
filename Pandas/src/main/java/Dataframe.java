@@ -256,12 +256,40 @@ public class Dataframe {
     }
 
     /**
+     * Sort the data frame with multiple given column
+     *
+     * @param indexColumn List of index of the column to sort
+     */
+    public void orderBy(final List<Integer> indexColumn) throws ExceptionWrongColumnType{
+        //We have to check if each index is in the line
+        for(Integer i: indexColumn) {
+            if (this.table.size() > 0 && (i < 0 || i >= this.table.get(0).getElements().size())) {
+                throw new ExceptionWrongColumnType("Your index is not in the array");
+            }
+        }
+        Collections.sort(this.table, new Comparator<Line>() {
+            @Override
+            public int compare(Line o1, Line o2) {
+                int currentIndex = 0;
+                while (currentIndex < (indexColumn.size() - 1)) {
+                    if (o1.getElementByIndex(indexColumn.get(currentIndex)).compareTo(o2.getElementByIndex(indexColumn.get(currentIndex))) != 0) {
+                        return o1.getElementByIndex(indexColumn.get(currentIndex)).compareTo(o2.getElementByIndex(indexColumn.get(currentIndex)));
+                    }
+                    currentIndex++;
+                }
+                return o1.getElementByIndex(indexColumn.get(currentIndex)).compareTo(o2.getElementByIndex(indexColumn.get(currentIndex)));
+            }
+        });
+
+    }
+
+    /**
      * Sort the data frame with the given column
      *
      * @param indexColumn Index of the column to sort
      */
     public void orderBy(final Integer indexColumn) throws ExceptionWrongColumnType{
-        if(indexColumn < 0 || indexColumn >= this.table.size()){
+        if(this.table.size() > 0 && (indexColumn < 0 || indexColumn >= this.table.get(0).getElements().size())){
             throw new ExceptionWrongColumnType("Your index is not in the array");
         }
         Collections.sort(this.table, new Comparator<Line>() {
