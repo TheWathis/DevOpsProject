@@ -258,7 +258,7 @@ public class Dataframe {
     /**
      * Sort the data frame with the given column
      *
-     * @param indexColumn Index of the column to sum
+     * @param indexColumn Index of the column to sort
      */
     public void orderBy(final Integer indexColumn) throws ExceptionWrongColumnType{
         if(indexColumn < 0 || indexColumn >= this.table.size()){
@@ -270,6 +270,15 @@ public class Dataframe {
                 return o1.getElementByIndex(indexColumn).compareTo(o2.getElementByIndex(indexColumn));
             }
         });
+    }
+
+    /**
+     * Sort the data frame with the given column label
+     *
+     * @param label Label of the column to sort
+     */
+    public void orderByLabel(final String label) throws ExceptionWrongColumnType{
+        this.orderBy(this.label.getIndex(label));
     }
 
     /**
