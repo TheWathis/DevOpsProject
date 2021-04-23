@@ -301,6 +301,19 @@ public class Dataframe {
     }
 
     /**
+     * Sort the data frame with a list of label
+     *
+     * @param labelList List of label of the column to sort
+     */
+    public void orderByLabel(final List<String> labelList) throws ExceptionWrongColumnType{
+        ArrayList<Integer> listIndexColumn = new ArrayList<>();
+        for(String labelName : labelList){
+            listIndexColumn.add(this.label.getIndex(labelName));
+        }
+        this.orderBy(listIndexColumn);
+    }
+
+    /**
      * Sort the data frame with the given column label
      *
      * @param label Label of the column to sort

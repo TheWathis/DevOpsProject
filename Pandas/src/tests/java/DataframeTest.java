@@ -1932,7 +1932,7 @@ public class DataframeTest {
 		listOfColumn.add(2);
 
 		dt.orderBy(listOfColumn);
-		dt.printDataframe();
+
 		boolean goodSort = true;
 		if(dt.getLines().size() != 2){
 			goodSort = false;
@@ -2047,6 +2047,301 @@ public class DataframeTest {
 		listOfColumn.add(-1);
 
 		dt.orderBy(listOfColumn);
+
+		boolean goodSort = true;
+		if(dt.getLines().size() != 3){
+			goodSort = false;
+		}
+		//Check for the first line
+		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
+				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Marion")) != 0
+				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0){
+			goodSort = false;
+		}
+		//Check for the second line
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+			goodSort = false;
+		}
+		//Check for the third line
+		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("3")) != 0
+				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+			goodSort = false;
+		}
+		assertTrue(goodSort);
+		//assertEquals(6.0, result, 0.001);
+	}
+
+	/***
+	 * Tests for order by with list function
+	 * */
+	@Test
+	public void testOrderByStringListLabel() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("1"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("1"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<String> listOfColumn = new ArrayList<>();
+		listOfColumn.add("Sexe");
+		listOfColumn.add("Name");
+
+		dt.orderByLabel(listOfColumn);
+
+		boolean goodSort = true;
+		if(dt.getLines().size() != 3){
+			goodSort = false;
+		}
+		//Check for the first line
+		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
+				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+			goodSort = false;
+		}
+		//Check for the second line
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+			goodSort = false;
+		}
+		//Check for the third line
+		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
+				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Marion")) != 0
+				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0){
+			goodSort = false;
+		}
+		assertTrue(goodSort);
+		//assertEquals(6.0, result, 0.001);
+	}
+
+	@Test
+	public void testOrderByIntListLabel() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Audrey"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+
+		ArrayList<String> listOfColumn = new ArrayList<>();
+		listOfColumn.add("Name");
+		listOfColumn.add("Sexe");
+
+		dt.orderByLabel(listOfColumn);
+
+		boolean goodSort = true;
+		if(dt.getLines().size() != 3){
+			goodSort = false;
+		}
+		//Check for the first line
+		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
+				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+			goodSort = false;
+		}
+		//Check for the second line
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("3")) != 0
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+			goodSort = false;
+		}
+		//Check for the third line
+		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
+				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Marion")) != 0
+				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0){
+			goodSort = false;
+		}
+		assertTrue(goodSort);
+		//assertEquals(6.0, result, 0.001);
+	}
+
+	@Test
+	public void testOrderByIntListLabelExceptionNotExcepted() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("2"));
+		listOfElement.add(new Element("Audrey"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("3"));
+		listOfElement2.add(new Element("Audrey"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		dt.addLine(l);
+		dt.addLine(l2);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<String> listOfColumn = new ArrayList<>();
+		listOfColumn.add("Name");
+		listOfColumn.add("Date");
+
+		dt.orderByLabel(listOfColumn);
+		boolean goodSort = true;
+		if(dt.getLines().size() != 2){
+			goodSort = false;
+		}
+		//Check for the first line
+		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("3")) != 0
+				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+			goodSort = false;
+		}
+		//Check for the second line
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0){
+			goodSort = false;
+		}
+		assertTrue(goodSort);
+		//assertEquals(6.0, result, 0.001);
+	}
+
+	@Test
+	public void testOrderByListLabelSameValue() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Audrey"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("2"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<String> listOfColumn = new ArrayList<>();
+		listOfColumn.add("Name");
+		listOfColumn.add("Sexe");
+
+		dt.orderByLabel(listOfColumn);
+		boolean goodSort = true;
+		if(dt.getLines().size() != 3){
+			goodSort = false;
+		}
+		//Check for the first line
+		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
+				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+			goodSort = false;
+		}
+		//Check for the second line
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+			goodSort = false;
+		}
+		//Check for the third line
+		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
+				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Marion")) != 0
+				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0){
+			goodSort = false;
+		}
+		assertTrue(goodSort);
+		//assertEquals(6.0, result, 0.001);
+	}
+
+	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
+	public void testOrderByIntNotInListLabel() throws Dataframe.ExceptionWrongColumnType {
+		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		ArrayList<Element> listOfElement2 = new ArrayList<>();
+		listOfElement2.add(new Element("2"));
+		listOfElement2.add(new Element("Bruno"));
+		listOfElement2.add(new Element("1870"));
+		Line l2 = new Line(1, listOfElement2);
+		ArrayList<Element> listOfElement3 = new ArrayList<>();
+		listOfElement3.add(new Element("3"));
+		listOfElement3.add(new Element("Audrey"));
+		listOfElement3.add(new Element("2010"));
+		Line l3 = new Line(2, listOfElement3);
+		dt.addLine(l);
+		dt.addLine(l2);
+		dt.addLine(l3);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<String> listOfColumn = new ArrayList<>();
+		listOfColumn.add("Sexe");
+		listOfColumn.add("unknow");
+
+		dt.orderByLabel(listOfColumn);
 
 		boolean goodSort = true;
 		if(dt.getLines().size() != 3){
