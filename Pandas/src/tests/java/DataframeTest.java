@@ -1408,6 +1408,30 @@ public class DataframeTest {
 		dt.changeLabelLine(lLabel);
 
 		dt.orderBy(1);
+
+		boolean goodSort = true;
+		if(dt.getLines().size() != 3){
+			goodSort = false;
+		}
+		//Check for the first line
+		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("3")) != 0
+			|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+			|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+			goodSort = false;
+		}
+		//Check for the second line
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+			goodSort = false;
+		}
+		//Check for the third line
+		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
+				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Marion")) != 0
+				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0){
+			goodSort = false;
+		}
+		assertTrue(goodSort);
 		//assertEquals(6.0, result, 0.001);
 	}
 
@@ -1441,6 +1465,30 @@ public class DataframeTest {
 		dt.changeLabelLine(lLabel);
 
 		dt.orderBy(0);
+
+		boolean goodSort = true;
+		if(dt.getLines().size() != 3){
+			goodSort = false;
+		}
+		//Check for the first line
+		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
+				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Marion")) != 0
+				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0){
+			goodSort = false;
+		}
+		//Check for the second line
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+			goodSort = false;
+		}
+		//Check for the third line
+		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("3")) != 0
+				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+			goodSort = false;
+		}
+		assertTrue(goodSort);
 		//assertEquals(6.0, result, 0.001);
 	}
 }
