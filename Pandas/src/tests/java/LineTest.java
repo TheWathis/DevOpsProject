@@ -1,5 +1,6 @@
-import org.junit.Test;
+package pandas;
 
+import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
