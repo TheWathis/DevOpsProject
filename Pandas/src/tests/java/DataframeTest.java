@@ -155,7 +155,7 @@ public class DataframeTest {
 		assertEquals("2010", eDate.getData());
 	}
 
-	@Test(expected = ExceptionUnknownColumn.class)
+	@Test(expected = ExceptionNoLabel.class)
 	public void testMaxElementByColumnLabelNonExistingColumn() throws ExceptionNoLabel, ExceptionUnknownColumn, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = new Dataframe();
 
@@ -267,7 +267,7 @@ public class DataframeTest {
 		ArrayList<String> columnValue = new ArrayList<>();
 		columnValue.add("Bruno");
 		Dataframe selectDataframe = dt.selectLineWhere(column, columnValue);
-		assertTrue(selectDataframe == null);
+		assertTrue(selectDataframe.getLines().size() == 0);
 	}
 
 	@Test(expected = ExceptionWrongIndex.class)
