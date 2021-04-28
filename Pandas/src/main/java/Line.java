@@ -154,7 +154,7 @@ public class Line {
 	 * @param labelsOfColumns The sequence of label we want to keep
 	 * @return The sub line
 	 */
-	public Line getSubColumnFromLabel(List<String> labelsOfColumns) {
+	public Line getSubLineFromColumnLabel(List<String> labelsOfColumns) {
 		ArrayList<Element> tmp = new ArrayList<>();
 		int currentI = 0;
 		String currentColumns = labelsOfColumns.get(currentI);

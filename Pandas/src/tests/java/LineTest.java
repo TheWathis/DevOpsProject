@@ -44,7 +44,7 @@ public class LineTest {
         indexOfColumn.add(1);
         indexOfColumn.add(2);
         indexOfColumn.add(3);
-        Line l2 = l.getSubColumnFromNumber(indexOfColumn);
+        Line l2 = l.getSubLineFromColumnNumber(indexOfColumn);
         ArrayList<Element> l1List = l.getElements();
         ArrayList<Element> l2List = l2.getElements();
         boolean assertBoolean = true;
@@ -67,7 +67,7 @@ public class LineTest {
         Line l = new Line(0, listOfElement);
         ArrayList<Integer> indexOfColumn = new ArrayList<>();
         indexOfColumn.add(0);
-        Line l2 = l.getSubColumnFromNumber(indexOfColumn);
+        Line l2 = l.getSubLineFromColumnNumber(indexOfColumn);
         ArrayList<Element> l1List = l.getElements();
         ArrayList<Element> l2List = l2.getElements();
         boolean assertBoolean = true;
@@ -87,7 +87,7 @@ public class LineTest {
         Line l = new Line(0, listOfElement);
         ArrayList<Integer> indexOfColumn = new ArrayList<>();
         indexOfColumn.add(3);
-        Line l2 = l.getSubColumnFromNumber(indexOfColumn);
+        Line l2 = l.getSubLineFromColumnNumber(indexOfColumn);
         ArrayList<Element> l1List = l.getElements();
         ArrayList<Element> l2List = l2.getElements();
         boolean assertBoolean = true;
@@ -108,7 +108,7 @@ public class LineTest {
         ArrayList<Integer> indexOfColumn = new ArrayList<>();
         indexOfColumn.add(1);
         indexOfColumn.add(3);
-        Line l2 = l.getSubColumnFromNumber(indexOfColumn);
+        Line l2 = l.getSubLineFromColumnNumber(indexOfColumn);
         ArrayList<Element> l1List = l.getElements();
         ArrayList<Element> l2List = l2.getElements();
         boolean assertBoolean = true;
@@ -132,7 +132,7 @@ public class LineTest {
         indexOfColumn.add(3);
         indexOfColumn.add(1);
 
-        Line l2 = l.getSubColumnFromNumber(indexOfColumn);
+        Line l2 = l.getSubLineFromColumnNumber(indexOfColumn);
         ArrayList<Element> l1List = l.getElements();
         ArrayList<Element> l2List = l2.getElements();
         boolean assertBoolean = true;
@@ -157,7 +157,7 @@ public class LineTest {
         indexOfColumn.add(1);
         indexOfColumn.add(1);
 
-        Line l2 = l.getSubColumnFromNumber(indexOfColumn);
+        Line l2 = l.getSubLineFromColumnNumber(indexOfColumn);
         ArrayList<Element> l1List = l.getElements();
         ArrayList<Element> l2List = l2.getElements();
         boolean assertBoolean = true;
