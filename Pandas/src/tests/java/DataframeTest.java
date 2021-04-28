@@ -52,6 +52,26 @@ public class DataframeTest {
 
 		assertNotNull(dt);
 	}
+
+	@Test(expected = ExceptionSizeNotEqual.class)
+	public void testChangeLabelLineFailed {
+
+		Dataframe dt = new Dataframe();
+
+
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		dt.addLine(l);
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+	}
 	
 	/*@Test
 	public void testConstructorEmpty()_1 {
