@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-
 public class Dataframe {
 
     private Line label;
@@ -103,7 +102,7 @@ public class Dataframe {
      * @param valueOfLines Values excepted for each column
      * @return The sub data frame
      */
-    public Dataframe selectLineWhere(List<Integer> numbersOfColumns, List<String> valueOfLines) throws Line.ExceptionUnknowColumn {
+    public Dataframe selectLineWhere(List<Integer> numbersOfColumns, List<String> valueOfLines) throws ExceptionUnknowColumn {
         Dataframe toReturn = new Dataframe();
         toReturn.label = this.label.getSubColumnFromNumber(numbersOfColumns);
         Line l;
@@ -116,18 +115,6 @@ public class Dataframe {
         return toReturn;
     }
 
-    public class ExceptionWrongColumnType extends Exception {
-        public String message;
-        public ExceptionWrongColumnType(String message){
-            super();
-            this.message = message;
-        }
-        public ExceptionWrongColumnType(){
-            super();
-            this.message = "";
-        }
-    }
-
     /**
      * Return the sum of value in the given column.
      * If the column is of type string the function will raise an exception.
@@ -135,7 +122,7 @@ public class Dataframe {
      * @param indexColumn Index of the column to sum
      * @return The sum of the column
      */
-    public Double sumOfColumn(Integer indexColumn) throws ExceptionWrongColumnType{
+    public Double sumOfColumn(Integer indexColumn) throws ExceptionWrongColumnType {
         if(indexColumn < 0 || indexColumn >= this.table.size()){
             throw new ExceptionWrongColumnType("Your index is not in the array");
         }
@@ -169,7 +156,7 @@ public class Dataframe {
      * @param valueOfLines Values excepted for each column
      * @return The sub data frame
      */
-    public Dataframe selectLineWhereByLabel(List<String> labelOfColumns, List<String> valueOfLines) throws Line.ExceptionUnknowColumn {
+    public Dataframe selectLineWhereByLabel(List<String> labelOfColumns, List<String> valueOfLines) throws ExceptionUnknowColumn {
         ArrayList<Integer> numbersOfColumns = new ArrayList<>();
         for(String label: labelOfColumns){
             numbersOfColumns.add(this.label.getIndex(label));
@@ -475,7 +462,7 @@ public class Dataframe {
     /**
      * Main function
      */
-    public static void main(String args[]) throws Line.ExceptionUnknowColumn {
+    public static void main(String args[]) {
         if(args.length > 0) {
             Dataframe df = new Dataframe(args[0]);
             df.printDataframe();

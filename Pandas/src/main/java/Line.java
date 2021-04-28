@@ -67,14 +67,6 @@ public class Line {
 		return new Line(this.index, tmp);
 	}
 
-	public static class ExceptionUnknowColumn extends Exception {
-		public String message;
-		public ExceptionUnknowColumn(String message){
-			super();
-			this.message = message;
-		}
-	}
-
 	/**
 	 * Get the sub line with given a sequence of index of column we want to keep.
 	 * The column are added in the order of the sequence of index.
