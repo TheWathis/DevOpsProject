@@ -69,7 +69,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionOperationOnEmptyTable.class)
-	public void testSumEmptyTable() throws ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
+	public void testSumEmptyTable() throws ExceptionSizeNotEqual, ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 
 		Dataframe dt = new Dataframe();
 
@@ -84,7 +84,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionOperationOnEmptyTable.class)
-	public void testOrderEmptyTable() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
+	public void testOrderEmptyTable() throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 
 		Dataframe dt = new Dataframe();
 
