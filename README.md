@@ -1,6 +1,6 @@
 ### DevOpsProject
 
-Projet DevOps effectué lors du second semestre de master 1. Ce projet est la construction d'une librairie (similaire à Pandas sur Python, où nous pouvons lire un fichier au format .CSV
+Projet DevOps effectué lors du second semestre de master 1. Ce projet est la construction d'une librairie (similaire à Pandas sur Python), où nous pouvons lire un fichier au format .CSV et manipuler ses données.
 
 [![Workflow Status](https://img.shields.io/github/workflow/status/haskaris/DevOpsProject/CI)](https://shields.io/)
 [![Workflow Travis Status](https://img.shields.io/travis/com/haskaris/DevOpsProject)](https://travis-ci.com/github/haskaris/DevOpsProject)
