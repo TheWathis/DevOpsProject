@@ -14,7 +14,7 @@ public class LineTest {
         Line l = new Line();
         Element e = new Element("Test");
         l.add(e);
-        assertEquals("Test", l.getElements().get(0).getElem());
+        assertEquals("Test", l.getElements().get(0).getData());
     }
 
     @Test
@@ -24,8 +24,8 @@ public class LineTest {
         l.add(e);
         Element e2 = new Element("Test2");
         l.add(e2);
-        assertEquals("Test", l.getElements().get(0).getElem());
-        assertEquals("Test2", l.getElements().get(1).getElem());
+        assertEquals("Test", l.getElements().get(0).getData());
+        assertEquals("Test2", l.getElements().get(1).getData());
     }
 
     /**
@@ -49,7 +49,7 @@ public class LineTest {
         ArrayList<Element> l2List = l2.getElements();
         boolean assertBoolean = true;
         for(int i = 0; i < l1List.size(); i++){
-            if(l1List.get(i).getElem() != l2List.get(i).getElem()){
+            if(l1List.get(i).getData() != l2List.get(i).getData()){
                 assertBoolean = false;
                 break;
             }
@@ -71,7 +71,7 @@ public class LineTest {
         ArrayList<Element> l1List = l.getElements();
         ArrayList<Element> l2List = l2.getElements();
         boolean assertBoolean = true;
-        if(l1List.get(0).getElem() != l2List.get(0).getElem() || l2List.size() != 1 ){
+        if(l1List.get(0).getData() != l2List.get(0).getData() || l2List.size() != 1 ){
             assertBoolean = false;
         }
         assertEquals(true, assertBoolean);
@@ -91,7 +91,7 @@ public class LineTest {
         ArrayList<Element> l1List = l.getElements();
         ArrayList<Element> l2List = l2.getElements();
         boolean assertBoolean = true;
-        if(l1List.get(3).getElem() != l2List.get(0).getElem() || l2List.size() != 1 ){
+        if(l1List.get(3).getData() != l2List.get(0).getData() || l2List.size() != 1 ){
             assertBoolean = false;
         }
         assertEquals(true, assertBoolean);
@@ -112,8 +112,8 @@ public class LineTest {
         ArrayList<Element> l1List = l.getElements();
         ArrayList<Element> l2List = l2.getElements();
         boolean assertBoolean = true;
-        if(l1List.get(3).getElem() != l2List.get(1).getElem()
-                || l1List.get(1).getElem() != l2List.get(0).getElem()
+        if(l1List.get(3).getData() != l2List.get(1).getData()
+                || l1List.get(1).getData() != l2List.get(0).getData()
                 || l2List.size() != 2 ){
             assertBoolean = false;
         }
@@ -136,8 +136,8 @@ public class LineTest {
         ArrayList<Element> l1List = l.getElements();
         ArrayList<Element> l2List = l2.getElements();
         boolean assertBoolean = true;
-        if(l1List.get(3).getElem() != l2List.get(0).getElem()
-                || l1List.get(1).getElem() != l2List.get(1).getElem()
+        if(l1List.get(3).getData() != l2List.get(0).getData()
+                || l1List.get(1).getData() != l2List.get(1).getData()
                 || l2List.size() != 2 ){
             assertBoolean = false;
         }
@@ -161,9 +161,9 @@ public class LineTest {
         ArrayList<Element> l1List = l.getElements();
         ArrayList<Element> l2List = l2.getElements();
         boolean assertBoolean = true;
-        if(l1List.get(1).getElem() != l2List.get(0).getElem()
-                || l1List.get(1).getElem() != l2List.get(1).getElem()
-                || l1List.get(1).getElem() != l2List.get(2).getElem()
+        if(l1List.get(1).getData() != l2List.get(0).getData()
+                || l1List.get(1).getData() != l2List.get(1).getData()
+                || l1List.get(1).getData() != l2List.get(2).getData()
                 || l2List.size() != 3 ){
             assertBoolean = false;
         }
