@@ -181,7 +181,7 @@ public class LineTest {
         listOfElement.add(new Element(2));
         listOfElement.add(new Element(3));
         Line l = new Line(0, listOfElement);
-        int index = l.getIndex("Test");
+        int index = l.getIndexFromDataName("Test");
         assertEquals(-1, index);
     }
 
@@ -193,7 +193,7 @@ public class LineTest {
         listOfElement.add(new Element("C"));
         listOfElement.add(new Element("D"));
         Line l = new Line(0, listOfElement);
-        int index = l.getIndex("A");
+        int index = l.getIndexFromDataName("A");
         assertEquals(0, index);
     }
 
@@ -205,7 +205,7 @@ public class LineTest {
         listOfElement.add(new Element("C"));
         listOfElement.add(new Element("D"));
         Line l = new Line(0, listOfElement);
-        int index = l.getIndex("D");
+        int index = l.getIndexFromDataName("D");
         assertEquals(3, index);
     }
 

@@ -275,7 +275,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionWrongIndex.class)
-	public void testSelectLineWhereValueColumnNotIn() throws ExceptionWrongIndex {
+	public void testSelectLineWhereValueColumnNotIn() throws ExceptionWrongIndex, ExceptionUnknownColumn {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<Integer> column = new ArrayList<>();
