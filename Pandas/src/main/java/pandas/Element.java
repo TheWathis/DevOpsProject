@@ -1,3 +1,4 @@
+package pandas;
 
 public class Element<E> implements Comparable<E>{
 	private E data;

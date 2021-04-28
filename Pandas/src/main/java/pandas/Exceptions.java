@@ -1,3 +1,5 @@
+package pandas;
+
 class ExceptionNoLabel extends Exception {
     public String message;
     public ExceptionNoLabel() {

@@ -37,7 +37,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>Dataframe</mainClass>
+                            <mainClass>pandas/Dataframe</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
