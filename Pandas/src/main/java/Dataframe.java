@@ -61,7 +61,6 @@ public class Dataframe {
                 String[] data = ligne.split(",");
                 for (String val : data) {
                     this.label.add(new Element(val));
-
                 }
             }
 
