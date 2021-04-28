@@ -84,7 +84,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionOperationOnEmptyTable.class)
-	public void testSumEmptyTable() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
+	public void testOrderEmptyTable() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 
 		Dataframe dt = new Dataframe();
 
