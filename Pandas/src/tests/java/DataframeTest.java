@@ -65,11 +65,11 @@ public class DataframeTest {
 		Line lLabel = new Line(0, listOfElementLabel);
 		dt.changeLabelLine(lLabel);
 
-		assertEqual(lLabel.toString(), dt.getLabels().toString())
+		assertEqual(lLabel.toString(), dt.getLabels().toString());
 	}
 
 	@Test(expected = ExceptionOperationOnEmptyTable.class)
-	public void testSumEmptyTable throws ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable  {
+	public void testSumEmptyTable() throws ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 
 		Dataframe dt = new Dataframe();
 
@@ -84,7 +84,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionOperationOnEmptyTable.class)
-	public void testSumEmptyTable throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable  {
+	public void testSumEmptyTable() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 
 		Dataframe dt = new Dataframe();
 
