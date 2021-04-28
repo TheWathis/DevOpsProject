@@ -83,11 +83,14 @@ public class Line {
 	 * @param numbersOfColumns The sequence of column we want to keep
 	 * @return The sub line
 	 */
-	public Line getSubLineFromColumnNumber(List<Integer> numbersOfColumns) {
+	public Line getSubLineFromColumnNumber(List<Integer> numbersOfColumns) throws ExceptionWrongIndex {
 		ArrayList<Element> tmp = new ArrayList<>();
 		int currentI = 0;
 		int currentColumns = numbersOfColumns.get(currentI);
 		for (int i = 0; i < this.elements.size(); i++) {
+			if (currentColumns < 0 || currentColumns >= this.elements.size()) {
+ 				throw new ExceptionWrongIndex();
+			}
 			if (i == currentColumns) {
 				tmp.add(this.elements.get(i));
 				currentI++;

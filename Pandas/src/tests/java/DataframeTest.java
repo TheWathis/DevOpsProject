@@ -192,7 +192,7 @@ public class DataframeTest {
 		Element eNumber = dt.minValueByLabel("Number");
 		assertEquals("1", eNumber.getData());
 		Element eName = dt.minValueByLabel("Name");
-		assertEquals("Audrey", eName.getData());
+		assertEquals("Bruno", eName.getData());
 	}
 
 	@Test(expected = ExceptionNoLabel.class)
@@ -446,15 +446,15 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		//Check for the first line
-		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("5")) != 0
-				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
-				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("10")) != 0
+				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
+				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
 			goodSort = false;
 		}
 		//Check for the second line
-		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("10")) != 0
-				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
-				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("5")) != 0
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
 			goodSort = false;
 		}
 		//Check for the third line
@@ -496,7 +496,7 @@ public class DataframeTest {
 		assertTrue(goodSort);
 	}
 
-	@Test(expected = ExceptionUnknownColumn.class)
+	@Test(expected = ExceptionWrongIndex.class)
 	public void testOrderByIntNotInLabel() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
@@ -1094,17 +1094,24 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testGetSubColumnFromNumber() {
+	public void testGetSubLineFromColumnLabel() {
 		Dataframe df = constructBaseDF_FromVoid();
 
 		ArrayList<String> indexOfColumn = new ArrayList<>();
 		indexOfColumn.add("Name");
 		indexOfColumn.add("Number");
-		Line l = df.getLines().get(0).getSubLineFromColumnLabel(indexOfColumn);
+		Line baseLine = df.getLines().get(0);
+		Line l = baseLine.getSubLineFromColumnLabel(indexOfColumn);
 
 		boolean assertBoolean = true;
-		for(int i = 0; i < df.getLines().get(0).getSize(); i++){
-			if(df.getLines().get(0).getElements().get(i).getData() != l.getElements().get(i).getData()) {
+		for(int i = 0; i < indexOfColumn.size(); i++){
+			boolean trouve = false;
+			for(Element e: df.getLines().get(0).getElements()) {
+				if (e.getData() == l.getElements().get(i).getData()) {
+					trouve = true;
+				}
+			}
+			if (!trouve) {
 				assertBoolean = false;
 				break;
 			}

@@ -123,7 +123,7 @@ public class Dataframe {
      * @param valueOfLines Values excepted for each column
      * @return The sub data frame
      */
-    public Dataframe selectLineWhere(List<Integer> numbersOfColumns, List<String> valueOfLines) throws ExceptionUnknownColumn {
+    public Dataframe selectLineWhere(List<Integer> numbersOfColumns, List<String> valueOfLines) throws ExceptionWrongIndex, ExceptionUnknownColumn {
         if (numbersOfColumns.size() != valueOfLines.size()) {
             Dataframe toReturn = new Dataframe();
             toReturn.label = this.label.getSubLineFromColumnNumber(numbersOfColumns);
@@ -184,10 +184,14 @@ public class Dataframe {
      * @param valueOfLines Values excepted for each column
      * @return The sub data frame
      */
-    public Dataframe selectLineWhereByLabel(List<String> labelOfColumns, List<String> valueOfLines) throws ExceptionUnknownColumn {
+    public Dataframe selectLineWhereByLabel(List<String> labelOfColumns, List<String> valueOfLines) throws ExceptionWrongIndex, ExceptionUnknownColumn {
         ArrayList<Integer> numbersOfColumns = new ArrayList<>();
         for(String label: labelOfColumns){
-            numbersOfColumns.add(this.label.getIndexFromDataName(label));
+            int index = this.label.getIndexFromDataName(label);
+            if (index == -1) {
+                throw new ExceptionUnknownColumn("Index invalid");
+            }
+            numbersOfColumns.add(index);
         }
         return selectLineWhere(numbersOfColumns, valueOfLines);
     }
@@ -198,7 +202,7 @@ public class Dataframe {
      * @param numbersOfColumns The list of index of column we want to keep
      * @return The sub data frame
      */
-    public Dataframe getSubDataFrameFromColumnsNumber(List<Integer> numbersOfColumns) {
+    public Dataframe getSubDataFrameFromColumnsNumber(List<Integer> numbersOfColumns) throws ExceptionWrongIndex {
         Dataframe toReturn = new Dataframe();
         toReturn.label = this.label.getSubLineFromColumnNumber(numbersOfColumns);
         for (int i = 0; i < this.table.size(); i++) {
@@ -213,7 +217,7 @@ public class Dataframe {
      * @param labelsOfColumns The list of label of column we want to keep
      * @return The sub data frame
      */
-    public Dataframe getSubDataFrameFromColumnsLabel(List<String> labelsOfColumns) {
+    public Dataframe getSubDataFrameFromColumnsLabel(List<String> labelsOfColumns) throws ExceptionWrongIndex {
         ArrayList<Integer> tmp = new ArrayList<>();
         for (String s: labelsOfColumns) {
             tmp.add(label.getIndexFromDataName(s));
