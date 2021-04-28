@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,19 +5,10 @@ public class Line {
 	private int index;
 	private ArrayList<Element> elements = new ArrayList<>();
 
-	public ArrayList<Element> getElements(){
-		return elements;
-	}
 
-	public Element getElementByIndex(int index){
-		if(0 <= index && index < elements.size()){
-			return elements.get(index);
-		} else {
-			//Mauvais index
-			return null;
-		}
-	}
-
+	/////////////////////////////////////////////////
+	//                  Constructors               //
+	/////////////////////////////////////////////////
 	public Line() {
 		new Line(0);
 	}
@@ -30,6 +20,51 @@ public class Line {
 	public Line(int index, ArrayList<Element> c) {
 		this.index = index;
 		this.elements = c;
+	}
+
+	/**
+	 * Getter of Elements
+	 *
+	 * @return ArrayList<Element> of the line
+	 */
+	public ArrayList<Element> getElements(){
+		return elements;
+	}
+
+	/**
+	 * Get the element of the line at the index i
+	 * @param i integer - the position to get the element from
+	 * @return Element at the position i
+	 */
+	public Element getElementByIndex(int i) throws ExceptionWrongIndex{
+		if (i < 0 || i >= this.elements.size()) {
+			throw new ExceptionWrongIndex();
+		}
+		return elements.get(i);
+	}
+
+	/**
+	 * Get the index of a given string element
+	 *
+	 * @param dataName Name of the element we want to find
+	 * @return The index of the first element (-1 if not present)
+	 */
+	public int getIndexFromDataName(String dataName) {
+		int toReturn = -1;
+		for (Element e: elements) {
+			if (e.toString().equals(dataName)) {
+				return elements.indexOf(e);
+			}
+		}
+		return toReturn;
+	}
+
+	/**
+	 * Get the length of the line
+	 * @return int - length of the line
+	 */
+	public int getSize() {
+		return this.elements.size();
 	}
 
 	/**
@@ -48,7 +83,7 @@ public class Line {
 	 * @param numbersOfColumns The sequence of column we want to keep
 	 * @return The sub line
 	 */
-	public Line getSubColumnFromNumber(List<Integer> numbersOfColumns) {
+	public Line getSubLineFromColumnNumber(List<Integer> numbersOfColumns) {
 		ArrayList<Element> tmp = new ArrayList<>();
 		int currentI = 0;
 		int currentColumns = numbersOfColumns.get(currentI);
@@ -56,6 +91,7 @@ public class Line {
 			if (i == currentColumns) {
 				tmp.add(this.elements.get(i));
 				currentI++;
+				//Vraie condition de sortie, car numbersOfColumns peuvent ne pas être dans l'ordre
 				if (currentI >= numbersOfColumns.size()) {
 					break;
 				} else if (numbersOfColumns.get(currentI) <= numbersOfColumns.get(currentI - 1)){
@@ -76,11 +112,11 @@ public class Line {
 	 * @param valuesOfColumns The values of each column
 	 * @return The sub line
 	 */
-	public Line selectLineWhere(List<Integer> numbersOfColumns, List<String> valuesOfColumns) throws ExceptionUnknowColumn {
+	public Line selectLineWhere(List<Integer> numbersOfColumns, List<String> valuesOfColumns) throws ExceptionUnknownColumn {
 		ArrayList<Element> tmp = new ArrayList<>();
 		int currentI = 0;
 		if( numbersOfColumns.get(currentI) < 0 || numbersOfColumns.get(currentI) >= this.elements.size()){
-			throw new ExceptionUnknowColumn("One of the given index of column is not in the array");
+			throw new ExceptionUnknownColumn("One of the given index of column is not in the array");
 		}
 		int currentColumns = numbersOfColumns.get(currentI);
 		for (int i = 0; i < this.elements.size(); i++) {
@@ -102,7 +138,7 @@ public class Line {
 					i = 0;
 				}
 				if( numbersOfColumns.get(currentI) < 0 || numbersOfColumns.get(currentI) >= this.elements.size()){
-					throw new ExceptionUnknowColumn("One of the given index of column is not in the array");
+					throw new ExceptionUnknownColumn("One of the given index of column is not in the array");
 				}
 				currentColumns = numbersOfColumns.get(currentI);
 			} else {
@@ -133,23 +169,6 @@ public class Line {
 			}
 		}
 		return new Line(this.index, tmp);
-	}
-
-	/**
-	 * Get the index of a given string element
-	 *
-	 * @param dataName Name of the element we want to find
-	 * @return The index of the element
-	 */
-	public int getIndex(String dataName) {
-		int toReturn = -1;
-		for (Element e: elements) {
-			if (e.toString().equals(dataName)) {
-				toReturn = elements.indexOf(e);
-				break;
-			}
-		}
-		return toReturn;
 	}
 
 	/**

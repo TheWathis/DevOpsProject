@@ -11,7 +11,7 @@ public class Element<E> implements Comparable<E>{
 	 *
 	 * @return The data of the element
 	 */
-	public E getElem() {
+	public E getData() {
 		return data;
 	}
 
@@ -20,7 +20,7 @@ public class Element<E> implements Comparable<E>{
 	 *
 	 * @param newData  the newData of the element
 	 */
-	public void setElem(E newData) {
+	public void setData(E newData) {
 		this.data = newData;
 	}
 

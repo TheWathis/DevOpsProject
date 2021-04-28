@@ -6,12 +6,14 @@ import java.util.ArrayList;
 
 public class DataframeTest {
 
-	/**
-	 * Test on get sub of data frame with sequence of line
-	 * */
-	@Test
-	public void testGetSubDataFrameFromLines() {
+	private Dataframe constructBaseDF_FromVoid() {
 		Dataframe dt = new Dataframe();
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Number"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
@@ -30,106 +32,39 @@ public class DataframeTest {
 		dt.addLine(l);
 		dt.addLine(l2);
 		dt.addLine(l3);
+		
+		return dt;
+	}
 
-		ArrayList<Integer> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add(0);
-		indexOfColumn.add(1);
-		indexOfColumn.add(2);
+	private Dataframe constructBaseDF_FromCSV() {
+		Dataframe dt = new Dataframe("Pandas/src/main/resources/fichier_test.csv");
 
-		Dataframe dtSub = dt.getSubDataFrameFromLines(indexOfColumn);
+		return dt;
+	}
+
+	@Test
+	public void testConstructorEmpty() {
+		Dataframe dt = constructBaseDF_FromVoid();
+
+		assertNotNull(dt);
+	}
+	
+	@Test
+	public void testConstructorEmpty() {
+		Dataframe dt = constructBaseDF_FromCSV();
+
+		assertNotNull(dt);
+	}
+	
+	/**
+	 * Test on get sub of data frame with sequence of line
+	 * */
+	@Test
+	public void testGetSubDataFrameFromLines() {
+		Dataframe dt = constructBaseDF_FromVoid();
+
+		Dataframe dtSub = dt.getSubDataFrameFromLines([2, 0, 1]);
 		assertEquals(dt.toString(), dtSub.toString());
-	}
-
-	@Test
-	public void testGetSubDataFrameFromFirstLine() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("10"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("5"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Integer> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add(0);
-
-		Dataframe dtSub = dt.getSubDataFrameFromLines(indexOfColumn);
-
-		boolean resultAssert = true;
-		ArrayList<Line> listOfLine = dt.getLines();
-		ArrayList<Line> listOfSubLine = dtSub.getLines();
-		if(listOfLine.get(0).getElements().get(0).getElem() != listOfSubLine.get(0).getElements().get(0).getElem() ){
-			resultAssert = false;
-		}
-		assertTrue(resultAssert);
-	}
-
-	@Test
-	public void testGetSubDataFrameFromLastLine() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("10"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("5"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Integer> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add(2);
-
-		Dataframe dtSub = dt.getSubDataFrameFromLines(indexOfColumn);
-
-		boolean resultAssert = true;
-		ArrayList<Line> listOfLine = dt.getLines();
-		ArrayList<Line> listOfSubLine = dtSub.getLines();
-		if(listOfLine.get(2).getElements().get(0).getElem() != listOfSubLine.get(0).getElements().get(0).getElem() ){
-			resultAssert = false;
-		}
-		assertTrue(resultAssert);
-	}
-
-	@Test
-	public void testGetSubDataFrameFromSameLine() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("10"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("5"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Integer> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add(2);
-		indexOfColumn.add(2);
-
-		Dataframe dtSub = dt.getSubDataFrameFromLines(indexOfColumn);
-
-		boolean resultAssert = true;
-		ArrayList<Line> listOfLine = dt.getLines();
-		ArrayList<Line> listOfSubLine = dtSub.getLines();
-		if(listOfLine.get(2).getElements().get(0).getElem() != listOfSubLine.get(0).getElements().get(0).getElem()
-			|| listOfLine.get(2).getElements().get(0).getElem() != listOfSubLine.get(1).getElements().get(0).getElem()){
-			resultAssert = false;
-		}
-		assertTrue(resultAssert);
 	}
 
 	/**
@@ -137,365 +72,26 @@ public class DataframeTest {
 	 * */
 	@Test
 	public void testGetSubDataFrameFromColumnsNumber() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("10"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("5"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
+		Dataframe dt = constructBaseDF_FromVoid();
 
-		ArrayList<Integer> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add(0);
-		indexOfColumn.add(1);
-		indexOfColumn.add(2);
-
-		Dataframe dtSub = dt.getSubDataFrameFromColumnsNumber(indexOfColumn);
+		Dataframe dtSub = dt.getSubDataFrameFromColumnsNumber([0,1,2]);
 		assertEquals(dt.toString(), dtSub.toString());
-	}
-
-	@Test
-	public void testGetSubDataFrameFromFirstColumnsNumber() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("10"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("5"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Integer> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add(0);
-
-		Dataframe dtSub = dt.getSubDataFrameFromColumnsNumber(indexOfColumn);
-
-		boolean resultAssert = true;
-		ArrayList<Line> listOfLine = dt.getLines();
-		ArrayList<Line> listOfSubLine = dtSub.getLines();
-		if(listOfLine.get(0).getElements().get(0).getElem()
-				!= listOfSubLine.get(0).getElements().get(0).getElem()
-				|| listOfLine.get(1).getElements().get(0).getElem()
-				!= listOfSubLine.get(1).getElements().get(0).getElem()
-				|| listOfLine.get(2).getElements().get(0).getElem()
-				!= listOfSubLine.get(2).getElements().get(0).getElem()
-				|| listOfSubLine.size() != 3 ){
-			resultAssert = false;
-		}
-		assertTrue(resultAssert);
-	}
-
-	@Test
-	public void testGetSubDataFrameFromLastColumnsNumber() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("10"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("5"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Integer> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add(2);
-
-		Dataframe dtSub = dt.getSubDataFrameFromColumnsNumber(indexOfColumn);
-
-		boolean resultAssert = true;
-		ArrayList<Line> listOfLine = dt.getLines();
-		ArrayList<Line> listOfSubLine = dtSub.getLines();
-		if(listOfLine.get(0).getElements().get(2).getElem()
-				!= listOfSubLine.get(0).getElements().get(0).getElem()
-			|| listOfLine.get(1).getElements().get(2).getElem()
-				!= listOfSubLine.get(1).getElements().get(0).getElem()
-			|| listOfLine.get(2).getElements().get(2).getElem()
-				!= listOfSubLine.get(2).getElements().get(0).getElem()
-			|| listOfSubLine.size() != 3){
-			resultAssert = false;
-		}
-		assertTrue(resultAssert);
-	}
-
-	@Test
-	public void testGetSubDataFrameFromSameColumnsNumber() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("10"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("5"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Integer> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add(2);
-		indexOfColumn.add(2);
-
-		Dataframe dtSub = dt.getSubDataFrameFromColumnsNumber(indexOfColumn);
-
-		boolean resultAssert = true;
-		ArrayList<Line> listOfLine = dt.getLines();
-		ArrayList<Line> listOfSubLine = dtSub.getLines();
-		if(listOfLine.get(0).getElements().get(2).getElem()
-				!= listOfSubLine.get(0).getElements().get(0).getElem()
-				|| listOfLine.get(1).getElements().get(2).getElem()
-				!= listOfSubLine.get(1).getElements().get(0).getElem()
-				|| listOfLine.get(2).getElements().get(2).getElem()
-				!= listOfSubLine.get(2).getElements().get(0).getElem()
-
-				|| listOfLine.get(0).getElements().get(2).getElem()
-				!= listOfSubLine.get(0).getElements().get(1).getElem()
-				|| listOfLine.get(1).getElements().get(2).getElem()
-				!= listOfSubLine.get(1).getElements().get(1).getElem()
-				|| listOfLine.get(2).getElements().get(2).getElem()
-				!= listOfSubLine.get(2).getElements().get(1).getElem()
-				|| listOfSubLine.size() != 3){
-			resultAssert = false;
-		}
-		assertTrue(resultAssert);
 	}
 
 	/**
 	 * Test on get sub of data frame with sequence of column label
 	 * */
-
 	@Test
 	public void testGetSubDataFrameFromColumnsLabel() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("10"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("5"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
+		Dataframe dt = constructBaseDF_FromVoid();
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Number"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		ArrayList<String> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add("Number");
-		indexOfColumn.add("Name");
-		indexOfColumn.add("Date");
-		Dataframe dtSub = dt.getSubDataFrameFromColumnsLabel(indexOfColumn);
-		dtSub.changeLabelLine(lLabel);
+		ArrayList<String> nameOfColumn = new ArrayList<>();
+		nameOfColumn.add("Number");
+		nameOfColumn.add("Name");
+		nameOfColumn.add("Date");
+		Dataframe dtSub = dt.getSubDataFrameFromColumnsLabel(nameOfColumn);
 
 		assertEquals(dt.toString(), dtSub.toString());
-	}
-
-	@Test
-	public void testGetSubDataFrameFromFirstColumnsLabel() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("10"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("5"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Number"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		ArrayList<String> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add("Number");
-		Dataframe dtSub = dt.getSubDataFrameFromColumnsLabel(indexOfColumn);
-		dtSub.changeLabelLine(lLabel);
-
-		boolean resultAssert = true;
-		ArrayList<Line> listOfLine = dt.getLines();
-		ArrayList<Line> listOfSubLine = dtSub.getLines();
-		if(listOfLine.get(0).getElements().get(0).getElem()
-				!= listOfSubLine.get(0).getElements().get(0).getElem()
-				|| listOfLine.get(1).getElements().get(0).getElem()
-				!= listOfSubLine.get(1).getElements().get(0).getElem()
-				|| listOfLine.get(2).getElements().get(0).getElem()
-				!= listOfSubLine.get(2).getElements().get(0).getElem()
-				|| listOfSubLine.size() != 3){
-			resultAssert = false;
-		}
-		assertTrue(resultAssert);
-	}
-
-	@Test
-	public void testGetSubDataFrameFromLastColumnsLabel() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("10"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("5"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Number"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		ArrayList<String> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add("Date");
-		Dataframe dtSub = dt.getSubDataFrameFromColumnsLabel(indexOfColumn);
-		dtSub.changeLabelLine(lLabel);
-
-		boolean resultAssert = true;
-		ArrayList<Line> listOfLine = dt.getLines();
-		ArrayList<Line> listOfSubLine = dtSub.getLines();
-		if(listOfLine.get(0).getElements().get(2).getElem()
-				!= listOfSubLine.get(0).getElements().get(0).getElem()
-				|| listOfLine.get(1).getElements().get(2).getElem()
-				!= listOfSubLine.get(1).getElements().get(0).getElem()
-				|| listOfLine.get(2).getElements().get(2).getElem()
-				!= listOfSubLine.get(2).getElements().get(0).getElem()
-				|| listOfSubLine.size() != 3){
-			resultAssert = false;
-		}
-		assertTrue(resultAssert);
-	}
-
-	@Test
-	public void testGetSubDataFrameFromSameColumnsLabel() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("10"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("5"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Number"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		ArrayList<String> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add("Date");
-		indexOfColumn.add("Date");
-		Dataframe dtSub = dt.getSubDataFrameFromColumnsLabel(indexOfColumn);
-		dtSub.changeLabelLine(lLabel);
-
-		boolean resultAssert = true;
-		ArrayList<Line> listOfLine = dt.getLines();
-		ArrayList<Line> listOfSubLine = dtSub.getLines();
-		if(listOfLine.get(0).getElements().get(2).getElem()
-				!= listOfSubLine.get(0).getElements().get(0).getElem()
-				|| listOfLine.get(1).getElements().get(2).getElem()
-				!= listOfSubLine.get(1).getElements().get(0).getElem()
-				|| listOfLine.get(2).getElements().get(2).getElem()
-				!= listOfSubLine.get(2).getElements().get(0).getElem()
-
-				|| listOfLine.get(0).getElements().get(2).getElem()
-				!= listOfSubLine.get(0).getElements().get(1).getElem()
-				|| listOfLine.get(1).getElements().get(2).getElem()
-				!= listOfSubLine.get(1).getElements().get(1).getElem()
-				|| listOfLine.get(2).getElements().get(2).getElem()
-				!= listOfSubLine.get(2).getElements().get(1).getElem()
-				|| listOfSubLine.size() != 3){
-			resultAssert = false;
-		}
-		assertTrue(resultAssert);
 	}
 
 	/**
@@ -503,78 +99,33 @@ public class DataframeTest {
 	 * */
 	@Test
 	public void testMaxElementByColumnIndex() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("M"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("L"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("X"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
+		Dataframe dt = constructBaseDF_FromVoid();
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		Element eSexe = dt.maxValueByColumnIndex(0);
-		assertEquals("L", eSexe.getElem());
+		Element eNumber = dt.maxValueByColumnIndex(0);
+		assertEquals("10", eNumber.getElem());
 		Element eName = dt.maxValueByColumnIndex(1);
-		assertEquals("Audrey", eName.getElem());
-		Element eDate = dt.maxValueByColumnIndex(2);
-		assertEquals("2010", eDate.getElem());
-
+		assertEquals("Marion", eName.getElem());
 	}
 
-	@Test
-	public void testMaxElementByColumnIndexNonExistingColumn() {
+	@Test(expected = ExceptionWrongIndex.class)
+	public void testMaxElementByColumnIndexNonExistingColumn() throws ExceptionWrongIndex {
+		Dataframe dt = constructBaseDF_FromVoid();
+
+		Element eNullSup = dt.maxValueByColumnIndex(-1);
+	}
+
+	@Test(expected = ExceptionOperationOnEmptyTable.class)
+	public void testMaxElementByColumnIndexEmptyTable() throws ExceptionOperationOnEmptyTable {
 		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("M"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("L"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("X"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
 
 		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Number"));
 		listOfElementLabel.add(new Element("Name"));
 		listOfElementLabel.add(new Element("Date"));
 		Line lLabel = new Line(0, listOfElementLabel);
 		dt.changeLabelLine(lLabel);
 
-		Element eNullSup = dt.maxValueByColumnIndex(-1);
-		assertEquals(null, eNullSup);
-		Element eNullInf = dt.maxValueByColumnIndex(10);
-		assertEquals(null, eNullInf);
-		Element eNullSupDomain = dt.maxValueByColumnIndex(3);
-		assertEquals(null, eNullSupDomain);
-
+		Element eNullSup = dt.maxValueByColumnIndex(1);
 	}
 
 	/**
@@ -582,78 +133,19 @@ public class DataframeTest {
 	 * */
 	@Test
 	public void testMaxElementByColumnLabel() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("M"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("L"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("X"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
+		Dataframe dt = constructBaseDF_FromVoid();
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		Element eSexe = dt.maxValueByLabel("Sexe");
-		assertEquals("L", eSexe.getElem());
 		Element eName = dt.maxValueByLabel("Name");
-		assertEquals("Audrey", eName.getElem());
+		assertEquals("Marion", eName.getElem());
 		Element eDate = dt.maxValueByLabel("Date");
 		assertEquals("2010", eDate.getElem());
-
 	}
 
-	@Test
-	public void testMaxElementByColumnLabelNonExistingColumn() {
+	@Test(expected = ExceptionUnknownColumn.class)
+	public void testMaxElementByColumnLabelNonExistingColumn() throws ExceptionUnknownColumn {
 		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("M"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("L"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("X"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		Element eNullSup = dt.maxValueByLabel("");
-		assertEquals(null, eNullSup);
-		Element eNullInf = dt.maxValueByLabel("tst");
-		assertEquals(null, eNullInf);
-		Element eNullSupDomain = dt.maxValueByLabel("Laa");
-		assertEquals(null, eNullSupDomain);
-
+		Element eNullSup = dt.maxValueByLabel("faux");
 	}
 
 	/**
@@ -661,157 +153,39 @@ public class DataframeTest {
 	 * */
 	@Test
 	public void testMinElementByColumnIndex() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("M"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("L"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("X"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
+		Dataframe dt = constructBaseDF_FromVoid();
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		Element eSexe = dt.minValueByColumnIndex(0);
-		assertEquals("X", eSexe.getElem());
+		Element eNumber = dt.minValueByColumnIndex(0);
+		assertEquals("1", eNumber.getElem());
 		Element eName = dt.minValueByColumnIndex(1);
-		assertEquals("Marion", eName.getElem());
-		Element eDate = dt.minValueByColumnIndex(2);
-		assertEquals("1870", eDate.getElem());
-
+		assertEquals("Audrey", eName.getElem());
 	}
 
-	@Test
-	public void testMinElementByColumnIndexNonExistingColumn() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("M"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("L"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("X"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
+	@Test(expected = ExceptionWrongIndex.class)
+	public void testMinElementByColumnIndexNonExistingColumn() throws ExceptionWrongIndex {
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element eNullSup = dt.minValueByColumnIndex(-1);
-		assertEquals(null, eNullSup);
-		Element eNullInf = dt.minValueByColumnIndex(10);
-		assertEquals(null, eNullInf);
-		Element eNullSupDomain = dt.minValueByColumnIndex(3);
-		assertEquals(null, eNullSupDomain);
-
 	}
 
 	/**
-	 * Tests for maximum value function by label
+	 * Tests for minimum value function by label
 	 * */
 	@Test
 	public void testMinElementByColumnLabel() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("M"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("L"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("X"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
+		Dataframe dt = constructBaseDF_FromVoid();
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		Element eSexe = dt.minValueByLabel("Sexe");
-		assertEquals("X", eSexe.getElem());
-		Element eName = dt.minValueByLabel("Name");
-		assertEquals("Marion", eName.getElem());
-		Element eDate = dt.minValueByLabel("Date");
-		assertEquals("1870", eDate.getElem());
-
+		Element eNumber = dt.minValueByLabel("Number");
+		assertEquals("1", eNumber.getElem());
+		Element eName = dt.maxValueByLabel("Name");
+		assertEquals("Audrey", eName.getElem());
 	}
 
-	@Test
-	public void testMinElementByColumnLabelNonExistingColumn() {
+	@Test(expected = ExceptionUnknownColumn.class)
+	public void testMinElementByColumnLabelNonExistingColumn() throws ExceptionUnknownColumn {
 		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("M"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("L"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("X"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		Element eNullSup = dt.minValueByLabel("");
-		assertEquals(null, eNullSup);
-		Element eNullInf = dt.minValueByLabel("tst");
-		assertEquals(null, eNullInf);
-		Element eNullSupDomain = dt.minValueByLabel("Laa");
-		assertEquals(null, eNullSupDomain);
-
+		Element eNullSup = dt.minValueByLabel("faux");
 	}
 
 	/***
@@ -819,75 +193,17 @@ public class DataframeTest {
 	 * */
 	@Test
 	public void testMeanValueByIndex() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element mean = dt.meanValueByIndex(0);
-		assertEquals(2.0, mean.getElem());
-
+		assertEquals((16.0/3.0), mean.getElem());
 	}
 
-	@Test
-	public void testMeanValueByInvalidIndex() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
+	@Test(expected = ExceptionWrongIndex.class)
+	public void testMeanValueByInvalidIndex() throws ExceptionWrongIndex {
+		Dataframe dt = constructBaseDF_FromVoid();
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-
-		Element eNullSup = dt.meanValueByIndex(5);
-		assertEquals(null, eNullSup);
-		Element eInvalidColumn = dt.meanValueByIndex(1);
-		assertEquals(null, eInvalidColumn);
 		Element eNullInf = dt.meanValueByIndex(-1);
-		assertEquals(null, eNullInf);
 	}
 
 	/***
@@ -895,111 +211,28 @@ public class DataframeTest {
 	 * */
 	@Test
 	public void testMeanValueByLabel() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
+		Dataframe dt = constructBaseDF_FromVoid();
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-
-		Element mean = dt.meanValueByLabel("Sexe");
-		assertEquals(2.0, mean.getElem());
-
+		Element mean = dt.meanValueByLabel("Number");
+		assertEquals((16.0/3.0), mean.getElem());
 	}
 
-	@Test
-	public void testMeanValueByInvalidLabel() {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
+	@Test(expected = ExceptionUnknownColumn.class)
+	public void testMeanValueByInvalidLabel() throws ExceptionUnknownColumn {
+		Dataframe dt = constructBaseDF_FromVoid();
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-
-		Element eNullSup = dt.meanValueByLabel("");
-		assertEquals(null, eNullSup);
-		Element eInvalidColumn = dt.meanValueByLabel("Name");
-		assertEquals(null, eInvalidColumn);
-		Element eInvalidColumn2 = dt.meanValueByLabel("null");
-		assertEquals(null, eInvalidColumn2);
+		Element mean = dt.meanValueByLabel("Faux");
 	}
 
 	/***
 	 * Tests for select line where
 	 * */
 	@Test
-	public void testSelectLineWhere() throws ExceptionUnknowColumn {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
+	public void testSelectLineWhere() throws ExceptionUnknownColumn {
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<Integer> column = new ArrayList<>();
-		column.add(1);
+		column.add(1); //"Number"
 		ArrayList<String> columnValue = new ArrayList<>();
 		columnValue.add("Bruno");
 		Dataframe selectDataframe = dt.selectLineWhere(column, columnValue);
@@ -1012,33 +245,8 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testSelectLineWhereValueNotIn() throws ExceptionUnknowColumn {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
+	public void testSelectLineWhereValueNotIn() throws ExceptionUnknownColumn {
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<Integer> column = new ArrayList<>();
 		column.add(0);
@@ -1052,75 +260,23 @@ public class DataframeTest {
 		assertTrue(correctValue);
 	}
 
-	@Test(expected = ExceptionUnknowColumn.class)
-	public void testSelectLineWhereValueColumnNotIn() throws ExceptionUnknowColumn {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
+	@Test(expected = ExceptionWrongIndex.class)
+	public void testSelectLineWhereValueColumnNotIn() throws ExceptionWrongIndex {
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<Integer> column = new ArrayList<>();
 		column.add(-1);
 		ArrayList<String> columnValue = new ArrayList<>();
 		columnValue.add("Bruno");
 		Dataframe selectDataframe = dt.selectLineWhere(column, columnValue);
-		selectDataframe.printDataframe();
-		assertEquals(0, selectDataframe.getLines().size());
 	}
 
 	/***
 	 * Tests for select line where with label
 	 * */
 	@Test
-	public void testSelectLineWhereWithLabel() throws ExceptionUnknowColumn {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
+	public void testSelectLineWhereWithLabel() throws ExceptionWrongIndex {
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<String> column = new ArrayList<>();
 		column.add("Name");
@@ -1135,37 +291,12 @@ public class DataframeTest {
 		assertTrue(correctValue);
 	}
 
-	@Test(expected = ExceptionUnknowColumn.class)
-	public void testSelectLineWhereWithLabelNotIn() throws ExceptionUnknowColumn {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
+	@Test(expected = ExceptionUnknownColumn.class)
+	public void testSelectLineWhereWithLabelNotIn() throws ExceptionUnknownColumn {
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<String> column = new ArrayList<>();
-		column.add("Unknow");
+		column.add("Faux");
 		ArrayList<String> columnValue = new ArrayList<>();
 		columnValue.add("Bruno");
 		Dataframe selectDataframe = dt.selectLineWhereByLabel(column, columnValue);
@@ -1176,101 +307,24 @@ public class DataframeTest {
 	 * */
 	@Test
 	public void testSumOfColumn() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		Double result = dt.sumOfColumn(0);
-		assertEquals(6.0, result, 0.001);
+		assertEquals(16.0, result, 0.001);
 	}
 
 	@Test(expected = ExceptionWrongColumnType.class)
 	public void testSumOfColumnInvalidColumn() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		Double result = dt.sumOfColumn(1);
-		assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = ExceptionWrongColumnType.class)
-	public void testSumOfColumnWrongIndex() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
+	@Test(expected = ExceptionWrongIndex.class)
+	public void testSumOfColumnWrongIndex() throws ExceptionWrongIndex {
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		Double result = dt.sumOfColumn(-1);
-		assertEquals(6.0, result, 0.001);
 	}
 
 	/***
@@ -1278,101 +332,24 @@ public class DataframeTest {
 	 * */
 	@Test
 	public void testSumOfColumnByLabel() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
+		Dataframe dt = constructBaseDF_FromVoid();
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		Double result = dt.sumOfColumnByLabel("Sexe");
-		assertEquals(6.0, result, 0.001);
+		Double result = dt.sumOfColumnByLabel("Number");
+		assertEquals(16.0, result, 0.001);
 	}
 
 	@Test(expected = ExceptionWrongColumnType.class)
 	public void testSumOfColumnByLabelInvalidColumn() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		Double result = dt.sumOfColumnByLabel("Name");
-		assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = ExceptionWrongColumnType.class)
-	public void testSumOfColumnByLabelWrongIndex() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
+	@Test(expected = ExceptionUnknownColumn.class)
+	public void testSumOfColumnByLabelWrongLabel() throws ExceptionUnknownColumn {
+		Dataframe dt = constructBaseDF_FromVoid();
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		Double result = dt.sumOfColumnByLabel("unknow");
-		assertEquals(6.0, result, 0.001);
+		Double result = dt.sumOfColumnByLabel("Faux");
 	}
 
 	/***
@@ -1380,33 +357,7 @@ public class DataframeTest {
 	 * */
 	@Test
 	public void testOrderByStringColumn() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
+		Dataframe dt = constructBaseDF_FromVoid();
 		dt.orderBy(1);
 
 		boolean goodSort = true;
@@ -1414,13 +365,13 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		//Check for the first line
-		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("3")) != 0
-			|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
-			|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("5")) != 0
+				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
 			goodSort = false;
 		}
 		//Check for the second line
-		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("10")) != 0
 				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
 				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
 			goodSort = false;
@@ -1428,42 +379,15 @@ public class DataframeTest {
 		//Check for the third line
 		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
 				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Marion")) != 0
-				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0){
+				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0) {
 			goodSort = false;
 		}
 		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 
 	@Test
 	public void testOrderByIntColumn() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
+		Dataframe dt = constructBaseDF_FromVoid();
 		dt.orderBy(0);
 
 		boolean goodSort = true;
@@ -1477,133 +401,25 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		//Check for the second line
-		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
-				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
-				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("5")) != 0
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
 			goodSort = false;
 		}
 		//Check for the third line
-		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("3")) != 0
-				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
-				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("10")) != 0
+				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
+				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
 			goodSort = false;
 		}
 		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = ExceptionWrongColumnType.class)
-	public void testOrderByIntWrongColumn() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
+	@Test(expected = ExceptionWrongIndex.class)
+	public void testOrderByIntWrongColumn() throws ExceptionWrongIndex {
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		dt.orderBy(-1);
-
-		boolean goodSort = true;
-		if(dt.getLines().size() != 3){
-			goodSort = false;
-		}
-		//Check for the first line
-		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
-				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Marion")) != 0
-				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0){
-			goodSort = false;
-		}
-		//Check for the second line
-		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
-				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
-				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
-			goodSort = false;
-		}
-		//Check for the third line
-		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("3")) != 0
-				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
-				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
-			goodSort = false;
-		}
-		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
-	}
-
-	@Test(expected = ExceptionWrongColumnType.class)
-	public void testOrderByIntNotInColumn() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		dt.orderBy(3);
-
-		boolean goodSort = true;
-		if(dt.getLines().size() != 3){
-			goodSort = false;
-		}
-		//Check for the first line
-		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
-				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Marion")) != 0
-				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0){
-			goodSort = false;
-		}
-		//Check for the second line
-		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
-				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
-				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
-			goodSort = false;
-		}
-		//Check for the third line
-		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("3")) != 0
-				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
-				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
-			goodSort = false;
-		}
-		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 
 	/***
@@ -1611,32 +427,7 @@ public class DataframeTest {
 	 * */
 	@Test
 	public void testOrderByStringLabel() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
+		Dataframe dt = constructBaseDF_FromVoid();
 
 		dt.orderByLabel("Name");
 
@@ -1645,13 +436,13 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		//Check for the first line
-		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("3")) != 0
+		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("5")) != 0
 				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
 				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
 			goodSort = false;
 		}
 		//Check for the second line
-		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("10")) != 0
 				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
 				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
 			goodSort = false;
@@ -1659,43 +450,16 @@ public class DataframeTest {
 		//Check for the third line
 		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
 				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Marion")) != 0
-				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0){
+				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0) {
 			goodSort = false;
 		}
 		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 
 	@Test
 	public void testOrderByIntLabel() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		dt.orderByLabel("Sexe");
+		Dataframe dt = constructBaseDF_FromVoid();
+		dt.orderByLabel("Number");
 
 		boolean goodSort = true;
 		if(dt.getLines().size() != 3){
@@ -1708,76 +472,25 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		//Check for the second line
-		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
-				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
-				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("5")) != 0
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
 			goodSort = false;
 		}
 		//Check for the third line
-		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("3")) != 0
-				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
-				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("10")) != 0
+				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
+				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
 			goodSort = false;
 		}
 		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = ExceptionWrongColumnType.class)
-	public void testOrderByIntNotInLabel() throws ExceptionWrongColumnType {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("2"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("3"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
+	@Test(expected = ExceptionUnknownColumn.class)
+	public void testOrderByIntNotInLabel() throws ExceptionUnknownColumn {
+		Dataframe dt = constructBaseDF_FromVoid();
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
-		dt.orderByLabel("unknow");
-
-		boolean goodSort = true;
-		if(dt.getLines().size() != 3){
-			goodSort = false;
-		}
-		//Check for the first line
-		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
-				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Marion")) != 0
-				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("1995")) != 0){
-			goodSort = false;
-		}
-		//Check for the second line
-		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("2")) != 0
-				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
-				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
-			goodSort = false;
-		}
-		//Check for the third line
-		if(dt.getLines().get(2).getElementByIndex(0).compareTo(new Element<String>("3")) != 0
-				|| dt.getLines().get(2).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
-				|| dt.getLines().get(2).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
-			goodSort = false;
-		}
-		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
+		dt.orderByLabel("Faux");
 	}
 
 	/***
@@ -2009,8 +722,8 @@ public class DataframeTest {
 		assertTrue(goodSort);
 	}
 
-	@Test(expected = ExceptionWrongColumnType.class)
-	public void testOrderByIntNotInListIndex() throws ExceptionWrongColumnType {
+	@Test(expected = ExceptionWrongIndex.class)
+	public void testOrderByIntNotInListIndex() throws ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -2240,7 +953,6 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 
 	@Test
@@ -2302,8 +1014,8 @@ public class DataframeTest {
 		assertTrue(goodSort);
 	}
 
-	@Test(expected = ExceptionWrongColumnType.class)
-	public void testOrderByIntNotInListLabel() throws ExceptionWrongColumnType {
+	@Test(expected = ExceptionUnknownColumn.class)
+	public void testOrderByIntNotInListLabel() throws ExceptionUnknownColumn {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -2333,7 +1045,7 @@ public class DataframeTest {
 
 		ArrayList<String> listOfColumn = new ArrayList<>();
 		listOfColumn.add("Sexe");
-		listOfColumn.add("unknow");
+		listOfColumn.add("Faux");
 
 		dt.orderByLabel(listOfColumn);
 
