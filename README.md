@@ -36,8 +36,8 @@ Fonctions possibles uniquement si la colonne contient des nombres :
 
 - Pull/Merge requests : Validation du code par les tests, puis validation humaine du code
 
-## Images dockers
-- Pour l'instant on n'a pas
+## Images docker
+- https://hub.docker.com/r/haskaris/devops_project_panda
 
 ## Feedback
 Rien à redire
