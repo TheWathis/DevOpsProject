@@ -970,7 +970,7 @@ public class DataframeTest {
 	 * Tests for select line where
 	 * */
 	@Test
-	public void testSelectLineWhere() throws Line.ExceptionUnknowColumn {
+	public void testSelectLineWhere() throws ExceptionUnknowColumn {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1012,7 +1012,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testSelectLineWhereValueNotIn() throws Line.ExceptionUnknowColumn {
+	public void testSelectLineWhereValueNotIn() throws ExceptionUnknowColumn {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1052,8 +1052,8 @@ public class DataframeTest {
 		assertTrue(correctValue);
 	}
 
-	@Test(expected = Line.ExceptionUnknowColumn.class)
-	public void testSelectLineWhereValueColumnNotIn() throws Line.ExceptionUnknowColumn {
+	@Test(expected = ExceptionUnknowColumn.class)
+	public void testSelectLineWhereValueColumnNotIn() throws ExceptionUnknowColumn {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1094,7 +1094,7 @@ public class DataframeTest {
 	 * Tests for select line where with label
 	 * */
 	@Test
-	public void testSelectLineWhereWithLabel() throws Line.ExceptionUnknowColumn {
+	public void testSelectLineWhereWithLabel() throws ExceptionUnknowColumn {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1135,8 +1135,8 @@ public class DataframeTest {
 		assertTrue(correctValue);
 	}
 
-	@Test(expected = Line.ExceptionUnknowColumn.class)
-	public void testSelectLineWhereWithLabelNotIn() throws Line.ExceptionUnknowColumn {
+	@Test(expected = ExceptionUnknowColumn.class)
+	public void testSelectLineWhereWithLabelNotIn() throws ExceptionUnknowColumn {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
