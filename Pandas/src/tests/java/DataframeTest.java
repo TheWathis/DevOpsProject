@@ -63,7 +63,12 @@ public class DataframeTest {
 	public void testGetSubDataFrameFromLines() {
 		Dataframe dt = constructBaseDF_FromVoid();
 
-		Dataframe dtSub = dt.getSubDataFrameFromLines([2, 0, 1]);
+		ArrayList<Integer> column = new ArrayList<>();
+		column.add(2);
+		column.add(0);
+		column.add(1);
+
+		Dataframe dtSub = dt.getSubDataFrameFromLines(column);
 		assertEquals(dt.toString(), dtSub.toString());
 	}
 
@@ -73,6 +78,11 @@ public class DataframeTest {
 	@Test
 	public void testGetSubDataFrameFromColumnsNumber() {
 		Dataframe dt = constructBaseDF_FromVoid();
+
+		ArrayList<Integer> column = new ArrayList<>();
+		column.add(0);
+		column.add(1);
+		column.add(2);
 
 		Dataframe dtSub = dt.getSubDataFrameFromColumnsNumber([0,1,2]);
 		assertEquals(dt.toString(), dtSub.toString());
