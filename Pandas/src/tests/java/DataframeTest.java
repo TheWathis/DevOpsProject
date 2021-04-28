@@ -73,10 +73,10 @@ public class DataframeTest {
 		Line l = new Line(0, listOfElement);
 		dt.addLine(l);
 
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel = new ArrayList<>();
 		listOfElementLabel.add(new Element("Sexe"));
 		listOfElementLabel.add(new Element("Name"));
-		Line lLabel = new Line(0, listOfElementLabel);
+		lLabel = new Line(0, listOfElementLabel);
 		dt.changeLabelLine(lLabel);
 	}
 	
