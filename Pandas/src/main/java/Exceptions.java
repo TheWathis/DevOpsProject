@@ -40,11 +40,4 @@ class ExceptionWrongIndex extends Exception {
         this.message = "Index isn't correct";
     }
 }
-class ExceptionWrongLabel extends Exception {
-    public String message;
-    public ExceptionWrongLabel() {
-        super();
-        this.message = "Label isn't correct";
-    }
-}
 

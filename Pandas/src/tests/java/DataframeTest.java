@@ -112,7 +112,7 @@ public class DataframeTest {
 	 * Tests for maximum value function
 	 * */
 	@Test
-	public void testMaxElementByColumnIndex() throws ExceptionOperationOnEmptyTable {
+	public void testMaxElementByColumnIndex() throws ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element eNumber = dt.maxValueByColumnIndex(0);
@@ -129,7 +129,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionOperationOnEmptyTable.class)
-	public void testMaxElementByColumnIndexEmptyTable() throws ExceptionOperationOnEmptyTable, ExceptionSizeNotEqual, ExceptionWrongIndex {
+	public void testMaxElementByColumnIndexEmptyTable() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
 
 		ArrayList<Element> listOfElementLabel = new ArrayList<>();
@@ -146,7 +146,7 @@ public class DataframeTest {
 	 * Tests for maximum value function by label
 	 * */
 	@Test
-	public void testMaxElementByColumnLabel() throws ExceptionNoLabel {
+	public void testMaxElementByColumnLabel() throws ExceptionNoLabel, ExceptionUnknownColumn, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element eName = dt.maxValueByLabel("Name");
@@ -156,7 +156,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionUnknownColumn.class)
-	public void testMaxElementByColumnLabelNonExistingColumn() throws ExceptionUnknownColumn, ExceptionNoLabel {
+	public void testMaxElementByColumnLabelNonExistingColumn() throws ExceptionNoLabel, ExceptionUnknownColumn, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = new Dataframe();
 
 		Element eNullSup = dt.maxValueByLabel("faux");
@@ -166,7 +166,7 @@ public class DataframeTest {
 	 * Tests for minimum value function
 	 * */
 	@Test
-	public void testMinElementByColumnIndex() throws ExceptionNoLabel {
+	public void testMinElementByColumnIndex() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element eNumber = dt.minValueByColumnIndex(0);
@@ -186,7 +186,7 @@ public class DataframeTest {
 	 * Tests for minimum value function by label
 	 * */
 	@Test
-	public void testMinElementByColumnLabel() throws ExceptionNoLabel {
+	public void testMinElementByColumnLabel() throws ExceptionNoLabel, ExceptionUnknownColumn, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element eNumber = dt.minValueByLabel("Number");
@@ -196,7 +196,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionUnknownColumn.class)
-	public void testMinElementByColumnLabelNonExistingColumn() throws ExceptionUnknownColumn, ExceptionNoLabel {
+	public void testMinElementByColumnLabelNonExistingColumn() throws ExceptionNoLabel, ExceptionUnknownColumn, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = new Dataframe();
 
 		Element eNullSup = dt.minValueByLabel("faux");
@@ -206,7 +206,7 @@ public class DataframeTest {
 	 * Tests for mean function
 	 * */
 	@Test
-	public void testMeanValueByIndex() throws ExceptionWrongIndex {
+	public void testMeanValueByIndex() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable, ExceptionWrongColumnType {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element mean = dt.meanValueByIndex(0);
@@ -214,7 +214,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionWrongIndex.class)
-	public void testMeanValueByInvalidIndex() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
+	public void testMeanValueByInvalidIndex() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable, ExceptionWrongColumnType {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element eNullInf = dt.meanValueByIndex(-1);
@@ -224,7 +224,7 @@ public class DataframeTest {
 	 * Tests for mean function with label
 	 * */
 	@Test
-	public void testMeanValueByLabel() throws ExceptionNoLabel {
+	public void testMeanValueByLabel() throws ExceptionNoLabel, ExceptionUnknownColumn, ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element mean = dt.meanValueByLabel("Number");
@@ -232,7 +232,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionUnknownColumn.class)
-	public void testMeanValueByInvalidLabel() throws ExceptionUnknownColumn, ExceptionNoLabel {
+	public void testMeanValueByInvalidLabel() throws ExceptionNoLabel, ExceptionUnknownColumn, ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element mean = dt.meanValueByLabel("Faux");
@@ -275,7 +275,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionWrongIndex.class)
-	public void testSelectLineWhereValueColumnNotIn() throws ExceptionWrongIndex, ExceptionUnknownColumn {
+	public void testSelectLineWhereValueColumnNotIn() throws ExceptionWrongIndex {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<Integer> column = new ArrayList<>();
@@ -289,7 +289,7 @@ public class DataframeTest {
 	 * Tests for select line where with label
 	 * */
 	@Test
-	public void testSelectLineWhereWithLabel() throws ExceptionWrongIndex, ExceptionUnknownColumn {
+	public void testSelectLineWhereWithLabel() throws ExceptionUnknownColumn, ExceptionWrongIndex {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<String> column = new ArrayList<>();
@@ -320,7 +320,7 @@ public class DataframeTest {
 	 * Tests for sum function
 	 * */
 	@Test
-	public void testSumOfColumn() throws ExceptionWrongColumnType, ExceptionWrongIndex {
+	public void testSumOfColumn() throws ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Double result = dt.sumOfColumn(0);
@@ -328,14 +328,14 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionWrongColumnType.class)
-	public void testSumOfColumnInvalidColumn() throws ExceptionWrongColumnType, ExceptionWrongIndex {
+	public void testSumOfColumnInvalidColumn() throws ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Double result = dt.sumOfColumn(1);
 	}
 
 	@Test(expected = ExceptionWrongIndex.class)
-	public void testSumOfColumnWrongIndex() throws ExceptionWrongIndex, ExceptionWrongColumnType {
+	public void testSumOfColumnWrongIndex() throws ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Double result = dt.sumOfColumn(-1);
@@ -345,7 +345,7 @@ public class DataframeTest {
 	 * Tests for sum function by label
 	 * */
 	@Test
-	public void testSumOfColumnByLabel() throws ExceptionWrongColumnType, ExceptionWrongIndex {
+	public void testSumOfColumnByLabel() throws ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Double result = dt.sumOfColumnByLabel("Number");
@@ -353,14 +353,14 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionWrongColumnType.class)
-	public void testSumOfColumnByLabelInvalidColumn() throws ExceptionWrongColumnType, ExceptionWrongIndex {
+	public void testSumOfColumnByLabelInvalidColumn() throws ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Double result = dt.sumOfColumnByLabel("Name");
 	}
 
 	@Test(expected = ExceptionUnknownColumn.class)
-	public void testSumOfColumnByLabelWrongLabel() throws ExceptionUnknownColumn, ExceptionWrongColumnType {
+	public void testSumOfColumnByLabelWrongLabel() throws ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Double result = dt.sumOfColumnByLabel("Faux");
@@ -370,7 +370,7 @@ public class DataframeTest {
 	 * Tests for order by function
 	 * */
 	@Test
-	public void testOrderByStringColumn() throws ExceptionWrongColumnType, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
+	public void testOrderByStringColumn() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 		dt.orderBy(1);
 
@@ -400,7 +400,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByIntColumn() throws ExceptionWrongColumnType, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
+	public void testOrderByIntColumn() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 		dt.orderBy(0);
 
@@ -440,7 +440,7 @@ public class DataframeTest {
 	 * Tests for order by function
 	 * */
 	@Test
-	public void testOrderByStringLabel() throws ExceptionWrongColumnType, ExceptionWrongIndex {
+	public void testOrderByStringLabel() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		dt.orderByLabel("Name");
@@ -471,7 +471,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByIntLabel() throws ExceptionWrongColumnType, ExceptionWrongIndex {
+	public void testOrderByIntLabel() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 		dt.orderByLabel("Number");
 
@@ -501,7 +501,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionUnknownColumn.class)
-	public void testOrderByIntNotInLabel() throws ExceptionUnknownColumn, ExceptionWrongIndex {
+	public void testOrderByIntNotInLabel() throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		dt.orderByLabel("Faux");
@@ -511,7 +511,7 @@ public class DataframeTest {
 	 * Tests for order by with list function
 	 * */
 	@Test
-	public void testOrderByStringListIndex() throws ExceptionWrongColumnType, ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
+	public void testOrderByStringListIndex() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -571,7 +571,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByIntListIndex() throws ExceptionWrongColumnType, ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
+	public void testOrderByIntListIndex() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -630,7 +630,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByIntListIndexExceptionNotExcepted() throws ExceptionWrongColumnType {
+	public void testOrderByIntListIndexExceptionNotExcepted() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("2"));
@@ -678,7 +678,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByListIndexSameValue() throws ExceptionWrongColumnType {
+	public void testOrderByListIndexSameValue() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -737,7 +737,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionWrongIndex.class)
-	public void testOrderByIntNotInListIndex() throws ExceptionWrongIndex {
+	public void testOrderByIntNotInListIndex() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -800,7 +800,7 @@ public class DataframeTest {
 	 * Tests for order by with list function
 	 * */
 	@Test
-	public void testOrderByStringListLabel() throws ExceptionWrongColumnType {
+	public void testOrderByStringListLabel() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -861,7 +861,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByIntListLabel() throws ExceptionWrongColumnType {
+	public void testOrderByIntListLabel() throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -923,7 +923,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByIntListLabelExceptionNotExcepted() throws ExceptionWrongColumnType {
+	public void testOrderByIntListLabelExceptionNotExcepted() throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("2"));
@@ -970,7 +970,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByListLabelSameValue() throws ExceptionWrongColumnType {
+	public void testOrderByListLabelSameValue() throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionOperationOnEmptyTable  {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1028,8 +1028,8 @@ public class DataframeTest {
 		assertTrue(goodSort);
 	}
 
-	@Test(expected = ExceptionUnknownColumn.class)
-	public void testOrderByIntNotInListLabel() throws ExceptionUnknownColumn {
+	@Test(expected = ExceptionWrongIndex.class)
+	public void testOrderByIntNotInListLabel() throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionOperationOnEmptyTable  {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
