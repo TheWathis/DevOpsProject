@@ -210,7 +210,7 @@ public class LineTest {
     }
 
     @Test
-    public void testGetWrongIndex() {
+    public void testGetWrongIndex() throws ExceptionWrongIndex {
         ArrayList<Element> listOfElement = new ArrayList<>();
         listOfElement.add(new Element("A"));
         listOfElement.add(new Element("B"));
