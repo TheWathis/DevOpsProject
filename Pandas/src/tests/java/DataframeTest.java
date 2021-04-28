@@ -84,7 +84,7 @@ public class DataframeTest {
 		column.add(1);
 		column.add(2);
 
-		Dataframe dtSub = dt.getSubDataFrameFromColumnsNumber([0,1,2]);
+		Dataframe dtSub = dt.getSubDataFrameFromColumnsNumber(column);
 		assertEquals(dt.toString(), dtSub.toString());
 	}
 
