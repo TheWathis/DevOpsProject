@@ -1,37 +1,44 @@
-## Welcome to GitHub Pages
+### DevOpsProject
 
-You can use the [editor on GitHub](https://github.com/haskaris/DevOpsProject/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Projet DevOps effectué lors du second semestre de master 1. Ce projet est la construction d'une librairie (similaire à Pandas sur Python), où nous pouvons lire un fichier au format .CSV et manipuler ses données.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+[![Workflow Status](https://img.shields.io/github/workflow/status/haskaris/DevOpsProject/CI)](https://shields.io/)
+[![Workflow Travis Status](https://img.shields.io/travis/com/haskaris/DevOpsProject)](https://travis-ci.com/github/haskaris/DevOpsProject)
+[![codecov](https://codecov.io/gh/haskaris/DevOpsProject/branch/main/graph/badge.svg?token=60M0FA5AUW)](https://codecov.io/gh/haskaris/DevOpsProject)
 
-### Markdown
+## Liste des fonctionnalités
+- Créer un DataFrame vide
+- Créer un DataFrame à partir d'un fichier CSV
+- Récupérer la valeur maximum et minimum d'une colonne
+- Trier le Dataframe à partir d'une colonne
+- Sélectionner un ensemble de ligne/colonne
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Fonctions possibles uniquement si la colonne contient des nombres :
+- Faire la somme de la colonne
+- Faire une moyenne de la colonne
 
-```markdown
-Syntax highlighted code block
+## Choix des outils
+- Github : Choix arbitraire
+- Maven : Intégration continu
+- JUnit : Test unitaire
+- CodeCov : Outil de couverture de code, permet de consulter les résultats en ligne et de générer le badge de couverture
+- Git CI/CL : Workflow CI pour effectuer les tests
+- Travis CI : Publication des résutats de couverture vers CodeCov
 
-# Header 1
-## Header 2
-### Header 3
+## Workflow git
+- On a suivi le Workflow Github :
+1. La branche main doit toujours être déployable
+2. Utiliser le concept de feature branch pour les nouveaux développements (ex: branche MathisCode)
+3. Poussez régulièrement les modications vers une branche sur le serveur
+4. Créer une pull request quand vous avez besoin de feedback et avant de merger avec master
+5. Ne merger avec master qu'une fois votre code relu par quelqu'un d'autre
+6. Tester un déploiement avant de merger avec master
 
-- Bulleted
-- List
+- Pull/Merge requests : Validation du code par les tests, puis validation humaine du code
 
-1. Numbered
-2. List
+## Images docker
+- https://hub.docker.com/r/haskaris/devops_project_panda
 
-**Bold** and _Italic_ and `Code` text
+## Feedback
+Rien à redire
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/haskaris/DevOpsProject/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
