@@ -40,11 +40,11 @@ public class DataframeTest {
 
 	}
 
-	/*private Dataframe constructBaseDF_FromCSV() {
+	private Dataframe constructBaseDF_FromCSV() {
 		Dataframe dt = new Dataframe("Pandas/src/main/resources/fichier_test.csv");
 
 		return dt;
-	}*/
+	}
 
 	@Test
 	public void testConstructorEmpty() {
