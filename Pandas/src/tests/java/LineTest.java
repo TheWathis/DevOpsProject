@@ -32,7 +32,7 @@ public class LineTest {
      * Tests for function get sub line with index.
      * */
     @Test
-    public void testGetSubColumnFromNumber() {
+    public void testGetSubColumnFromNumber() throws ExceptionWrongIndex {
         ArrayList<Element> listOfElement = new ArrayList<>();
         listOfElement.add(new Element(0));
         listOfElement.add(new Element(1));
@@ -58,7 +58,7 @@ public class LineTest {
     }
 
     @Test
-    public void testGetSubColumnFromNumberOnlyFirstColumn() {
+    public void testGetSubColumnFromNumberOnlyFirstColumn() throws ExceptionWrongIndex {
         ArrayList<Element> listOfElement = new ArrayList<>();
         listOfElement.add(new Element(0));
         listOfElement.add(new Element(1));
@@ -78,7 +78,7 @@ public class LineTest {
     }
 
     @Test
-    public void testGetSubColumnFromNumberOnlyLastColumn() {
+    public void testGetSubColumnFromNumberOnlyLastColumn() throws ExceptionWrongIndex {
         ArrayList<Element> listOfElement = new ArrayList<>();
         listOfElement.add(new Element(0));
         listOfElement.add(new Element(1));
@@ -98,7 +98,7 @@ public class LineTest {
     }
 
     @Test
-    public void testGetSubColumnFromNumberMultipleElement() {
+    public void testGetSubColumnFromNumberMultipleElement() throws ExceptionWrongIndex {
         ArrayList<Element> listOfElement = new ArrayList<>();
         listOfElement.add(new Element(0));
         listOfElement.add(new Element(1));
@@ -121,7 +121,7 @@ public class LineTest {
     }
 
     @Test
-    public void testGetSubColumnFromNumberMultipleUnorderedElement() {
+    public void testGetSubColumnFromNumberMultipleUnorderedElement() throws ExceptionWrongIndex {
         ArrayList<Element> listOfElement = new ArrayList<>();
         listOfElement.add(new Element(0));
         listOfElement.add(new Element(1));
@@ -145,7 +145,7 @@ public class LineTest {
     }
 
     @Test
-    public void testGetSubColumnFromNumberSameColumnMultipleTime() {
+    public void testGetSubColumnFromNumberSameColumnMultipleTime() throws ExceptionWrongIndex {
         ArrayList<Element> listOfElement = new ArrayList<>();
         listOfElement.add(new Element(0));
         listOfElement.add(new Element(1));
