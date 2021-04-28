@@ -1,4 +1,6 @@
-Sexe,Prénom,Année de naissance
-M,Alphonse,1932
-F,Béatrice,1964
-F,Charlotte,1988
+Id,Prénom,Année de naissance
+5,Elodie,1964
+1,Alphonse,1932
+2,Béatrice,1964
+3,Charlotte,1942
+4,Denise,1934
