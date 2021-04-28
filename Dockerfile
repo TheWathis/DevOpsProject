@@ -5,6 +5,6 @@ COPY . /usr/src/myapp/
 WORKDIR /usr/src/myapp/
 RUN apk --no-cache add maven && mvn --version
 RUN mvn package
-RUN javac -cp Pandas/target/Pandas-1.0-SNAPSHOT.jar docker/ExampleDataframe.java
+RUN javac -cp Pandas/target/pandas-1.0-SNAPSHOT.jar docker/ExampleDataframe.java
 
-CMD java -cp  Pandas/target/Pandas-1.0-SNAPSHOT.jar:docker  ExampleDataframe
+CMD java -cp  Pandas/target/pandas-1.0-SNAPSHOT.jar:docker  ExampleDataframe
