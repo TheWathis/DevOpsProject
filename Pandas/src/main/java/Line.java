@@ -106,7 +106,7 @@ public class Line {
 	/**
 	 * Get the sub line with given a sequence of index of column we want to keep.
 	 * The column are added in the order of the sequence of index.
-	 * Return null if the line don't contains the right value
+	 * Return null if the line don't contain the right value
 	 *
 	 * @param numbersOfColumns The sequence of column we want to keep
 	 * @param valuesOfColumns The values of each column
@@ -174,6 +174,7 @@ public class Line {
 	/**
 	 * Convert a line in string
 	 *
+	 * @return The line in string form
 	 */
 	@Override
 	public String toString() {
