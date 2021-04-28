@@ -80,7 +80,7 @@ public class DataframeTest {
 	 * Test on get sub of data frame with sequence of column number
 	 * */
 	@Test
-	public void testGetSubDataFrameFromColumnsNumber() {
+	public void testGetSubDataFrameFromColumnsNumber() throws ExceptionWrongIndex {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<Integer> column = new ArrayList<>();
@@ -96,7 +96,7 @@ public class DataframeTest {
 	 * Test on get sub of data frame with sequence of column label
 	 * */
 	@Test
-	public void testGetSubDataFrameFromColumnsLabel() {
+	public void testGetSubDataFrameFromColumnsLabel() throws ExceptionWrongIndex {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<String> nameOfColumn = new ArrayList<>();
@@ -259,7 +259,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testSelectLineWhereValueNotIn() throws ExceptionUnknownColumn {
+	public void testSelectLineWhereValueNotIn() throws ExceptionWrongIndex, ExceptionUnknownColumn {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<Integer> column = new ArrayList<>();
@@ -302,7 +302,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionUnknownColumn.class)
-	public void testSelectLineWhereWithLabelNotIn() throws ExceptionUnknownColumn {
+	public void testSelectLineWhereWithLabelNotIn() throws ExceptionWrongIndex, ExceptionUnknownColumn {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<String> column = new ArrayList<>();
