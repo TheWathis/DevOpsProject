@@ -242,7 +242,7 @@ public class DataframeTest {
 	 * Tests for select line where
 	 * */
 	@Test
-	public void testSelectLineWhere() throws ExceptionUnknownColumn, ExceptionWrongIndex {
+	public void testSelectLineWhere() throws ExceptionSizeNotEqual, ExceptionUnknownColumn, ExceptionWrongIndex {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<Integer> column = new ArrayList<>();
@@ -259,7 +259,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testSelectLineWhereValueNotIn() throws ExceptionWrongIndex, ExceptionUnknownColumn {
+	public void testSelectLineWhereValueNotIn() throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionUnknownColumn {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<Integer> column = new ArrayList<>();
@@ -271,7 +271,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionWrongIndex.class)
-	public void testSelectLineWhereValueColumnNotIn() throws ExceptionWrongIndex, ExceptionUnknownColumn {
+	public void testSelectLineWhereValueColumnNotIn() throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionUnknownColumn {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<Integer> column = new ArrayList<>();
@@ -285,7 +285,7 @@ public class DataframeTest {
 	 * Tests for select line where with label
 	 * */
 	@Test
-	public void testSelectLineWhereWithLabel() throws ExceptionUnknownColumn, ExceptionWrongIndex {
+	public void testSelectLineWhereWithLabel() throws ExceptionSizeNotEqual, ExceptionUnknownColumn, ExceptionWrongIndex {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<String> column = new ArrayList<>();
@@ -302,7 +302,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionUnknownColumn.class)
-	public void testSelectLineWhereWithLabelNotIn() throws ExceptionWrongIndex, ExceptionUnknownColumn {
+	public void testSelectLineWhereWithLabelNotIn() throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionUnknownColumn {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<String> column = new ArrayList<>();

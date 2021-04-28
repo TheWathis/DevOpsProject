@@ -123,7 +123,7 @@ public class Dataframe {
      * @param valueOfLines Values excepted for each column
      * @return The sub data frame
      */
-    public Dataframe selectLineWhere(List<Integer> numbersOfColumns, List<String> valueOfLines) throws ExceptionWrongIndex, ExceptionUnknownColumn {
+    public Dataframe selectLineWhere(List<Integer> numbersOfColumns, List<String> valueOfLines) throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionUnknownColumn {
         if (numbersOfColumns.size() != valueOfLines.size()) {
             Dataframe toReturn = new Dataframe();
             toReturn.label = this.label.getSubLineFromColumnNumber(numbersOfColumns);
@@ -136,7 +136,7 @@ public class Dataframe {
             }
             return toReturn;
         } else {
-            return null;
+            throw new ExceptionSizeNotEqual("Size of both list not equals");
         }
     }
 
@@ -184,7 +184,7 @@ public class Dataframe {
      * @param valueOfLines Values excepted for each column
      * @return The sub data frame
      */
-    public Dataframe selectLineWhereByLabel(List<String> labelOfColumns, List<String> valueOfLines) throws ExceptionWrongIndex, ExceptionUnknownColumn {
+    public Dataframe selectLineWhereByLabel(List<String> labelOfColumns, List<String> valueOfLines) throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionUnknownColumn {
         ArrayList<Integer> numbersOfColumns = new ArrayList<>();
         for(String label: labelOfColumns){
             int index = this.label.getIndexFromDataName(label);
