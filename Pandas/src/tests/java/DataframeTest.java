@@ -1098,8 +1098,8 @@ public class DataframeTest {
 		Line l = df.getLines().get(0).getSubLineFromColumnLabel(indexOfColumn);
 
 		boolean assertBoolean = true;
-		for(int i = 0; i < df.getLine().get(0).getSize(); i++){
-			if(df.getLine().get(0).getElements().get(i).getData() != l.getElements().get(i).getData()) {
+		for(int i = 0; i < df.getLines().get(0).getSize(); i++){
+			if(df.getLines().get(0).getElements().get(i).getData() != l.getElements().get(i).getData()) {
 				assertBoolean = false;
 				break;
 			}
