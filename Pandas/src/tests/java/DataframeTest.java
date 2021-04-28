@@ -54,7 +54,7 @@ public class DataframeTest {
 	}
 
 	@Test(expected = ExceptionSizeNotEqual.class)
-	public void testChangeLabelLineFailed() {
+	public void testChangeLabelLineFailed() throws ExceptionSizeNotEqual {
 
 		Dataframe dt = new Dataframe();
 
