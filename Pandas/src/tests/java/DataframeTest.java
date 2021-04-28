@@ -1087,4 +1087,23 @@ public class DataframeTest {
 		}
 		assertTrue(goodSort);
 	}
+
+	@Test
+	public void testGetSubColumnFromNumber() {
+		Dataframe df = constructBaseDF_FromVoid();
+
+		ArrayList<Integer> indexOfColumn = new ArrayList<>();
+		indexOfColumn.add("Name");
+		indexOfColumn.add("Number");
+		Line l = df.getLine().get(0).getSubLineFromColumnNumber(indexOfColumn);
+
+		boolean assertBoolean = true;
+		for(int i = 0; i < df.getLine().get(0).getSize(); i++){
+			if(df.getLine().get(0).getElements().get(i).getData() != l.getElements().get(i).getData()) {
+				assertBoolean = false;
+				break;
+			}
+		}
+		assertTrue(assertBoolean);
+	}
 }
