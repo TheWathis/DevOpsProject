@@ -5,34 +5,39 @@ import java.util.ArrayList;
 
 public class DataframeTest {
 
-	private Dataframe constructBaseDF_FromVoid() throws ExceptionSizeNotEqual {
-		Dataframe dt = new Dataframe();
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Number"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-		ArrayList<Element> listOfElement = new ArrayList<>();
-		listOfElement.add(new Element("1"));
-		listOfElement.add(new Element("Marion"));
-		listOfElement.add(new Element("1995"));
-		Line l = new Line(0, listOfElement);
-		ArrayList<Element> listOfElement2 = new ArrayList<>();
-		listOfElement2.add(new Element("10"));
-		listOfElement2.add(new Element("Bruno"));
-		listOfElement2.add(new Element("1870"));
-		Line l2 = new Line(1, listOfElement2);
-		ArrayList<Element> listOfElement3 = new ArrayList<>();
-		listOfElement3.add(new Element("5"));
-		listOfElement3.add(new Element("Audrey"));
-		listOfElement3.add(new Element("2010"));
-		Line l3 = new Line(2, listOfElement3);
-		dt.addLine(l);
-		dt.addLine(l2);
-		dt.addLine(l3);
-		
-		return dt;
+	private Dataframe constructBaseDF_FromVoid() {
+		try {
+			Dataframe dt = new Dataframe();
+			ArrayList<Element> listOfElementLabel = new ArrayList<>();
+			listOfElementLabel.add(new Element("Number"));
+			listOfElementLabel.add(new Element("Name"));
+			listOfElementLabel.add(new Element("Date"));
+			Line lLabel = new Line(0, listOfElementLabel);
+			dt.changeLabelLine(lLabel);
+			ArrayList<Element> listOfElement = new ArrayList<>();
+			listOfElement.add(new Element("1"));
+			listOfElement.add(new Element("Marion"));
+			listOfElement.add(new Element("1995"));
+			Line l = new Line(0, listOfElement);
+			ArrayList<Element> listOfElement2 = new ArrayList<>();
+			listOfElement2.add(new Element("10"));
+			listOfElement2.add(new Element("Bruno"));
+			listOfElement2.add(new Element("1870"));
+			Line l2 = new Line(1, listOfElement2);
+			ArrayList<Element> listOfElement3 = new ArrayList<>();
+			listOfElement3.add(new Element("5"));
+			listOfElement3.add(new Element("Audrey"));
+			listOfElement3.add(new Element("2010"));
+			Line l3 = new Line(2, listOfElement3);
+			dt.addLine(l);
+			dt.addLine(l2);
+			dt.addLine(l3);
+
+			return dt;
+		} catch (ExceptionSizeNotEqual e) {
+			return null
+		}
+
 	}
 
 	/*private Dataframe constructBaseDF_FromCSV() {
