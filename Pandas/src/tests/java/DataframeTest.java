@@ -156,7 +156,7 @@ public class DataframeTest {
 		lLabel = new Line(0, listOfElementLabel);
 		dt.changeLabelLine(lLabel);
 
-		assertEqual(lLabel.toString(), dt.getLabels().toString())
+		assertEqual(lLabel.toString(), dt.getLabels().toString());
 	}
 
 	@Test(expected = ExceptionSizeNotEqual.class)
