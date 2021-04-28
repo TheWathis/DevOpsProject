@@ -1092,7 +1092,7 @@ public class DataframeTest {
 	public void testGetSubColumnFromNumber() {
 		Dataframe df = constructBaseDF_FromVoid();
 
-		ArrayList<Integer> indexOfColumn = new ArrayList<>();
+		ArrayList<String> indexOfColumn = new ArrayList<>();
 		indexOfColumn.add("Name");
 		indexOfColumn.add("Number");
 		Line l = df.getLine().get(0).getSubLineFromColumnNumber(indexOfColumn);
