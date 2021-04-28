@@ -35,7 +35,7 @@ public class DataframeTest {
 
 			return dt;
 		} catch (ExceptionSizeNotEqual e) {
-			return null
+			return null;
 		}
 
 	}
