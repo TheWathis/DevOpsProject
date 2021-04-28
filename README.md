@@ -24,6 +24,7 @@ Fonctions possibles uniquement si la colonne contient des nombres :
 - CodeCov : Outil de couverture de code, permet de consulter les résultats en ligne et de générer le badge de couverture
 - Git CI/CL : Workflow CI pour valider les tests après chaque push, Worflow Maven Package pour héberger la bibliothèque compilée sur Github Packages après un push sur la branche main
 - Travis CI : Publication des résutats de couverture vers CodeCov
+- Le site web est hébergé par Github Pages : https://haskaris.github.io/DevOpsProject/
 
 ## Workflow git
 - On a suivi le Workflow Github :
@@ -34,10 +35,10 @@ Fonctions possibles uniquement si la colonne contient des nombres :
 5. Ne merger avec master qu'une fois votre code relu par quelqu'un d'autre
 6. Tester un déploiement avant de merger avec master
 
-- Pull/Merge requests : Validation du code par les tests, puis validation humaine du code
+- Pull/Merge requests : Validation du code par les tests, puis validation humaine du code (revue de code)
 
-## Images docker
-- L'image docker lance un programme (docker/ExampleDataframe.java) qui utilise les méthodes de la bibliothèque pandas générée par mvn package (Pandas/target/pandas-1.0-SNAPSHOT.jar) avec le fichier .cvs contenu dans le dossier docker/ . L'image docker est générée automatiquement par le service Docker Hub automated build lors d'un push sur la branche main.
+## Image Docker
+- L'image Docker lance un programme (docker/ExampleDataframe.java) qui utilise les méthodes de la bibliothèque pandas générée par mvn package (Pandas/target/pandas-1.0-SNAPSHOT.jar) avec le fichier .cvs contenu dans le dossier docker/ . L'image docker est générée automatiquement par le service Docker Hub automated build lors d'un push sur la branche main.
 - https://hub.docker.com/r/haskaris/devops_project_panda    
 - docker run haskaris/devops_project_panda 
 
