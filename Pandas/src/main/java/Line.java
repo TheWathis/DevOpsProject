@@ -152,29 +152,6 @@ public class Line {
 	}
 
 	/**
-	 * Get the sub line with given a sequence of label of column we want to keep.
-	 *
-	 * @param labelsOfColumns The sequence of label we want to keep
-	 * @return The sub line
-	 */
-	public Line getSubLineFromColumnLabel(List<String> labelsOfColumns) {
-		ArrayList<Element> tmp = new ArrayList<>();
-		int currentI = 0;
-		String currentColumns = labelsOfColumns.get(currentI);
-		for (Element element : this.elements) {
-			if (element.toString().equals(currentColumns)) {
-				tmp.add(element);
-				currentI++;
-				if (currentI >= labelsOfColumns.size()) {
-					break;
-				}
-				currentColumns = labelsOfColumns.get(currentI);
-			}
-		}
-		return new Line(this.index, tmp);
-	}
-
-	/**
 	 * Convert a line in string
 	 *
 	 * @return The line in string form

@@ -68,9 +68,9 @@ public class DataframeTest {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<Integer> column = new ArrayList<>();
-		column.add(2);
 		column.add(0);
 		column.add(1);
+		column.add(2);
 
 		Dataframe dtSub = dt.getSubDataFrameFromLines(column);
 		assertEquals(dt.toString(), dtSub.toString());
@@ -246,7 +246,7 @@ public class DataframeTest {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		ArrayList<Integer> column = new ArrayList<>();
-		column.add(1); //"Number"
+		column.add(1); //"Name"
 		ArrayList<String> columnValue = new ArrayList<>();
 		columnValue.add("Bruno");
 		Dataframe selectDataframe = dt.selectLineWhere(column, columnValue);
@@ -1093,29 +1093,4 @@ public class DataframeTest {
 		assertTrue(goodSort);
 	}
 
-	@Test
-	public void testGetSubLineFromColumnLabel() {
-		Dataframe df = constructBaseDF_FromVoid();
-
-		ArrayList<String> indexOfColumn = new ArrayList<>();
-		indexOfColumn.add("Name");
-		indexOfColumn.add("Number");
-		Line baseLine = df.getLines().get(0);
-		Line l = baseLine.getSubLineFromColumnLabel(indexOfColumn);
-
-		boolean assertBoolean = true;
-		for(int i = 0; i < indexOfColumn.size(); i++){
-			boolean trouve = false;
-			for(Element e: df.getLines().get(0).getElements()) {
-				if (e.getData() == l.getElements().get(i).getData()) {
-					trouve = true;
-				}
-			}
-			if (!trouve) {
-				assertBoolean = false;
-				break;
-			}
-		}
-		assertTrue(assertBoolean);
-	}
 }
