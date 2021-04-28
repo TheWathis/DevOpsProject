@@ -6,20 +6,20 @@ public class ElementTest {
     @Test
     public void testGetElement() {
         Element e = new Element("Tests");
-        assertEquals("Tests", e.getElem());
+        assertEquals("Tests", e.getData());
     }
 
     @Test
     public void testSetElement() {
         Element e = new Element("Tests");
-        e.setElem("Tests2");
-        assertEquals("Tests2", e.getElem());
+        e.setData("Tests2");
+        assertEquals("Tests2", e.getData());
     }
 
     @Test
     public void testSetElementDifferentType() {
         Element e = new Element("Tests");
-        e.setElem(1);
-        assertEquals(1, e.getElem());
+        e.setData(1);
+        assertEquals(1, e.getData());
     }
 }
