@@ -1,5 +1,4 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import java.util.ArrayList;
@@ -43,14 +42,14 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testConstructorEmpty() {
+	public void testConstructorEmpty_0() {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		assertNotNull(dt);
 	}
 	
 	@Test
-	public void testConstructorEmpty() {
+	public void testConstructorEmpty()_1 {
 		Dataframe dt = constructBaseDF_FromCSV();
 
 		assertNotNull(dt);
@@ -112,9 +111,9 @@ public class DataframeTest {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element eNumber = dt.maxValueByColumnIndex(0);
-		assertEquals("10", eNumber.getElem());
+		assertEquals("10", eNumber.getData());
 		Element eName = dt.maxValueByColumnIndex(1);
-		assertEquals("Marion", eName.getElem());
+		assertEquals("Marion", eName.getData());
 	}
 
 	@Test(expected = ExceptionWrongIndex.class)
@@ -146,9 +145,9 @@ public class DataframeTest {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element eName = dt.maxValueByLabel("Name");
-		assertEquals("Marion", eName.getElem());
+		assertEquals("Marion", eName.getData());
 		Element eDate = dt.maxValueByLabel("Date");
-		assertEquals("2010", eDate.getElem());
+		assertEquals("2010", eDate.getData());
 	}
 
 	@Test(expected = ExceptionUnknownColumn.class)
@@ -166,9 +165,9 @@ public class DataframeTest {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element eNumber = dt.minValueByColumnIndex(0);
-		assertEquals("1", eNumber.getElem());
+		assertEquals("1", eNumber.getData());
 		Element eName = dt.minValueByColumnIndex(1);
-		assertEquals("Audrey", eName.getElem());
+		assertEquals("Audrey", eName.getData());
 	}
 
 	@Test(expected = ExceptionWrongIndex.class)
@@ -186,9 +185,9 @@ public class DataframeTest {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element eNumber = dt.minValueByLabel("Number");
-		assertEquals("1", eNumber.getElem());
+		assertEquals("1", eNumber.getData());
 		Element eName = dt.maxValueByLabel("Name");
-		assertEquals("Audrey", eName.getElem());
+		assertEquals("Audrey", eName.getData());
 	}
 
 	@Test(expected = ExceptionUnknownColumn.class)
@@ -206,7 +205,7 @@ public class DataframeTest {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element mean = dt.meanValueByIndex(0);
-		assertEquals((16.0/3.0), mean.getElem());
+		assertEquals((16.0/3.0), mean.getData());
 	}
 
 	@Test(expected = ExceptionWrongIndex.class)
@@ -224,7 +223,7 @@ public class DataframeTest {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		Element mean = dt.meanValueByLabel("Number");
-		assertEquals((16.0/3.0), mean.getElem());
+		assertEquals((16.0/3.0), mean.getData());
 	}
 
 	@Test(expected = ExceptionUnknownColumn.class)
@@ -248,7 +247,7 @@ public class DataframeTest {
 		Dataframe selectDataframe = dt.selectLineWhere(column, columnValue);
 		boolean correctValue = true;
 		if(selectDataframe.getLines().size() != 1
-			|| selectDataframe.getLines().get(0).getElementByIndex(1).getElem() != "Bruno"){
+			|| selectDataframe.getLines().get(0).getElementByIndex(1).getData() != "Bruno"){
 			correctValue = false;
 		}
 		assertTrue(correctValue);
@@ -295,7 +294,7 @@ public class DataframeTest {
 		Dataframe selectDataframe = dt.selectLineWhereByLabel(column, columnValue);
 		boolean correctValue = true;
 		if(selectDataframe.getLines().size() != 1
-				|| selectDataframe.getLines().get(0).getElementByIndex(1).getElem() != "Bruno"){
+				|| selectDataframe.getLines().get(0).getElementByIndex(1).getData() != "Bruno"){
 			correctValue = false;
 		}
 		assertTrue(correctValue);
