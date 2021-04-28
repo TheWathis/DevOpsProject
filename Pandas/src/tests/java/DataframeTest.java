@@ -1175,7 +1175,7 @@ public class DataframeTest {
 	 * Tests for sum function
 	 * */
 	@Test
-	public void testSumOfColumn() throws Dataframe.ExceptionWrongColumnType {
+	public void testSumOfColumn() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1207,8 +1207,8 @@ public class DataframeTest {
 		assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
-	public void testSumOfColumnInvalidColumn() throws Dataframe.ExceptionWrongColumnType {
+	@Test(expected = ExceptionWrongColumnType.class)
+	public void testSumOfColumnInvalidColumn() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1240,8 +1240,8 @@ public class DataframeTest {
 		assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
-	public void testSumOfColumnWrongIndex() throws Dataframe.ExceptionWrongColumnType {
+	@Test(expected = ExceptionWrongColumnType.class)
+	public void testSumOfColumnWrongIndex() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1277,7 +1277,7 @@ public class DataframeTest {
 	 * Tests for sum function by label
 	 * */
 	@Test
-	public void testSumOfColumnByLabel() throws Dataframe.ExceptionWrongColumnType {
+	public void testSumOfColumnByLabel() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1309,8 +1309,8 @@ public class DataframeTest {
 		assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
-	public void testSumOfColumnByLabelInvalidColumn() throws Dataframe.ExceptionWrongColumnType {
+	@Test(expected = ExceptionWrongColumnType.class)
+	public void testSumOfColumnByLabelInvalidColumn() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1342,8 +1342,8 @@ public class DataframeTest {
 		assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
-	public void testSumOfColumnByLabelWrongIndex() throws Dataframe.ExceptionWrongColumnType {
+	@Test(expected = ExceptionWrongColumnType.class)
+	public void testSumOfColumnByLabelWrongIndex() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1379,7 +1379,7 @@ public class DataframeTest {
 	 * Tests for order by function
 	 * */
 	@Test
-	public void testOrderByStringColumn() throws Dataframe.ExceptionWrongColumnType {
+	public void testOrderByStringColumn() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1436,7 +1436,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByIntColumn() throws Dataframe.ExceptionWrongColumnType {
+	public void testOrderByIntColumn() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1492,8 +1492,8 @@ public class DataframeTest {
 		//assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
-	public void testOrderByIntWrongColumn() throws Dataframe.ExceptionWrongColumnType {
+	@Test(expected = ExceptionWrongColumnType.class)
+	public void testOrderByIntWrongColumn() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1549,8 +1549,8 @@ public class DataframeTest {
 		//assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
-	public void testOrderByIntNotInColumn() throws Dataframe.ExceptionWrongColumnType {
+	@Test(expected = ExceptionWrongColumnType.class)
+	public void testOrderByIntNotInColumn() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1610,7 +1610,7 @@ public class DataframeTest {
 	 * Tests for order by function
 	 * */
 	@Test
-	public void testOrderByStringLabel() throws Dataframe.ExceptionWrongColumnType {
+	public void testOrderByStringLabel() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1667,7 +1667,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByIntLabel() throws Dataframe.ExceptionWrongColumnType {
+	public void testOrderByIntLabel() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1723,8 +1723,8 @@ public class DataframeTest {
 		//assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
-	public void testOrderByIntNotInLabel() throws Dataframe.ExceptionWrongColumnType {
+	@Test(expected = ExceptionWrongColumnType.class)
+	public void testOrderByIntNotInLabel() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1784,7 +1784,7 @@ public class DataframeTest {
 	 * Tests for order by with list function
 	 * */
 	@Test
-	public void testOrderByStringListIndex() throws Dataframe.ExceptionWrongColumnType {
+	public void testOrderByStringListIndex() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1841,11 +1841,10 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 
 	@Test
-	public void testOrderByIntListIndex() throws Dataframe.ExceptionWrongColumnType {
+	public void testOrderByIntListIndex() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -1901,11 +1900,10 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 
 	@Test
-	public void testOrderByIntListIndexExceptionNotExcepted() throws Dataframe.ExceptionWrongColumnType {
+	public void testOrderByIntListIndexExceptionNotExcepted() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("2"));
@@ -1950,11 +1948,10 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 
 	@Test
-	public void testOrderByListIndexSameValue() throws Dataframe.ExceptionWrongColumnType {
+	public void testOrderByListIndexSameValue() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -2010,11 +2007,10 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
-	public void testOrderByIntNotInListIndex() throws Dataframe.ExceptionWrongColumnType {
+	@Test(expected = ExceptionWrongColumnType.class)
+	public void testOrderByIntNotInListIndex() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -2071,14 +2067,13 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 
 	/***
 	 * Tests for order by with list function
 	 * */
 	@Test
-	public void testOrderByStringListLabel() throws Dataframe.ExceptionWrongColumnType {
+	public void testOrderByStringListLabel() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -2139,7 +2134,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByIntListLabel() throws Dataframe.ExceptionWrongColumnType {
+	public void testOrderByIntListLabel() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -2201,7 +2196,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByIntListLabelExceptionNotExcepted() throws Dataframe.ExceptionWrongColumnType {
+	public void testOrderByIntListLabelExceptionNotExcepted() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("2"));
@@ -2249,7 +2244,7 @@ public class DataframeTest {
 	}
 
 	@Test
-	public void testOrderByListLabelSameValue() throws Dataframe.ExceptionWrongColumnType {
+	public void testOrderByListLabelSameValue() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -2305,11 +2300,10 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 
-	@Test(expected = Dataframe.ExceptionWrongColumnType.class)
-	public void testOrderByIntNotInListLabel() throws Dataframe.ExceptionWrongColumnType {
+	@Test(expected = ExceptionWrongColumnType.class)
+	public void testOrderByIntNotInListLabel() throws ExceptionWrongColumnType {
 		Dataframe dt = new Dataframe();
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -2366,6 +2360,5 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		assertTrue(goodSort);
-		//assertEquals(6.0, result, 0.001);
 	}
 }
