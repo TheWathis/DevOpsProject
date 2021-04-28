@@ -209,4 +209,14 @@ public class LineTest {
         assertEquals(3, index);
     }
 
+    @Test
+    public void testGetWrongIndex() {
+        ArrayList<Element> listOfElement = new ArrayList<>();
+        listOfElement.add(new Element("A"));
+        listOfElement.add(new Element("B"));
+        Line l = new Line(0, listOfElement);
+        int index = l.getElementByIndex(2);
+        assertNull(index);
+    }
+
 }

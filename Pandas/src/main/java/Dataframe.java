@@ -73,7 +73,7 @@ public class Dataframe {
                 }
                 this.table.add(new Line(this.table.size(), tmp));
             }
-            this.printDataframe();
+
             br.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -215,10 +215,10 @@ public class Dataframe {
      * @param numberOfLines The number of lines we want to print
      */
     public void printFirstLines(int numberOfLines) {
-        this.label.printLine();
+        System.out.println(this.label.toString());
         int goal = Math.min(this.table.size(), numberOfLines);
         for(int i = 0; i < goal; i++) {
-            this.table.get(i).printLine();
+            System.out.println(this.table.get(i).toString());
         }
     }
 
@@ -230,10 +230,10 @@ public class Dataframe {
      * @param numberOfLines The number of lines we want to print
      */
     public void printLastLines(int numberOfLines) {
-        this.label.printLine();
+        System.out.println(this.label.toString());
         int i = Math.max((this.table.size() - numberOfLines), 0);
         for(; i < this.table.size(); i++) {
-            this.table.get(i).printLine();
+            System.out.println(this.table.get(i).toString());
         }
     }
 
@@ -479,16 +479,7 @@ public class Dataframe {
     public static void main(String args[]) throws Line.ExceptionUnknowColumn {
         if(args.length > 0) {
             Dataframe df = new Dataframe(args[0]);
-
-            System.out.println("----------------");
-            ArrayList<Integer> column = new ArrayList<>();
-            column.add(1);
-            ArrayList<String> columnValue = new ArrayList<>();
-            columnValue.add("Charlotte");
-
-            Dataframe dSub = df.selectLineWhere(column, columnValue);
-            dSub.printDataframe();
-
+            df.printDataframe();
         }
     }
 

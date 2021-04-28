@@ -11,12 +11,12 @@ public class Line {
 	}
 
 	public Element getElementByIndex(int index){
-		if( 0 <= index && index < elements.size()){
+		if(0 <= index && index < elements.size()){
 			return elements.get(index);
 		} else {
+			//Mauvais index
 			return null;
 		}
-
 	}
 
 	public Line() {
@@ -67,18 +67,14 @@ public class Line {
 		return new Line(this.index, tmp);
 	}
 
-	public class ExceptionUnknowColumn extends Exception {
+	public static class ExceptionUnknowColumn extends Exception {
 		public String message;
 		public ExceptionUnknowColumn(String message){
 			super();
 			this.message = message;
 		}
-
-		public ExceptionUnknowColumn(){
-			super();
-			this.message = "";
-		}
 	}
+
 	/**
 	 * Get the sub line with given a sequence of index of column we want to keep.
 	 * The column are added in the order of the sequence of index.
@@ -165,23 +161,15 @@ public class Line {
 	}
 
 	/**
-	 * Print the line
-	 *
-	 */
-	public void printLine() {
-		String tmp = elements.get(0).toString();
-		for (int i = 1; i < elements.size(); i++) {
-			tmp = tmp.concat(", " + elements.get(i).toString());
-		}
-		System.out.println(tmp);
-	}
-
-	/**
 	 * Convert a line in string
 	 *
 	 */
 	@Override
 	public String toString() {
-		return index + " : " + elements + "\n";
+		String tmp = elements.get(0).toString();
+		for (int i = 1; i < elements.size(); i++) {
+			tmp = tmp.concat(", " + elements.get(i).toString());
+		}
+		return tmp + "\n";
 	}
 }

@@ -1,7 +1,0 @@
-(Potentiel début de compte rendu)
-Voici une liste des différentes focntionnalités :
-    On peut créer un DataFrame vide, ou le créer directement à partir d'un fichier CSV.
-    Avec ce DataFrame on peut récupérer la valeur maximum et minimum d'une colonne.
-    On peut (seulement si la colonne contient des nombres) faire une somme de la colonne.
-    Il est possible de trier le dataFrame à partir d'une colonne (ORDER BY) -> TODO
-    On peut selectionner un ensemble de ligne dans le Dataframe ou un ensemble de colonne.
