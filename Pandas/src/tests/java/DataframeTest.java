@@ -1095,7 +1095,7 @@ public class DataframeTest {
 		ArrayList<String> indexOfColumn = new ArrayList<>();
 		indexOfColumn.add("Name");
 		indexOfColumn.add("Number");
-		Line l = df.getLines().get(0).getSubLineFromColumnNumber(indexOfColumn);
+		Line l = df.getLines().get(0).getSubLineFromColumnLabel(indexOfColumn);
 
 		boolean assertBoolean = true;
 		for(int i = 0; i < df.getLine().get(0).getSize(); i++){
