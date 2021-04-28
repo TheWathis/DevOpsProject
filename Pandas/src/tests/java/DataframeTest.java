@@ -58,6 +58,13 @@ public class DataframeTest {
 
 		Dataframe dt = new Dataframe();
 
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Année"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
 
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
@@ -73,12 +80,12 @@ public class DataframeTest {
 		dt.changeLabelLine(lLabel);
 	}
 	
-	/*@Test
+	@Test
 	public void testConstructorEmpty()_1 {
 		Dataframe dt = constructBaseDF_FromCSV();
 
 		assertNotNull(dt);
-	}*/
+	}
 	
 	/**
 	 * Test on get sub of data frame with sequence of line

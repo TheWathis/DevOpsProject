@@ -118,19 +118,19 @@ public class Line {
 	public Line selectLineWhere(List<Integer> numbersOfColumns, List<String> valuesOfColumns) throws ExceptionUnknownColumn {
 		ArrayList<Element> tmp = new ArrayList<>();
 		int currentI = 0;
-		if( numbersOfColumns.get(currentI) < 0 || numbersOfColumns.get(currentI) >= this.elements.size()){
-			throw new ExceptionUnknownColumn("One of the given index of column is not in the array");
-		}
 		int currentColumns = numbersOfColumns.get(currentI);
 		for (int i = 0; i < this.elements.size(); i++) {
+			if(numbersOfColumns.get(currentI) < 0 || numbersOfColumns.get(currentI) >= this.elements.size()){
+				throw new ExceptionUnknownColumn("One of the given index of column is not in the array");
+			}
 
 			if (i == currentColumns ) {
 				if(this.elements.get(i).compareTo(valuesOfColumns.get(currentI)) != 0 ){
 					return null;
 				}
 				tmp.add(this.elements.get(i));
-
 				currentI++;
+
 				if (currentI >= numbersOfColumns.size()) {
 					i++;
 					for(; i < this.elements.size(); i++){
@@ -139,9 +139,6 @@ public class Line {
 					break;
 				} else if (numbersOfColumns.get(currentI) <= numbersOfColumns.get(currentI - 1)){
 					i = 0;
-				}
-				if( numbersOfColumns.get(currentI) < 0 || numbersOfColumns.get(currentI) >= this.elements.size()){
-					throw new ExceptionUnknownColumn("One of the given index of column is not in the array");
 				}
 				currentColumns = numbersOfColumns.get(currentI);
 			} else {
