@@ -124,7 +124,7 @@ public class Dataframe {
      * @return The sub data frame
      */
     public Dataframe selectLineWhere(List<Integer> numbersOfColumns, List<String> valueOfLines) throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionUnknownColumn {
-        if (numbersOfColumns.size() != valueOfLines.size()) {
+        if (numbersOfColumns.size() == valueOfLines.size()) {
             Dataframe toReturn = new Dataframe();
             toReturn.label = this.label.getSubLineFromColumnNumber(numbersOfColumns);
             Line l;
