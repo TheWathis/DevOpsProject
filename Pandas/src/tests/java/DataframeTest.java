@@ -81,7 +81,7 @@ public class DataframeTest {
 	}
 	
 	@Test
-	public void testConstructorEmpty()_1 {
+	public void testConstructorEmpty_1() {
 		Dataframe dt = constructBaseDF_FromCSV();
 
 		assertNotNull(dt);
