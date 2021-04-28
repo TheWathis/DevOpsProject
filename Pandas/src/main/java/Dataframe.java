@@ -51,6 +51,8 @@ public class Dataframe {
         return this.table;
     }
 
+    public Line getLabels() { return this.label; }
+
     /**
      * Constructor
      * */

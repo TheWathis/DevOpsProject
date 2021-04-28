@@ -53,6 +53,55 @@ public class DataframeTest {
 		assertNotNull(dt);
 	}
 
+	@Test()
+	public void testGetLabelSucceed() throws ExceptionSizeNotEqual {
+
+		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Année"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		assertEqual(lLabel.toString(), dt.getLabels().toString())
+	}
+
+	@Test(expected = ExceptionOperationOnEmptyTable.class)
+	public void testSumEmptyTable throws ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable  {
+
+		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Année"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		dt.sumOfColumn(1);
+	}
+
+	@Test(expected = ExceptionOperationOnEmptyTable.class)
+	public void testSumEmptyTable throws ExceptionWrongIndex, ExceptionOperationOnEmptyTable  {
+
+		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Année"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		ArrayList<Integer> listOfInt = new ArrayList<>();
+		listOfInt.add(1);
+		listOfInt.add(2);
+
+		dt.orderBy(listOfInt);
+	}
+
 	@Test(expected = ExceptionSizeNotEqual.class)
 	public void testChangeLabelLineFailed() throws ExceptionSizeNotEqual {
 
@@ -79,7 +128,57 @@ public class DataframeTest {
 		lLabel = new Line(0, listOfElementLabel);
 		dt.changeLabelLine(lLabel);
 	}
-	
+
+	@Test()
+	public void testChangeLabelLineSucceed() throws ExceptionSizeNotEqual {
+
+		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Année"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		dt.addLine(l);
+
+		listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Année"));
+		lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+		assertEqual(lLabel.toString(), dt.getLabels().toString())
+	}
+
+	@Test(expected = ExceptionSizeNotEqual.class)
+	public void testAddLineFailed() throws ExceptionSizeNotEqual {
+
+		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
+
+		ArrayList<Element> listOfElement = new ArrayList<>();
+		listOfElement.add(new Element("1"));
+		listOfElement.add(new Element("Marion"));
+		listOfElement.add(new Element("1995"));
+		Line l = new Line(0, listOfElement);
+		dt.addLine(l);
+	}
+
 	@Test
 	public void testConstructorEmpty_1() {
 		Dataframe dt = constructBaseDF_FromCSV();
