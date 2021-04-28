@@ -513,6 +513,14 @@ public class DataframeTest {
 	@Test
 	public void testOrderByStringListIndex() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
@@ -531,13 +539,6 @@ public class DataframeTest {
 		dt.addLine(l);
 		dt.addLine(l2);
 		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
 
 		ArrayList<Integer> listOfColumn = new ArrayList<>();
 		listOfColumn.add(0);
@@ -573,6 +574,14 @@ public class DataframeTest {
 	@Test
 	public void testOrderByIntListIndex() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
@@ -591,13 +600,6 @@ public class DataframeTest {
 		dt.addLine(l);
 		dt.addLine(l2);
 		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
 
 		ArrayList<Integer> listOfColumn = new ArrayList<>();
 		listOfColumn.add(1);
@@ -632,6 +634,14 @@ public class DataframeTest {
 	@Test
 	public void testOrderByIntListIndexExceptionNotExcepted() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("2"));
 		listOfElement.add(new Element("Audrey"));
@@ -644,13 +654,6 @@ public class DataframeTest {
 		Line l2 = new Line(1, listOfElement2);
 		dt.addLine(l);
 		dt.addLine(l2);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
 
 		ArrayList<Integer> listOfColumn = new ArrayList<>();
 		listOfColumn.add(1);
@@ -680,6 +683,14 @@ public class DataframeTest {
 	@Test
 	public void testOrderByListIndexSameValue() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
@@ -698,13 +709,6 @@ public class DataframeTest {
 		dt.addLine(l);
 		dt.addLine(l2);
 		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
 
 		ArrayList<Integer> listOfColumn = new ArrayList<>();
 		listOfColumn.add(1);
@@ -739,6 +743,14 @@ public class DataframeTest {
 	@Test(expected = ExceptionWrongIndex.class)
 	public void testOrderByIntNotInListIndex() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
@@ -757,13 +769,6 @@ public class DataframeTest {
 		dt.addLine(l);
 		dt.addLine(l2);
 		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
 
 		ArrayList<Integer> listOfColumn = new ArrayList<>();
 		listOfColumn.add(5);
@@ -802,6 +807,14 @@ public class DataframeTest {
 	@Test
 	public void testOrderByStringListLabel() throws ExceptionSizeNotEqual, ExceptionOperationOnEmptyTable, ExceptionWrongIndex {
 		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
@@ -820,13 +833,6 @@ public class DataframeTest {
 		dt.addLine(l);
 		dt.addLine(l2);
 		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
 
 		ArrayList<String> listOfColumn = new ArrayList<>();
 		listOfColumn.add("Sexe");
@@ -863,6 +869,14 @@ public class DataframeTest {
 	@Test
 	public void testOrderByIntListLabel() throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
@@ -881,14 +895,6 @@ public class DataframeTest {
 		dt.addLine(l);
 		dt.addLine(l2);
 		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
-
 
 		ArrayList<String> listOfColumn = new ArrayList<>();
 		listOfColumn.add("Name");
@@ -925,6 +931,14 @@ public class DataframeTest {
 	@Test
 	public void testOrderByIntListLabelExceptionNotExcepted() throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("2"));
 		listOfElement.add(new Element("Audrey"));
@@ -937,13 +951,6 @@ public class DataframeTest {
 		Line l2 = new Line(1, listOfElement2);
 		dt.addLine(l);
 		dt.addLine(l2);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
 
 		ArrayList<String> listOfColumn = new ArrayList<>();
 		listOfColumn.add("Name");
@@ -972,6 +979,14 @@ public class DataframeTest {
 	@Test
 	public void testOrderByListLabelSameValue() throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionOperationOnEmptyTable  {
 		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
@@ -990,13 +1005,6 @@ public class DataframeTest {
 		dt.addLine(l);
 		dt.addLine(l2);
 		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
 
 		ArrayList<String> listOfColumn = new ArrayList<>();
 		listOfColumn.add("Name");
@@ -1031,6 +1039,14 @@ public class DataframeTest {
 	@Test(expected = ExceptionWrongIndex.class)
 	public void testOrderByIntNotInListLabel() throws ExceptionSizeNotEqual, ExceptionWrongIndex, ExceptionOperationOnEmptyTable  {
 		Dataframe dt = new Dataframe();
+
+		ArrayList<Element> listOfElementLabel = new ArrayList<>();
+		listOfElementLabel.add(new Element("Sexe"));
+		listOfElementLabel.add(new Element("Name"));
+		listOfElementLabel.add(new Element("Date"));
+		Line lLabel = new Line(0, listOfElementLabel);
+		dt.changeLabelLine(lLabel);
+
 		ArrayList<Element> listOfElement = new ArrayList<>();
 		listOfElement.add(new Element("1"));
 		listOfElement.add(new Element("Marion"));
@@ -1049,13 +1065,6 @@ public class DataframeTest {
 		dt.addLine(l);
 		dt.addLine(l2);
 		dt.addLine(l3);
-
-		ArrayList<Element> listOfElementLabel = new ArrayList<>();
-		listOfElementLabel.add(new Element("Sexe"));
-		listOfElementLabel.add(new Element("Name"));
-		listOfElementLabel.add(new Element("Date"));
-		Line lLabel = new Line(0, listOfElementLabel);
-		dt.changeLabelLine(lLabel);
 
 		ArrayList<String> listOfColumn = new ArrayList<>();
 		listOfColumn.add("Sexe");
