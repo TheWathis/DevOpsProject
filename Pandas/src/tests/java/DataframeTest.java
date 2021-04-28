@@ -35,25 +35,25 @@ public class DataframeTest {
 		return dt;
 	}
 
-	private Dataframe constructBaseDF_FromCSV() {
+	/*private Dataframe constructBaseDF_FromCSV() {
 		Dataframe dt = new Dataframe("Pandas/src/main/resources/fichier_test.csv");
 
 		return dt;
-	}
+	}*/
 
 	@Test
-	public void testConstructorEmpty_0() {
+	public void testConstructorEmpty() {
 		Dataframe dt = constructBaseDF_FromVoid();
 
 		assertNotNull(dt);
 	}
 	
-	@Test
+	/*@Test
 	public void testConstructorEmpty()_1 {
 		Dataframe dt = constructBaseDF_FromCSV();
 
 		assertNotNull(dt);
-	}
+	}*/
 	
 	/**
 	 * Test on get sub of data frame with sequence of line
