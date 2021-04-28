@@ -172,7 +172,7 @@ public class DataframeTest {
 		Element eNumber = dt.minValueByColumnIndex(0);
 		assertEquals("1", eNumber.getData());
 		Element eName = dt.minValueByColumnIndex(1);
-		assertEquals("Audrey", eName.getData());
+		assertEquals("Bruno", eName.getData()); // Bruno est plus court qu'Audrey
 	}
 
 	@Test(expected = ExceptionWrongIndex.class)
@@ -191,11 +191,11 @@ public class DataframeTest {
 
 		Element eNumber = dt.minValueByLabel("Number");
 		assertEquals("1", eNumber.getData());
-		Element eName = dt.maxValueByLabel("Name");
+		Element eName = dt.minValueByLabel("Name");
 		assertEquals("Audrey", eName.getData());
 	}
 
-	@Test(expected = ExceptionUnknownColumn.class)
+	@Test(expected = ExceptionNoLabel.class)
 	public void testMinElementByColumnLabelNonExistingColumn() throws ExceptionNoLabel, ExceptionUnknownColumn, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = new Dataframe();
 
@@ -267,11 +267,7 @@ public class DataframeTest {
 		ArrayList<String> columnValue = new ArrayList<>();
 		columnValue.add("Bruno");
 		Dataframe selectDataframe = dt.selectLineWhere(column, columnValue);
-		boolean correctValue = true;
-		if(selectDataframe.getLines().size() != 0){
-			correctValue = false;
-		}
-		assertTrue(correctValue);
+		assertTrue(selectDataframe == null);
 	}
 
 	@Test(expected = ExceptionWrongIndex.class)
@@ -359,7 +355,7 @@ public class DataframeTest {
 		Double result = dt.sumOfColumnByLabel("Name");
 	}
 
-	@Test(expected = ExceptionUnknownColumn.class)
+	@Test(expected = ExceptionWrongIndex.class)
 	public void testSumOfColumnByLabelWrongLabel() throws ExceptionWrongColumnType, ExceptionWrongIndex, ExceptionOperationOnEmptyTable {
 		Dataframe dt = constructBaseDF_FromVoid();
 
@@ -379,15 +375,15 @@ public class DataframeTest {
 			goodSort = false;
 		}
 		//Check for the first line
-		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("5")) != 0
-				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
-				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("10")) != 0
+				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
+				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
 			goodSort = false;
 		}
 		//Check for the second line
-		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("10")) != 0
-				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
-				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("5")) != 0
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
 			goodSort = false;
 		}
 		//Check for the third line
@@ -550,16 +546,16 @@ public class DataframeTest {
 		if(dt.getLines().size() != 3){
 			goodSort = false;
 		}
-		//Check for the first line
+		//Check for the second line
 		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
-				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
-				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
+				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
 			goodSort = false;
 		}
-		//Check for the second line
+		//Check for the first line
 		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
-				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
-				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
 			goodSort = false;
 		}
 		//Check for the third line
@@ -846,14 +842,14 @@ public class DataframeTest {
 		}
 		//Check for the first line
 		if(dt.getLines().get(0).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
-				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
-				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
+				|| dt.getLines().get(0).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
+				|| dt.getLines().get(0).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
 			goodSort = false;
 		}
 		//Check for the second line
 		if(dt.getLines().get(1).getElementByIndex(0).compareTo(new Element<String>("1")) != 0
-				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Bruno")) != 0
-				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("1870")) != 0){
+				|| dt.getLines().get(1).getElementByIndex(1).compareTo(new Element<String>("Audrey")) != 0
+				|| dt.getLines().get(1).getElementByIndex(2).compareTo(new Element<String>("2010")) != 0){
 			goodSort = false;
 		}
 		//Check for the third line
